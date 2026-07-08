@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "6a444bdadca39793446305ee"
+  },
+  "fullname": "Admin",
+  "email": "admin2123.com",
+  "username": "Admin",
+  "password": "$2b$10$L42AEqpSBw2tmO5r3a7mie89WAdsHHcLMuyNBcPCWpP/owuKyHMeW",
+  "role": "admin",
+  "phoneNumber": "0987654321",
+  "createdAt": {
+    "$date": "2026-06-30T23:06:02.045Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-30T23:49:03.561Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a446185a84fac01dec99eba"
+  },
+  "fullname": "Thanh Anh Huan",
+  "email": "huan@gmail.com",
+  "username": "HuanThanh",
+  "password": "$2b$10$enPY629a/lYOo3UUQgMcBeOgJAqnIiLmwxn/UeeBDvKVGgEV/yDeO",
+  "role": "customer",
+  "phoneNumber": "0123456789",
+  "createdAt": {
+    "$date": "2026-07-01T00:38:29.043Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-01T00:38:29.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a44636012b4ed66e6352637"
+  },
+  "fullname": "Tran Khanh Linh",
+  "email": "xu@gmai.com",
+  "username": "KhanhLinh",
+  "password": "$2b$10$r4R9DRwxeaZDuofvLXZpv.iOuBo5K7imSQ3xdR3C4w6wPKEG5WsJy",
+  "role": "customer",
+  "phoneNumber": "0912345678",
+  "createdAt": {
+    "$date": "2026-07-01T00:46:24.121Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-01T00:46:24.121Z"
+  },
+  "__v": 0
+}]
