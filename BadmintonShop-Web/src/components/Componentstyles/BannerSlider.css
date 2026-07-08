@@ -1,11 +1,7 @@
 .banner-slider-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 2rem auto;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
 .banner-slider-track {
@@ -22,22 +18,15 @@
   justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .banner-slide {
-    /* removed forced aspect ratio */
-  }
-}
-
 .banner-img {
   width: 100%;
   height: auto;
-  object-fit: contain;
   display: block;
 }
 
 .banner-dots {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 2rem;
   left: 0;
   right: 0;
   display: flex;
@@ -51,12 +40,77 @@
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .banner-dot.active {
   width: 24px;
-  background-color: var(--color-primary); /* Primary orange */
+  background-color: var(--color-primary);
+}
+
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.banner-arrow:hover {
+  background-color: var(--color-primary);
+}
+
+.banner-arrow-left {
+  left: 2rem;
+}
+
+.banner-arrow-right {
+  right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .banner-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+  .banner-arrow-left { left: 1rem; }
+  .banner-arrow-right { right: 1rem; }
+}
+
+.banner-overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end; /* Align to bottom */
+  pointer-events: none; /* Let clicks pass through if they click outside the card */
+}
+
+.banner-overlay-content > * {
+  pointer-events: auto; /* Re-enable pointer events for the content inside */
+}
+
+@media (max-width: 768px) {
+  .banner-slider-container {
+    height: auto;
+  }
 }

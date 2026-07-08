@@ -9,6 +9,8 @@ import banner5 from '../assets/banners/banner5.webp';
 import banner6 from '../assets/banners/banner6.webp';
 import banner7 from '../assets/banners/banner7.webp';
 
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi';
+
 const bannerImages = [
   banner1,
   banner2,
@@ -19,18 +21,26 @@ const bannerImages = [
   banner7,
 ];
 
-export default function BannerSlider() {
+export default function BannerSlider({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % bannerImages.length);
-    }, 12000); // 12 seconds per the original FE component
+    }, 5000); // 5 seconds
     return () => clearInterval(interval);
   }, []);
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % bannerImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1));
   };
 
   return (
@@ -46,6 +56,13 @@ export default function BannerSlider() {
         ))}
       </div>
 
+      <button className="banner-arrow banner-arrow-left" onClick={prevSlide}>
+        <HiOutlineChevronLeft />
+      </button>
+      <button className="banner-arrow banner-arrow-right" onClick={nextSlide}>
+        <HiOutlineChevronRight />
+      </button>
+
       <div className="banner-dots">
         {bannerImages.map((_, index) => (
           <div
@@ -55,6 +72,12 @@ export default function BannerSlider() {
           />
         ))}
       </div>
+
+      {children && (
+        <div className="banner-overlay-content">
+          {children}
+        </div>
+      )}
     </div>
   );
 }
