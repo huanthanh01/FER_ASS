@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../api/productApi';
-import { useAppContext } from '../context/AppContext';
+import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../../api/productApi';
+import { useAppContext } from '../../context/AppContext';
 import { HiOutlinePlus, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
 import { toast } from 'react-toastify';
-import '../styles/AdminProductsPage.css';
+import '../../styles/AdminProductsPage.css';
 
 export default function AdminProductsPage() {
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,12 +47,14 @@ export default function AdminProductsPage() {
     fetchProducts();
   }, [currentUser, navigate]);
 
-  const fetchProducts = async (searchQuery = '') => {
+  const fetchProducts = async (searchQuery = '', page = 1) => {
     setIsLoading(true);
     try {
-      const res = await getProducts(false, 1, 50, undefined, searchQuery);
+      const res = await getProducts(false, page, 10, undefined, searchQuery);
       if (res.success) {
         setProducts(res.products);
+        setTotalPages(res.totalPages || 1);
+        setCurrentPage(res.currentPage || 1);
       }
     } catch (error) {
       console.error("Failed to fetch products", error);
@@ -76,7 +80,8 @@ export default function AdminProductsPage() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchProducts(search);
+    setCurrentPage(1);
+    fetchProducts(search, 1);
   };
 
   const openModal = (product = null) => {
@@ -145,7 +150,7 @@ export default function AdminProductsPage() {
       if (res.success) {
         toast.success(`Product ${isEditMode ? 'updated' : 'created'} successfully`);
         closeModal();
-        fetchProducts(search);
+        fetchProducts(search, currentPage);
       } else {
         toast.error(res.error || `Failed to ${isEditMode ? 'update' : 'create'} product`);
       }
@@ -163,12 +168,19 @@ export default function AdminProductsPage() {
       const res = await deleteProduct(id);
       if (res.success) {
         toast.success('Product deleted successfully');
-        fetchProducts(search);
+        fetchProducts(search, currentPage);
       } else {
         toast.error(res.error || 'Failed to delete product');
       }
     } catch (error) {
       toast.error('An error occurred');
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      fetchProducts(search, newPage);
     }
   };
 
@@ -202,6 +214,7 @@ export default function AdminProductsPage() {
             <div className="loading-spinner"></div>
           </div>
         ) : (
+          <>
           <div className="table-responsive">
             <table className="admin-table">
               <thead>
@@ -267,6 +280,39 @@ export default function AdminProductsPage() {
               </tbody>
             </table>
           </div>
+
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button 
+                className="page-btn" 
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              
+              <div className="page-numbers">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <button
+                    key={page}
+                    className={`page-btn ${currentPage === page ? 'active' : ''}`}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+              
+              <button 
+                className="page-btn" 
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
+          </>
         )}
       </div>
 

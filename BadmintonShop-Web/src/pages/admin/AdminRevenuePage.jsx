@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getRevenue } from '../api/revenueApi';
-import { useAppContext } from '../context/AppContext';
+import { getRevenue } from '../../api/revenueApi';
+import { useAppContext } from '../../context/AppContext';
 import { HiOutlineCurrencyDollar, HiOutlineTrendingUp, HiOutlineCalendar, HiOutlineSearch } from 'react-icons/hi';
 import { toast } from 'react-toastify';
-import '../styles/AdminRevenuePage.css';
-import '../styles/AdminProductsPage.css'; // Reuse some table styles
+import '../../styles/AdminRevenuePage.css';
+import '../../styles/AdminProductsPage.css'; // Reuse some table styles
 
 export default function AdminRevenuePage() {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ export default function AdminRevenuePage() {
   
   // Date filter state
   const [dateFilter, setDateFilter] = useState({
-    day: '',
     month: '',
     year: new Date().getFullYear().toString()
   });
@@ -39,7 +38,7 @@ export default function AdminRevenuePage() {
     setIsLoading(true);
     try {
       const res = await getRevenue(
-        dateFilter.day || undefined,
+        undefined,
         dateFilter.month || undefined,
         dateFilter.year || undefined
       );
@@ -72,7 +71,6 @@ export default function AdminRevenuePage() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
   return (
     <div className="admin-page page-container">
@@ -116,14 +114,6 @@ export default function AdminRevenuePage() {
             <select name="month" className="form-control" value={dateFilter.month} onChange={handleChange}>
               <option value="">All Months</option>
               {months.map(m => <option key={m} value={m}>{new Date(2000, m - 1).toLocaleString('default', { month: 'short' })}</option>)}
-            </select>
-          </div>
-          
-          <div className="filter-select-group">
-            <label>Day</label>
-            <select name="day" className="form-control" value={dateFilter.day} onChange={handleChange}>
-              <option value="">All Days</option>
-              {days.map(d => <option key={d} value={d}>{d}</option>)}
             </select>
           </div>
           

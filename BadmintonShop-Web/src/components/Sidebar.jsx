@@ -44,8 +44,7 @@ export default function Sidebar() {
   ];
 
   const adminItems = [
-    { to: "/admin/products", icon: HiOutlineCube, label: "Products" },
-    { to: "/admin/revenue", icon: HiOutlineChartBar, label: "Revenue" },
+    { to: "/admin/dashboard", icon: HiOutlineChartBar, label: "Admin Panel" },
   ];
 
   return (

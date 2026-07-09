@@ -23,3 +23,15 @@ export async function getRevenue(day, month, year) {
     return { success: false, error: error.response?.data?.error || 'Failed to fetch revenue.' };
   }
 }
+
+export async function getDashboardStats() {
+  try {
+    const response = await axios.get(`${API_URL}/revenue/dashboard-stats`);
+    return response.data;
+  } catch (error) {
+    if (!error.response) {
+      return { success: false, error: 'Network error. Is the backend running?' };
+    }
+    return { success: false, error: error.response?.data?.error || 'Failed to fetch dashboard stats.' };
+  }
+}
