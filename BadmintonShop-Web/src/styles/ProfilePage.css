@@ -139,3 +139,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--color-text-muted);
+}
+
+.input-with-icon .form-control {
+  padding-left: 2.5rem;
+}
