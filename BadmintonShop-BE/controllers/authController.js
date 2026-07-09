@@ -69,6 +69,11 @@ const authController = {
         return res.status(403).json({ success: false, error: 'Your account has been disabled. Please contact support.' });
       }
 
+      if (user.role === 'admin') {
+        console.log(`[LOGIN FAILED] Admin tried to login via shop portal: '${username}'`);
+        return res.status(403).json({ success: false, error: 'Admin accounts must log in through the Admin Portal.' });
+      }
+
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         console.log(`[LOGIN FAILED] Password mismatch for: '${username}'`);

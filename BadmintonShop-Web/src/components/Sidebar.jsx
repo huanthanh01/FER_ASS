@@ -23,8 +23,6 @@ export default function Sidebar() {
 
   const unreadCount = notifications.filter((n) => !n.read).length;
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const isAdmin = currentUser?.role === "admin";
-
   const navItems = [
     { to: "/", icon: HiOutlineHome, label: "Home" },
     { to: "/shop", icon: HiOutlineShoppingBag, label: "Shop" },
@@ -41,10 +39,6 @@ export default function Sidebar() {
       badge: unreadCount,
     },
     { to: "/profile", icon: HiOutlineUser, label: "Profile" },
-  ];
-
-  const adminItems = [
-    { to: "/admin/dashboard", icon: HiOutlineChartBar, label: "Admin Panel" },
   ];
 
   return (
@@ -91,27 +85,6 @@ export default function Sidebar() {
           ))}
         </div>
 
-        {isAdmin && (
-          <div className="nav-section">
-            {!sidebarCollapsed && (
-              <span className="nav-section-label">Admin</span>
-            )}
-            {adminItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `nav-item ${isActive ? "active" : ""}`
-                }
-              >
-                <item.icon size={22} />
-                {!sidebarCollapsed && (
-                  <span className="nav-label">{item.label}</span>
-                )}
-              </NavLink>
-            ))}
-          </div>
-        )}
       </nav>
 
       <div className="sidebar-footer">
@@ -124,7 +97,7 @@ export default function Sidebar() {
               <div className="user-info">
                 <span className="user-name">{currentUser?.fullname}</span>
                 <span className="user-role">
-                  {isAdmin ? "Admin" : "Member"}
+                  Customer
                 </span>
               </div>
             )}
