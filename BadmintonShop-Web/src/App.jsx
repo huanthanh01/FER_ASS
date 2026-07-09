@@ -17,6 +17,7 @@ import NotificationsPage from './pages/NotificationsPage';
 import NotificationDetailPage from './pages/NotificationDetailPage';
 
 // Admin Pages & Layout
+import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
@@ -42,6 +43,9 @@ function App() {
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="notifications/:id" element={<NotificationDetailPage />} />
         </Route>
+
+        {/* Admin Login (Isolated from Layout) */}
+        <Route path="/admin/login" element={<AdminLoginPage />} />
 
         {/* Dedicated Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>

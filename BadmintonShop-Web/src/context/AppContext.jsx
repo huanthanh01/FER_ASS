@@ -18,6 +18,11 @@ export function AppProvider({ children }) {
   // Auth State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  
+  // Admin Auth State
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [currentAdmin, setCurrentAdmin] = useState(null);
+
   const [cartItems, setCartItems] = useState([]);
   const [isGlobalLoading, setIsGlobalLoading] = useState(false);
   const [productRefreshKey, setProductRefreshKey] = useState(0);
@@ -59,7 +64,22 @@ export function AppProvider({ children }) {
         console.error('Auto-login failed:', err);
       }
     };
+    
+    const autoAdminLogin = () => {
+      const adminData = localStorage.getItem('admin_session');
+      if (adminData) {
+        try {
+          const parsed = JSON.parse(adminData);
+          setCurrentAdmin(parsed);
+          setIsAdminLoggedIn(true);
+        } catch(e) {
+          localStorage.removeItem('admin_session');
+        }
+      }
+    };
+    
     autoLogin();
+    autoAdminLogin();
   }, []);
 
   const addNotification = useCallback((title, message, type = 'info') => {
@@ -113,6 +133,21 @@ export function AppProvider({ children }) {
     localStorage.removeItem('saved_timestamp');
     navigate('/');
     toast.info('Logged out successfully');
+  }, [navigate]);
+
+  const handleAdminLoginSuccess = useCallback((user) => {
+    setCurrentAdmin(user);
+    setIsAdminLoggedIn(true);
+    localStorage.setItem('admin_session', JSON.stringify(user));
+    navigate('/admin');
+  }, [navigate]);
+
+  const handleAdminLogout = useCallback(() => {
+    setIsAdminLoggedIn(false);
+    setCurrentAdmin(null);
+    localStorage.removeItem('admin_session');
+    navigate('/admin/login');
+    toast.info('Admin logged out successfully');
   }, [navigate]);
 
   // Cart actions
@@ -198,9 +233,11 @@ export function AppProvider({ children }) {
 
   const value = {
     isLoggedIn, currentUser,
+    isAdminLoggedIn, currentAdmin,
     cartItems, isGlobalLoading, productRefreshKey,
     notifications, addNotification, markNotificationRead, clearNotifications,
     handleLoginSuccess, handleRegisterSuccess, handleLogout,
+    handleAdminLoginSuccess, handleAdminLogout,
     addToCart, updateCartQuantity, removeFromCart, checkoutCart,
     updateProfile, changePassword,
   };

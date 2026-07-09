@@ -30,6 +30,21 @@ export async function loginUser(username, password) {
   }
 }
 
+export async function adminLogin(username, password) {
+  try {
+    const response = await axios.post(`${API_URL}/auth/admin-login`, {
+      username, password,
+    });
+    return { success: true, user: response.data.user };
+  } catch (error) {
+    if (!error.response) {
+      return { success: false, error: 'Network error. Is the backend running at ' + API_URL + '?' };
+    }
+    const msg = error.response?.data?.error || 'Invalid admin credentials';
+    return { success: false, error: msg };
+  }
+}
+
 export async function updateUserProfile(userId, fullname, email, phoneNumber) {
   try {
     await axios.put(`${API_URL}/auth/profile/${userId}`, {

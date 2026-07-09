@@ -6,20 +6,17 @@ import { useAppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
 
 export default function AdminLayout() {
-  const { currentUser, isLoggedIn } = useAppContext();
+  const { currentAdmin, isAdminLoggedIn } = useAppContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Only allow admin access
-    if (!isLoggedIn) {
-      navigate('/login');
-    } else if (currentUser && currentUser.role !== 'admin') {
-      navigate('/');
-      toast.error('Unauthorized access');
+    // Only allow admin access based on the separate admin session
+    if (!isAdminLoggedIn || !currentAdmin) {
+      navigate('/admin/login');
     }
-  }, [currentUser, isLoggedIn, navigate]);
+  }, [currentAdmin, isAdminLoggedIn, navigate]);
 
-  if (!currentUser || currentUser.role !== 'admin') {
+  if (!isAdminLoggedIn || !currentAdmin) {
     return null; // Or a loading spinner
   }
 

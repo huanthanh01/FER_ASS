@@ -64,6 +64,11 @@ const authController = {
         return res.status(400).json({ success: false, error: 'Invalid username or password' });
       }
 
+      if (user.isActive === false) {
+        console.log(`[LOGIN FAILED] User is disabled: '${username}'`);
+        return res.status(403).json({ success: false, error: 'Your account has been disabled. Please contact support.' });
+      }
+
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         console.log(`[LOGIN FAILED] Password mismatch for: '${username}'`);
@@ -84,6 +89,47 @@ const authController = {
     } catch (err) {
       console.error(err);
       res.status(500).json({ success: false, error: 'Login failed. Please try again.' });
+    }
+  },
+
+  // Admin Login
+  adminLogin: async (req, res) => {
+    const { username, password } = req.body;
+    try {
+      const user = await User.findOne({ 
+        $or: [{ username: username }, { email: username }] 
+      });
+      if (!user) {
+        return res.status(400).json({ success: false, error: 'Invalid admin credentials' });
+      }
+
+      if (user.isActive === false) {
+        return res.status(403).json({ success: false, error: 'Your account has been disabled.' });
+      }
+
+      if (user.role !== 'admin') {
+        return res.status(403).json({ success: false, error: 'Unauthorized. Admin access required.' });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ success: false, error: 'Invalid admin credentials' });
+      }
+
+      res.json({
+        success: true,
+        user: {
+          id: user._id,
+          fullname: user.fullname,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+          phoneNumber: user.phoneNumber
+        }
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Admin login failed.' });
     }
   },
 

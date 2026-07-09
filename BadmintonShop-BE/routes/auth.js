@@ -7,6 +7,7 @@ router.post('/register', authController.register);
 
 // Login
 router.post('/login', authController.login);
+router.post('/admin-login', authController.adminLogin);
 
 // Update Profile
 router.put('/profile/:id', authController.updateProfile);
