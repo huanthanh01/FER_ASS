@@ -37,15 +37,8 @@ export default function AdminProductsPage() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Check admin role
-    if (currentUser?.role !== 'admin') {
-      navigate('/');
-      toast.error('Unauthorized access');
-      return;
-    }
-
     fetchProducts();
-  }, [currentUser, navigate]);
+  }, []);
 
   const fetchProducts = async (searchQuery = '', page = 1) => {
     setIsLoading(true);
