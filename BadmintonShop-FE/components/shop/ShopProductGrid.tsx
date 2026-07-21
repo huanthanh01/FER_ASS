@@ -12,6 +12,19 @@ import { Skeleton } from '../ui/Skeleton';
 import { CategorySidebar } from './CategorySidebar';
 import { SortingInfo, SortOrder } from './SortingInfo';
 
+const getPaginationItems = (currentPage: number, totalPages: number) => {
+  if (totalPages <= 5) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  if (currentPage <= 3) {
+    return [1, 2, 3, 4, '...', totalPages];
+  }
+  if (currentPage >= totalPages - 2) {
+    return [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+};
+
 interface ShopProductGridProps {
   searchQuery?: string;
   initialCategory?: string;
@@ -164,19 +177,22 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
                 showsHorizontalScrollIndicator={false} 
                 contentContainerStyle={{ paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center' }}
               >
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                {getPaginationItems(page, totalPages).map((p, index) => (
                   <TouchableOpacity
-                    key={p}
+                    key={`${p}-${index}`}
                     style={{
                       width: 40,
                       height: 40,
                       borderRadius: 20,
-                      backgroundColor: page === p ? AppColors.primaryOrange : '#e5e7eb',
+                      backgroundColor: page === p ? AppColors.primaryOrange : (p === '...' ? 'transparent' : '#e5e7eb'),
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginHorizontal: 4
                     }}
-                    onPress={() => fetchProducts(p)}
+                    onPress={() => {
+                      if (typeof p === 'number') fetchProducts(p);
+                    }}
+                    disabled={p === '...'}
                   >
                     <Text style={{
                       color: page === p ? '#fff' : '#4b5563',
