@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
-import { registerUser } from '../../api/authApi';
+import { registerUser, googleLogin } from '../../api/authApi';
+
+import GoogleLoginButton from '../../components/Auth/GoogleLoginButton';
 
 function RegisterForm({ isLoading, setIsLoading, switchToLogin }) {
-  const { handleRegisterSuccess } = useAppContext();
+  const { handleRegisterSuccess, handleLoginSuccess } = useAppContext();
   const [showPassword, setShowPassword] = useState(false);
   const [registerData, setRegisterData] = useState({
     fullname: '',
@@ -64,6 +66,27 @@ function RegisterForm({ isLoading, setIsLoading, switchToLogin }) {
   const updateField = (field, value) => {
     setRegisterData({ ...registerData, [field]: value });
     if (errors[field]) setErrors({ ...errors, [field]: '' });
+  };
+
+  const handleSocialClick = (e) => {
+    e.preventDefault();
+    alert("This feature is currently under development.");
+  };
+
+  const handleGoogleSuccess = async (codeResponse) => {
+    setIsLoading(true);
+    try {
+      const result = await googleLogin(codeResponse.access_token);
+      if (result.success && result.user) {
+        await handleLoginSuccess(result.user);
+      } else {
+        setErrors({ general: result.error || "Google sign up failed" });
+      }
+    } catch (err) {
+      setErrors({ general: "An unexpected error occurred" });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -162,16 +185,17 @@ function RegisterForm({ isLoading, setIsLoading, switchToLogin }) {
         </div>
 
         <div className="login-social-icons">
-          <a href="#" className="login-social-btn" id="signup-google" title="Sign up with Google">
-            <i className="bx bxl-google"></i>
-          </a>
-          <a href="#" className="login-social-btn" id="signup-facebook" title="Sign up with Facebook">
+          <GoogleLoginButton 
+            onSuccess={handleGoogleSuccess}
+            onError={(err) => setErrors({ general: "Google sign up failed. Please try again." })}
+          />
+          <a href="#" className="login-social-btn" id="signup-facebook" title="Sign up with Facebook" onClick={handleSocialClick}>
             <i className="bx bxl-facebook"></i>
           </a>
-          <a href="#" className="login-social-btn" id="signup-tiktok" title="Sign up with TikTok">
+          <a href="#" className="login-social-btn" id="signup-tiktok" title="Sign up with TikTok" onClick={handleSocialClick}>
             <i className="bx bxl-tiktok"></i>
           </a>
-          <a href="#" className="login-social-btn" id="signup-github" title="Sign up with GitHub">
+          <a href="#" className="login-social-btn" id="signup-github" title="Sign up with GitHub" onClick={handleSocialClick}>
             <i className="bx bxl-github"></i>
           </a>
         </div>

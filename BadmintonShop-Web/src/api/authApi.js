@@ -30,6 +30,21 @@ export async function loginUser(username, password) {
   }
 }
 
+export async function googleLogin(access_token) {
+  try {
+    const response = await axios.post(`${API_URL}/auth/google-login`, {
+      access_token
+    });
+    return { success: true, user: response.data.user };
+  } catch (error) {
+    if (!error.response) {
+      return { success: false, error: 'Network error. Is the backend running at ' + API_URL + '?' };
+    }
+    const msg = error.response?.data?.error || 'Google Login failed';
+    return { success: false, error: msg };
+  }
+}
+
 export async function adminLogin(username, password) {
   try {
     const response = await axios.post(`${API_URL}/auth/admin-login`, {

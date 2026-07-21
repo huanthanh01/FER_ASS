@@ -225,6 +225,64 @@ const authController = {
       console.error(err);
       res.status(500).json({ success: false, error: 'Failed to reset password' });
     }
+  },
+  // Google Login
+  googleLogin: async (req, res) => {
+    const { access_token } = req.body;
+    try {
+      // Use the access_token to fetch user info from Google
+      const axios = require('axios');
+      const googleResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${access_token}` }
+      });
+      
+      const payload = googleResponse.data;
+      const { email, name } = payload; 
+
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        // Register new user
+        const bcrypt = require('bcryptjs');
+        const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(randomPassword, salt);
+        
+        let username = email.split('@')[0];
+        let existingUsername = await User.findOne({ username });
+        while(existingUsername) {
+            username = username + Math.floor(Math.random() * 1000);
+            existingUsername = await User.findOne({ username });
+        }
+
+        user = new User({
+          fullname: name,
+          email,
+          username,
+          password: hashedPassword,
+        });
+        await user.save();
+      } else {
+        if (user.isActive === false) {
+          return res.status(403).json({ success: false, error: 'Your account has been disabled. Please contact support.' });
+        }
+      }
+
+      res.json({
+        success: true,
+        user: {
+          id: user._id,
+          fullname: user.fullname,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+          phoneNumber: user.phoneNumber
+        }
+      });
+    } catch (err) {
+      console.error('Google login error:', err);
+      res.status(500).json({ success: false, error: 'Google authentication failed' });
+    }
   }
 };
 
