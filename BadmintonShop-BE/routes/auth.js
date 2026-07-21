@@ -21,4 +21,7 @@ router.post('/verify-reset-password', authController.verifyResetPassword);
 // Reset Password
 router.post('/reset-password', authController.resetPassword);
 
+// Google Login
+router.post('/google-login', authController.googleLogin);
+
 module.exports = router;

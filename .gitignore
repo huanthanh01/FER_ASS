@@ -1,2 +1,3 @@
 FER_ASS.code-workspace
-node_modules
+**/node_modules
+**/.env
