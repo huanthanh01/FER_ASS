@@ -13,6 +13,7 @@ import {
   HiOutlineChartBar,
   HiOutlineMenu,
   HiOutlineX,
+  HiOutlineSupport,
 } from "react-icons/hi";
 import ClassStateSummary from "./ClassStateSummary";
 
@@ -40,6 +41,7 @@ export default function Sidebar() {
       badge: unreadCount,
     },
     { to: "/profile", icon: HiOutlineUser, label: "Profile" },
+    { to: "/report", icon: HiOutlineSupport, label: "Report / Support" },
   ];
 
   return (

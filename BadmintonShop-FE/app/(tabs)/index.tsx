@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, ScrollView, StatusBar, Platform } from 'react-native';
+import { ScrollView, StatusBar, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../../constants/ThemeContext';
 import { AppColors } from '../../constants/colors';
 
 import { TopHeader } from '../../components/landing/TopHeader';
+import { styles } from '../../components/styles/tabs/index.styles';
 import { HeroSection } from '../../components/landing/HeroSection';
 import { BannerSlider } from '../../components/landing/BannerSlider';
 import { CategoryGrid } from '../../components/landing/CategoryGrid';
@@ -33,14 +34,4 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingBottom: 100, // Space for custom bottom tab bar
-  },
-});
+
