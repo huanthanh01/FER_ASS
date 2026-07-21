@@ -55,26 +55,29 @@ export default function ProductDetailsScreen() {
   const handleReviewSubmit = async (rating: number, comment: string) => {
     if (!currentUser || !isLoggedIn) {
       alert("Please login to submit a review");
-      return;
+      return false;
     }
     
     setIsSubmittingReview(true);
-    const res = await createProductReview(id, currentUser.id, rating, comment);
+    const res = await createProductReview(id as string, currentUser.id, rating, comment);
     
     if (res.success) {
       alert("Review submitted successfully");
       
       // Refresh product data
-      const prodRes = await getProductById(id);
+      const prodRes = await getProductById(id as string);
       if (prodRes.success && prodRes.product) setProduct(prodRes.product);
       
       // Refresh reviews
-      const revRes = await getProductReviews(id);
+      const revRes = await getProductReviews(id as string);
       if (revRes.success && revRes.reviews) setReviews(revRes.reviews);
+      setIsSubmittingReview(false);
+      return true;
     } else {
       alert(res.error || "Failed to submit review");
+      setIsSubmittingReview(false);
+      return false;
     }
-    setIsSubmittingReview(false);
   };
 
   if (loading) {
