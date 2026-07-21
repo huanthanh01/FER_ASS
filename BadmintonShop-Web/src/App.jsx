@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { AppProvider } from './context/AppContext';
@@ -7,7 +7,7 @@ import './App.css';
 
 // Pages
 import HomePage from './pages/HomePage';
-import ShopPage from './pages/ShopPage';
+const ShopPage = React.lazy(() => import('./pages/ShopPage'));
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import AuthPage from './pages/Auth/AuthPage';
@@ -35,7 +35,11 @@ function App() {
         <Route path="/register" element={<AuthPage view="register" />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="shop" element={<ShopPage />} />
+          <Route path="shop" element={
+            <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center', color: '#9ca3af', width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Shop...</div>}>
+              <ShopPage />
+            </Suspense>
+          } />
           <Route path="product/:id" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />

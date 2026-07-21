@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
-import { loginUser } from "../../api/authApi";
+import { loginUser, googleLogin } from "../../api/authApi";
 import RegisterForm from "./RegisterForm";
+import GoogleLoginButton from "../../components/Auth/GoogleLoginButton";
 import ShopLogo from "../../assets/ShopLogo.png";
 import "../../styles/AuthPage.css";
 
@@ -63,6 +64,27 @@ export default function AuthPage({ view = "login" }) {
 
   const switchToLogin = () => {
     navigate("/login");
+  };
+
+  const handleGoogleSuccess = async (codeResponse) => {
+    setIsLoading(true);
+    try {
+      const result = await googleLogin(codeResponse.access_token);
+      if (result.success && result.user) {
+        await handleLoginSuccess(result.user);
+      } else {
+        setLoginErrors({ general: result.error || "Google login failed" });
+      }
+    } catch (err) {
+      setLoginErrors({ general: "An unexpected error occurred" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSocialClick = (e) => {
+    e.preventDefault();
+    alert("This feature is currently under development.");
   };
 
   return (
@@ -188,19 +210,16 @@ export default function AuthPage({ view = "login" }) {
               </div>
 
               <div className="login-social-icons">
-                <a
-                  href="#"
-                  className="login-social-btn"
-                  id="login-google"
-                  title="Login with Google"
-                >
-                  <i className="bx bxl-google"></i>
-                </a>
+                <GoogleLoginButton 
+                  onSuccess={handleGoogleSuccess}
+                  onError={(err) => setLoginErrors({ general: "Google login failed. Please try again." })}
+                />
                 <a
                   href="#"
                   className="login-social-btn"
                   id="login-facebook"
                   title="Login with Facebook"
+                  onClick={handleSocialClick}
                 >
                   <i className="bx bxl-facebook"></i>
                 </a>
@@ -209,6 +228,7 @@ export default function AuthPage({ view = "login" }) {
                   className="login-social-btn"
                   id="login-tiktok"
                   title="Login with TikTok"
+                  onClick={handleSocialClick}
                 >
                   <i className="bx bxl-tiktok"></i>
                 </a>
@@ -217,6 +237,7 @@ export default function AuthPage({ view = "login" }) {
                   className="login-social-btn"
                   id="login-github"
                   title="Login with GitHub"
+                  onClick={handleSocialClick}
                 >
                   <i className="bx bxl-github"></i>
                 </a>

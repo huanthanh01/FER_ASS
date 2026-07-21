@@ -14,6 +14,7 @@ import {
   HiOutlineMenu,
   HiOutlineX,
 } from "react-icons/hi";
+import ClassStateSummary from "./ClassStateSummary";
 
 export default function Sidebar() {
   const { isLoggedIn, currentUser, cartItems, notifications, handleLogout } =
@@ -86,6 +87,12 @@ export default function Sidebar() {
         </div>
 
       </nav>
+
+      <ClassStateSummary 
+        cartCount={cartCount} 
+        unreadCount={unreadCount} 
+        sidebarCollapsed={sidebarCollapsed} 
+      />
 
       <div className="sidebar-footer">
         {isLoggedIn ? (
