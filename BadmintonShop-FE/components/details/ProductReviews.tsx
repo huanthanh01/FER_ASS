@@ -9,7 +9,7 @@ interface ProductReviewsProps {
   colors: any;
   isLoggedIn: boolean;
   currentUser: any;
-  onSubmitReview: (rating: number, comment: string) => Promise<void>;
+  onSubmitReview: (rating: number, comment: string) => Promise<boolean>;
   isSubmitting: boolean;
 }
 
@@ -28,6 +28,7 @@ export const ProductReviews = ({
   
   const [rating, setRating] = useState(existingReview ? existingReview.rating : 5);
   const [comment, setComment] = useState(existingReview ? (existingReview.comment || '') : '');
+  const [isEditing, setIsEditing] = useState(false);
 
   const renderStars = (ratingValue: number, size = 16, onPress?: (val: number) => void) => {
     return (
@@ -59,33 +60,53 @@ export const ProductReviews = ({
 
       {/* Write a Review Section */}
       {isLoggedIn ? (
-        <View style={[styles.reviewFormContainer, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <Text style={[styles.formTitle, { color: colors.text }]}>Write a Review</Text>
-          <View style={styles.ratingSelect}>
-            <Text style={{ color: colors.textSecondary, marginRight: 8 }}>Rating:</Text>
-            {renderStars(rating, 24, setRating)}
+        (!existingReview || isEditing) && (
+          <View style={[styles.reviewFormContainer, { backgroundColor: colors.card, borderColor: colors.border }]}>
+            <Text style={[styles.formTitle, { color: colors.text }]}>{existingReview ? "Edit Your Review" : "Write a Review"}</Text>
+            <View style={styles.ratingSelect}>
+              <Text style={{ color: colors.textSecondary, marginRight: 8 }}>Rating:</Text>
+              {renderStars(rating, 24, setRating)}
+            </View>
+            <TextInput
+              style={[styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.background }]}
+              placeholder="Share your thoughts about this product..."
+              placeholderTextColor={colors.textSecondary}
+              multiline
+              numberOfLines={3}
+              value={comment}
+              onChangeText={setComment}
+            />
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              <TouchableOpacity 
+                style={[styles.submitButton, { flex: 1 }, isSubmitting && styles.submitButtonDisabled]}
+                disabled={isSubmitting}
+                onPress={async () => {
+                  const success = await onSubmitReview(rating, comment);
+                  if (success) setIsEditing(false);
+                }}
+              >
+                {isSubmitting ? (
+                  <ActivityIndicator color="#fff" size="small" />
+                ) : (
+                  <Text style={styles.submitButtonText}>{existingReview ? "Update" : "Submit"}</Text>
+                )}
+              </TouchableOpacity>
+              
+              {existingReview && (
+                <TouchableOpacity 
+                  style={[styles.cancelButton, { flex: 1, borderColor: colors.border }]}
+                  onPress={() => {
+                    setIsEditing(false);
+                    setRating(existingReview.rating);
+                    setComment(existingReview.comment || '');
+                  }}
+                >
+                  <Text style={[styles.cancelButtonText, { color: colors.text }]}>Cancel</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-          <TextInput
-            style={[styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.background }]}
-            placeholder="Share your thoughts about this product..."
-            placeholderTextColor={colors.textSecondary}
-            multiline
-            numberOfLines={3}
-            value={comment}
-            onChangeText={setComment}
-          />
-          <TouchableOpacity 
-            style={[styles.submitButton, isSubmitting && styles.submitButtonDisabled]}
-            disabled={isSubmitting}
-            onPress={() => onSubmitReview(rating, comment)}
-          >
-            {isSubmitting ? (
-              <ActivityIndicator color="#fff" size="small" />
-            ) : (
-              <Text style={styles.submitButtonText}>Submit Review</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+        )
       ) : (
         <View style={[styles.loginPrompt, { backgroundColor: colors.card, borderColor: colors.border }]}>
           <Text style={{ color: colors.textSecondary }}>Please log in to write a review.</Text>
@@ -101,9 +122,19 @@ export const ProductReviews = ({
                 <Text style={[styles.reviewAuthor, { color: colors.text }]}>
                   {review.user?.fullname || 'Anonymous'}
                 </Text>
-                <Text style={[styles.reviewDate, { color: colors.textSecondary }]}>
-                  {new Date(review.updatedAt || review.createdAt).toLocaleDateString()}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                  <Text style={[styles.reviewDate, { color: colors.textSecondary }]}>
+                    {new Date(review.updatedAt || review.createdAt).toLocaleDateString()}
+                  </Text>
+                  {currentUser && review.user?._id === currentUser.id && !isEditing && (
+                    <TouchableOpacity 
+                      onPress={() => setIsEditing(true)}
+                      style={{ paddingHorizontal: 8, paddingVertical: 4, backgroundColor: AppColors.primaryOrange, borderRadius: 4 }}
+                    >
+                      <Text style={{ color: '#fff', fontSize: 12, fontWeight: 'bold' }}>Edit</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
               </View>
               <View style={{ marginBottom: 8 }}>
                 {renderStars(review.rating, 16)}
@@ -171,6 +202,17 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  cancelButton: {
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    borderWidth: 1,
+    backgroundColor: 'transparent',
+  },
+  cancelButtonText: {
     fontWeight: 'bold',
     fontSize: 16,
   },

@@ -26,6 +26,7 @@ export default function ProductDetailPage() {
   const [userRating, setUserRating] = useState(5);
   const [userComment, setUserComment] = useState("");
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+  const [isEditingReview, setIsEditingReview] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -120,6 +121,7 @@ export default function ProductDetailPage() {
     const res = await submitReview(id, currentUser.id, userRating, userComment);
     if (res.success) {
       toast.success(res.message || "Review submitted!");
+      setIsEditingReview(false);
       // Refresh product to get updated overall rating & reviews
       const updatedProductRes = await getProductById(id);
       if (updatedProductRes.success && updatedProductRes.product) {
@@ -134,6 +136,8 @@ export default function ProductDetailPage() {
     }
     setIsSubmittingReview(false);
   };
+
+  const myReview = currentUser ? reviews.find(r => r.user?._id === currentUser.id) : null;
 
   if (isLoading) {
     return (
@@ -405,37 +409,50 @@ export default function ProductDetailPage() {
               <h3>Customer Reviews ({product.numReviews || 0})</h3>
               
               {isLoggedIn ? (
-                <div className="review-form-container">
-                  <h4>Write a Review</h4>
-                  <form onSubmit={handleReviewSubmit} className="review-form">
-                    <div className="form-group">
-                      <label>Rating:</label>
-                      <div className="star-rating-select">
-                        {[1, 2, 3, 4, 5].map(num => (
-                          <HiStar 
-                            key={num} 
-                            size={24} 
-                            style={{ cursor: 'pointer', color: num <= userRating ? '#ffc107' : '#e4e5e9' }}
-                            onClick={() => setUserRating(num)}
-                          />
-                        ))}
+                (!myReview || isEditingReview) && (
+                  <div className="review-form-container">
+                    <h4>{myReview ? "Edit Your Review" : "Write a Review"}</h4>
+                    <form onSubmit={handleReviewSubmit} className="review-form">
+                      <div className="form-group">
+                        <label>Rating:</label>
+                        <div className="star-rating-select">
+                          {[1, 2, 3, 4, 5].map(num => (
+                            <HiStar 
+                              key={num} 
+                              size={24} 
+                              style={{ cursor: 'pointer', color: num <= userRating ? '#ffc107' : '#e4e5e9' }}
+                              onClick={() => setUserRating(num)}
+                            />
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <div className="form-group">
-                      <label>Comment:</label>
-                      <textarea 
-                        className="form-control" 
-                        rows="3"
-                        value={userComment}
-                        onChange={(e) => setUserComment(e.target.value)}
-                        placeholder="Share your thoughts about this product..."
-                      ></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-primary" disabled={isSubmittingReview}>
-                      {isSubmittingReview ? "Submitting..." : "Submit Review"}
-                    </button>
-                  </form>
-                </div>
+                      <div className="form-group">
+                        <label>Comment:</label>
+                        <textarea 
+                          className="form-control" 
+                          rows="3"
+                          value={userComment}
+                          onChange={(e) => setUserComment(e.target.value)}
+                          placeholder="Share your thoughts about this product..."
+                        ></textarea>
+                      </div>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button type="submit" className="btn btn-primary" disabled={isSubmittingReview}>
+                          {isSubmittingReview ? "Submitting..." : (myReview ? "Update Review" : "Submit Review")}
+                        </button>
+                        {myReview && (
+                          <button type="button" className="btn btn-secondary" onClick={() => {
+                            setIsEditingReview(false);
+                            setUserRating(myReview.rating);
+                            setUserComment(myReview.comment || "");
+                          }}>
+                            Cancel
+                          </button>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+                )
               ) : (
                 <div className="review-login-prompt">
                   <p>Please <a href="/login">login</a> to write a review.</p>
@@ -448,7 +465,17 @@ export default function ProductDetailPage() {
                     <div key={review._id} className="review-card">
                       <div className="review-header">
                         <div className="review-author">{review.user?.fullname || 'Anonymous'}</div>
-                        <div className="review-date">{new Date(review.updatedAt || review.createdAt).toLocaleDateString()}</div>
+                        <div className="review-date" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          {new Date(review.updatedAt || review.createdAt).toLocaleDateString()}
+                          {currentUser && review.user?._id === currentUser.id && !isEditingReview && (
+                            <button 
+                              onClick={() => setIsEditingReview(true)}
+                              style={{ padding: '2px 8px', fontSize: '12px', background: 'var(--color-primary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                            >
+                              Edit
+                            </button>
+                          )}
+                        </div>
                       </div>
                       <div className="review-stars">
                         {[1, 2, 3, 4, 5].map(num => (
