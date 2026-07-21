@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, Product } from "../models/types";
+import { User, Product, Review } from "../models/types";
 import { Platform } from "react-native";
 
 import Constants from "expo-constants";
@@ -245,6 +245,41 @@ export async function deleteProduct(
       success: false,
       error: error.response?.data?.error || "Failed to delete product.",
     };
+  }
+}
+
+export async function getProductReviews(
+  productId: string,
+): Promise<{ success: boolean; error?: string; reviews?: Review[] }> {
+  try {
+    const response = await axios.get(`${API_URL}/products/${productId}/reviews`);
+    return { success: true, reviews: response.data.reviews };
+  } catch (error: any) {
+    if (!error.response) {
+      return { success: false, error: "Network error. Is the backend running?" };
+    }
+    return { success: false, error: error.response?.data?.error || "Failed to fetch reviews." };
+  }
+}
+
+export async function createProductReview(
+  productId: string,
+  userId: string,
+  rating: number,
+  comment: string
+): Promise<{ success: boolean; error?: string; message?: string }> {
+  try {
+    const response = await axios.post(`${API_URL}/products/${productId}/reviews`, {
+      userId,
+      rating,
+      comment
+    });
+    return { success: true, message: response.data.message };
+  } catch (error: any) {
+    if (!error.response) {
+      return { success: false, error: "Network error. Is the backend running?" };
+    }
+    return { success: false, error: error.response?.data?.error || "Failed to submit review." };
   }
 }
 

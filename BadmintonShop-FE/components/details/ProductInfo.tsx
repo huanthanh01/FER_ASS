@@ -29,6 +29,15 @@ export const ProductInfo = ({ product, colors }: ProductInfoProps) => {
         {product.brand}
       </Text>
       <Text style={[styles.name, { color: colors.text }]}>{product.name}</Text>
+      <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
+        <Text style={{ color: "#ffc107", fontSize: 16 }}>★</Text>
+        <Text style={{ color: colors.text, marginLeft: 4, fontWeight: "500" }}>
+          {(product.rating && product.rating > 0) ? product.rating.toFixed(1) : "No ratings"}
+        </Text>
+        <Text style={{ color: colors.textSecondary, marginLeft: 8 }}>
+          ({product.numReviews || 0} reviews)
+        </Text>
+      </View>
 
       <View style={styles.priceRow}>
         <View style={styles.priceContainer}>

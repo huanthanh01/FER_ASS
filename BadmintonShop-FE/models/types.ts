@@ -40,6 +40,21 @@ export interface Product {
   isFeatured?: boolean;
   stock?: number;
   category: string;
+  rating?: number;
+  numReviews?: number;
+}
+
+export interface Review {
+  _id: string;
+  user: {
+    _id: string;
+    fullname: string;
+  };
+  product: string;
+  rating: number;
+  comment?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CartItemType {

@@ -5,6 +5,7 @@ import { adminLogin } from '../../api/authApi';
 import { useAppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
 import ShopLogo from '../../assets/ShopLogo.png';
+import '../../styles/AdminLoginPage.css';
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
@@ -34,69 +35,79 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4 selection:bg-orange-500/30">
-      <div className="w-full max-w-md">
+    <div className="admin-login-wrapper">
+      
+      {/* Animated Background Shapes */}
+      <div className="admin-bg-shape-1"></div>
+      <div className="admin-bg-shape-2"></div>
+
+      <div className="admin-login-content">
         
         {/* Logo & Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl mb-6">
-            <img src={ShopLogo} alt="Logo" className="w-10 h-10 object-contain" />
+        <div className="admin-header">
+          <div className="admin-logo-box">
+            <img src={ShopLogo} alt="Logo" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Admin Portal</h1>
-          <p className="text-slate-400 mt-2">Sign in to access the control panel</p>
+          <h1 className="admin-title">Admin Portal</h1>
+          <p className="admin-subtitle">Control Center Authentication</p>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Username or Email</label>
-              <div className="relative">
+        {/* Login Card (Glassmorphism) */}
+        <div className="admin-card">
+          <form onSubmit={handleLogin} className="admin-form">
+            
+            {/* Username Field */}
+            <div className="admin-input-group">
+              <label className="admin-label">Username / Email</label>
+              <div className="admin-input-wrapper">
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 text-white rounded-xl pl-11 pr-4 py-3 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                  className="admin-input"
                   placeholder="admin@example.com"
                 />
-                <HiOutlineUser className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <HiOutlineUser className="admin-icon" />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-              <div className="relative">
+            {/* Password Field */}
+            <div className="admin-input-group">
+              <label className="admin-label">Password</label>
+              <div className="admin-input-wrapper">
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 text-white rounded-xl pl-11 pr-4 py-3 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                  className="admin-input"
                   placeholder="••••••••"
                 />
-                <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <HiOutlineLockClosed className="admin-icon" />
               </div>
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-600 hover:bg-orange-500 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-lg shadow-orange-600/20 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+              className="admin-submit-btn"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="admin-spinner"></div>
               ) : (
-                'Sign In'
+                'SECURE SIGN IN'
               )}
             </button>
           </form>
         </div>
         
-        <div className="text-center mt-8">
+        {/* Back Link */}
+        <div className="admin-back-link">
           <button 
             onClick={() => navigate('/')} 
-            className="text-slate-500 hover:text-white transition-colors text-sm flex items-center justify-center gap-2 mx-auto"
+            className="admin-back-btn"
           >
-            &larr; Back to Shop
+            <span>&larr;</span> Return to Shop
           </button>
         </div>
       </div>

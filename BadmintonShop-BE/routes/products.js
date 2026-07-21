@@ -20,4 +20,10 @@ router.put('/:id', productController.updateProduct);
 // Delete a product
 router.delete('/:id', productController.deleteProduct);
 
+// Create or update a review
+router.post('/:id/reviews', productController.createProductReview);
+
+// Get product reviews
+router.get('/:id/reviews', productController.getProductReviews);
+
 module.exports = router;

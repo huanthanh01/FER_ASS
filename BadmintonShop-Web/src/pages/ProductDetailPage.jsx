@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProductById, getProducts } from "../api/productApi";
+import { fetchReviews, submitReview } from "../api/reviewApi";
 import { useAppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
 import ProductCard from "../components/ProductCard";
 import {
   HiOutlineShoppingCart,
@@ -17,9 +19,13 @@ import "../styles/ProductDetailPage.css";
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useAppContext();
+  const { addToCart, currentUser, isLoggedIn } = useAppContext();
 
   const [product, setProduct] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [userRating, setUserRating] = useState(5);
+  const [userComment, setUserComment] = useState("");
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -58,6 +64,22 @@ export default function ProductDetailPage() {
               );
             }
           }
+
+          // Fetch reviews
+          const reviewsRes = await fetchReviews(id);
+          if (reviewsRes.success) {
+            setReviews(reviewsRes.reviews || []);
+            
+            // Check if current user already reviewed, pre-fill form
+            if (currentUser && reviewsRes.reviews) {
+               const myReview = reviewsRes.reviews.find(r => r.user?._id === currentUser.id);
+               if (myReview) {
+                 setUserRating(myReview.rating);
+                 setUserComment(myReview.comment || "");
+               }
+            }
+          }
+
         } else {
           // Handle not found
           setProduct(null);
@@ -86,6 +108,31 @@ export default function ProductDetailPage() {
     if (product) {
       addToCart(product._id || product.id, quantity);
     }
+  };
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    if (!isLoggedIn || !currentUser) {
+      toast.warning("Please login to submit a review.");
+      return;
+    }
+    setIsSubmittingReview(true);
+    const res = await submitReview(id, currentUser.id, userRating, userComment);
+    if (res.success) {
+      toast.success(res.message || "Review submitted!");
+      // Refresh product to get updated overall rating & reviews
+      const updatedProductRes = await getProductById(id);
+      if (updatedProductRes.success && updatedProductRes.product) {
+        setProduct(updatedProductRes.product);
+      }
+      const reviewsRes = await fetchReviews(id);
+      if (reviewsRes.success) {
+        setReviews(reviewsRes.reviews || []);
+      }
+    } else {
+      toast.error(res.error || "Failed to submit review.");
+    }
+    setIsSubmittingReview(false);
   };
 
   if (isLoading) {
@@ -200,11 +247,10 @@ export default function ProductDetailPage() {
 
           <div className="product-meta">
             <div className="product-rating">
-              <HiStar className="star-icon" />
-              <span>{product.rating || 4.5}</span>
+              <HiStar className="star-icon" style={{ color: product.rating > 0 ? '#ffc107' : '#e4e5e9' }} />
+              <span>{product.rating > 0 ? product.rating.toFixed(1) : 'No ratings'}</span>
               <span className="review-count">
-                ({product.reviews || Math.floor(Math.random() * 100) + 10}{" "}
-                reviews)
+                ({product.numReviews || 0} reviews)
               </span>
             </div>
             <div className="product-stock">
@@ -355,9 +401,67 @@ export default function ProductDetailPage() {
             </div>
           )}
           {activeTab === "reviews" && (
-            <div className="tab-pane">
-              <h3>Customer Reviews</h3>
-              <p>Reviews will be displayed here.</p>
+            <div className="tab-pane reviews-tab">
+              <h3>Customer Reviews ({product.numReviews || 0})</h3>
+              
+              {isLoggedIn ? (
+                <div className="review-form-container">
+                  <h4>Write a Review</h4>
+                  <form onSubmit={handleReviewSubmit} className="review-form">
+                    <div className="form-group">
+                      <label>Rating:</label>
+                      <div className="star-rating-select">
+                        {[1, 2, 3, 4, 5].map(num => (
+                          <HiStar 
+                            key={num} 
+                            size={24} 
+                            style={{ cursor: 'pointer', color: num <= userRating ? '#ffc107' : '#e4e5e9' }}
+                            onClick={() => setUserRating(num)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Comment:</label>
+                      <textarea 
+                        className="form-control" 
+                        rows="3"
+                        value={userComment}
+                        onChange={(e) => setUserComment(e.target.value)}
+                        placeholder="Share your thoughts about this product..."
+                      ></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary" disabled={isSubmittingReview}>
+                      {isSubmittingReview ? "Submitting..." : "Submit Review"}
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <div className="review-login-prompt">
+                  <p>Please <a href="/login">login</a> to write a review.</p>
+                </div>
+              )}
+
+              <div className="reviews-list">
+                {reviews.length > 0 ? (
+                  reviews.map(review => (
+                    <div key={review._id} className="review-card">
+                      <div className="review-header">
+                        <div className="review-author">{review.user?.fullname || 'Anonymous'}</div>
+                        <div className="review-date">{new Date(review.updatedAt || review.createdAt).toLocaleDateString()}</div>
+                      </div>
+                      <div className="review-stars">
+                        {[1, 2, 3, 4, 5].map(num => (
+                          <HiStar key={num} size={16} color={num <= review.rating ? '#ffc107' : '#e4e5e9'} />
+                        ))}
+                      </div>
+                      {review.comment && <p className="review-comment">{review.comment}</p>}
+                    </div>
+                  ))
+                ) : (
+                  <p>No reviews yet. Be the first to review this product!</p>
+                )}
+              </div>
             </div>
           )}
         </div>
