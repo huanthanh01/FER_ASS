@@ -4,8 +4,8 @@ import { useLocalSearchParams, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from '../../constants/colors';
 import { useTheme } from '../../constants/ThemeContext';
-import { Product } from '../../models/types';
-import { getProductById } from '../../utils/database';
+import { Product, Review } from '../../models/types';
+import { getProductById, getProductReviews, createProductReview } from '../../utils/database';
 import { useAppContext } from '../../controllers/useAppController';
 import { styles } from '../../components/styles/details/ProductDetails.styles';
 
@@ -13,15 +13,18 @@ import { styles } from '../../components/styles/details/ProductDetails.styles';
 import { ProductDetailsHeader } from '../../components/details/ProductDetailsHeader';
 import { ProductImage } from '../../components/details/ProductImage';
 import { ProductInfo } from '../../components/details/ProductInfo';
+import { ProductReviews } from '../../components/details/ProductReviews';
 import { ProductBottomBar } from '../../components/details/ProductBottomBar';
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { colors, isDark } = useTheme();
-  const { addToCart } = useAppContext();
+  const { addToCart, currentUser, isLoggedIn } = useAppContext();
   
   const [product, setProduct] = useState<Product | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -31,6 +34,11 @@ export default function ProductDetailsScreen() {
         const result = await getProductById(id);
         if (result.success && result.product) {
           setProduct(result.product);
+        }
+        
+        const reviewsRes = await getProductReviews(id);
+        if (reviewsRes.success && reviewsRes.reviews) {
+          setReviews(reviewsRes.reviews);
         }
       }
       setLoading(false);
@@ -42,6 +50,31 @@ export default function ProductDetailsScreen() {
     if (product) {
       addToCart(product._id, quantity);
     }
+  };
+
+  const handleReviewSubmit = async (rating: number, comment: string) => {
+    if (!currentUser || !isLoggedIn) {
+      alert("Please login to submit a review");
+      return;
+    }
+    
+    setIsSubmittingReview(true);
+    const res = await createProductReview(id, currentUser.id, rating, comment);
+    
+    if (res.success) {
+      alert("Review submitted successfully");
+      
+      // Refresh product data
+      const prodRes = await getProductById(id);
+      if (prodRes.success && prodRes.product) setProduct(prodRes.product);
+      
+      // Refresh reviews
+      const revRes = await getProductReviews(id);
+      if (revRes.success && revRes.reviews) setReviews(revRes.reviews);
+    } else {
+      alert(res.error || "Failed to submit review");
+    }
+    setIsSubmittingReview(false);
   };
 
   if (loading) {
@@ -72,6 +105,15 @@ export default function ProductDetailsScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <ProductImage product={product} />
         <ProductInfo product={product} colors={colors} />
+        <ProductReviews 
+          productId={id}
+          reviews={reviews}
+          colors={colors}
+          isLoggedIn={isLoggedIn}
+          currentUser={currentUser}
+          onSubmitReview={handleReviewSubmit}
+          isSubmitting={isSubmittingReview}
+        />
       </ScrollView>
 
       <ProductBottomBar 

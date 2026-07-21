@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Review = require('../models/Review');
 
 const productController = {
   // Get all unique categories
@@ -111,6 +112,70 @@ const productController = {
     } catch (err) {
       console.error(err);
       res.status(500).json({ success: false, error: 'Failed to delete product' });
+    }
+  },
+
+  // Create or update a product review
+  createProductReview: async (req, res) => {
+    try {
+      const { rating, comment, userId } = req.body;
+      const productId = req.params.id;
+
+      if (!userId) {
+        return res.status(401).json({ success: false, error: 'Unauthorized' });
+      }
+
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ success: false, error: 'Product not found' });
+      }
+
+      // Check if user already reviewed
+      const existingReview = await Review.findOne({ product: productId, user: userId });
+
+      if (existingReview) {
+        // Update existing review
+        existingReview.rating = Number(rating);
+        existingReview.comment = comment;
+        await existingReview.save();
+      } else {
+        // Create new review
+        const review = new Review({
+          user: userId,
+          product: productId,
+          rating: Number(rating),
+          comment
+        });
+        await review.save();
+      }
+
+      // Recalculate product rating
+      const reviews = await Review.find({ product: productId });
+      product.numReviews = reviews.length;
+      product.rating = reviews.length > 0
+        ? reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
+        : 0;
+
+      await product.save();
+      res.status(201).json({ success: true, message: 'Review added/updated' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: 'Failed to submit review' });
+    }
+  },
+
+  // Get product reviews
+  getProductReviews: async (req, res) => {
+    try {
+      const productId = req.params.id;
+      const reviews = await Review.find({ product: productId })
+        .populate('user', 'fullname')
+        .sort({ updatedAt: -1 });
+
+      res.json({ success: true, reviews });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: 'Failed to fetch reviews' });
     }
   }
 };

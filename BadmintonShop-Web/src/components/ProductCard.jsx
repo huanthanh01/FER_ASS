@@ -39,9 +39,9 @@ export default function ProductCard({ product }) {
         <h3 className="product-title" title={product.name}>{product.name}</h3>
         
         <div className="product-rating">
-          <HiStar className="star-icon" />
-          <span>{product.rating || 4.5}</span>
-          <span className="review-count">({product.reviews || Math.floor(Math.random() * 100) + 10} reviews)</span>
+          <HiStar className="star-icon" style={{ color: product.rating > 0 ? '#ffc107' : '#e4e5e9' }} />
+          <span>{product.rating > 0 ? product.rating.toFixed(1) : 'No ratings'}</span>
+          <span className="review-count">({product.numReviews || 0} reviews)</span>
         </div>
         
         <div className="product-footer">
