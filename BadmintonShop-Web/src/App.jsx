@@ -15,6 +15,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
 import NotificationDetailPage from './pages/NotificationDetailPage';
+import ReportPage from './pages/ReportPage';
 
 // Admin Pages & Layout
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -46,6 +47,7 @@ function App() {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="notifications/:id" element={<NotificationDetailPage />} />
+          <Route path="report" element={<ReportPage />} />
         </Route>
 
         {/* Admin Login (Isolated from Layout) */}

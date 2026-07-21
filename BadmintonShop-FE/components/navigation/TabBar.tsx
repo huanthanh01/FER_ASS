@@ -40,6 +40,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
         if (route.name === 'index') iconName = 'home';
         else if (route.name === 'shop') iconName = 'bag-handle';
         else if (route.name === 'notification') iconName = 'notifications';
+        else if (route.name === 'report') iconName = 'chatbubble';
         else if (route.name === 'profile') iconName = 'person';
 
         // Outline icons for inactive tabs
