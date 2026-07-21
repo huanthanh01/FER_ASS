@@ -4,6 +4,31 @@
 @source "./";
 
 :root {
+  /* Color Palette - Light Theme (White / Light Green) */
+  --color-bg-base: #f8fafc; /* Slate-50 */
+  --color-bg-surface: #ffffff; /* White */
+  --color-bg-surface-light: #f1f5f9; /* Slate-100 */
+  --color-bg-surface-hover: rgba(241, 245, 249, 0.8);
+  
+  --color-primary: #84cc16; /* Light Green (Lime 500) */
+  --color-primary-rgb: 132, 204, 22;
+  --color-primary-hover: #65a30d; /* Lime 600 */
+  --color-primary-light: #d9f99d; /* Lime 200 */
+  
+  --color-text-primary: #0f172a; /* Slate 900 */
+  --color-text-secondary: #475569; /* Slate 600 */
+  --color-text-muted: #94a3b8; /* Slate 400 */
+  
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  --color-border: #e2e8f0; /* Slate 200 */
+  --color-border-light: #f8fafc; /* Slate 50 */
+}
+
+[data-theme='dark'] {
   /* Color Palette - Dark Theme (Pure Black/Neutral) */
   --color-bg-base: #000000;
   --color-bg-surface: #111111;
@@ -11,6 +36,7 @@
   --color-bg-surface-hover: rgba(17, 17, 17, 0.5);
   
   --color-primary: #f97316; /* Orange */
+  --color-primary-rgb: 249, 115, 22;
   --color-primary-hover: #ea580c;
   --color-primary-light: #ffedd5;
   
@@ -25,7 +51,9 @@
 
   --color-border: #333333;
   --color-border-light: #444444;
+}
 
+:root {
   /* Typography */
   --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   

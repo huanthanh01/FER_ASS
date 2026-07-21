@@ -19,6 +19,18 @@ export function AppProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   
+  // Theme State
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+  
   // Admin Auth State
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState(null);
@@ -236,6 +248,7 @@ export function AppProvider({ children }) {
     isAdminLoggedIn, currentAdmin,
     cartItems, isGlobalLoading, productRefreshKey,
     notifications, addNotification, markNotificationRead, clearNotifications,
+    theme, toggleTheme,
     handleLoginSuccess, handleRegisterSuccess, handleLogout,
     handleAdminLoginSuccess, handleAdminLogout,
     addToCart, updateCartQuantity, removeFromCart, checkoutCart,

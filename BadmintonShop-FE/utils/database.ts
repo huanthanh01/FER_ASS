@@ -428,3 +428,16 @@ export async function getRevenue(
     return { success: false, error: msg };
   }
 }
+
+
+// ==================== ORDER ENDPOINTS ====================
+export async function getUserOrdersDB(userId: string): Promise<{ success: boolean; error?: string; orders?: any[] }> {
+  try {
+    const response = await axios.get(`${API_URL}/orders/user/${userId}`);
+    return { success: true, orders: response.data.orders };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to fetch orders." };
+  }
+}
+

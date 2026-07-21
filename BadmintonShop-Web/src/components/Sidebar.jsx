@@ -14,11 +14,13 @@ import {
   HiOutlineMenu,
   HiOutlineX,
   HiOutlineSupport,
+  HiOutlineSun,
+  HiOutlineMoon,
 } from "react-icons/hi";
 import ClassStateSummary from "./ClassStateSummary";
 
 export default function Sidebar() {
-  const { isLoggedIn, currentUser, cartItems, notifications, handleLogout } =
+  const { isLoggedIn, currentUser, cartItems, notifications, handleLogout, theme, toggleTheme } =
     useAppContext();
   const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -97,6 +99,11 @@ export default function Sidebar() {
       />
 
       <div className="sidebar-footer">
+        <button className="sidebar-toggle theme-toggle" onClick={toggleTheme} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', background: 'rgba(var(--color-primary-rgb), 0.1)', border: '1px solid rgba(var(--color-primary-rgb), 0.2)', color: 'var(--color-primary)', cursor: 'pointer', marginBottom: '1rem', borderRadius: '0.5rem', fontWeight: '500', transition: 'all 0.2s' }}>
+          {theme === 'dark' ? <HiOutlineSun size={20} /> : <HiOutlineMoon size={20} />}
+          {!sidebarCollapsed && <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
+        </button>
+
         {isLoggedIn ? (
           <div className="user-card">
             <div className="user-avatar">

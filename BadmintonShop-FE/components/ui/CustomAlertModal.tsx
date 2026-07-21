@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { AppColors } from '../../constants/colors';
+import { useTheme } from '../../constants/ThemeContext';
 
 export interface AlertButton {
   text: string;
@@ -33,6 +34,8 @@ export const CustomAlertModal: React.FC<CustomAlertProps> = ({
   type = 'info',
   onClose,
 }) => {
+  const { colors, isDark } = useTheme();
+
   if (!visible) return null;
 
   const getIconName = () => {
@@ -47,9 +50,9 @@ export const CustomAlertModal: React.FC<CustomAlertProps> = ({
 
   const getIconColor = () => {
     switch (type) {
-      case 'success': return AppColors.primaryLime;
+      case 'success': return colors.primary;
       case 'error': return AppColors.error;
-      case 'warning': return AppColors.primaryOrange;
+      case 'warning': return colors.primary;
       case 'info':
       default: return '#3b82f6';
     }
@@ -72,36 +75,38 @@ export const CustomAlertModal: React.FC<CustomAlertProps> = ({
       <TouchableWithoutFeedback>
         <View style={styles.overlay}>
           <TouchableWithoutFeedback>
-            <View style={styles.card}>
+            <View style={[styles.card, { backgroundColor: colors.card }]}>
               <View style={styles.iconContainer}>
                 <Ionicons name={getIconName()} size={48} color={getIconColor()} />
               </View>
               
-              <Text style={styles.title}>{title}</Text>
-              {message ? <Text style={styles.message}>{message}</Text> : null}
+              <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
+              {message ? <Text style={[styles.message, { color: colors.textSecondary }]}>{message}</Text> : null}
 
               <View style={styles.buttonContainer}>
                 {buttons.map((btn, index) => {
                   const isCancel = btn.style === 'cancel';
                   const isDestructive = btn.style === 'destructive';
                   
+                  let buttonStyle = { backgroundColor: colors.primary };
+                  if (isCancel) buttonStyle = { backgroundColor: isDark ? '#333' : '#e5e7eb' };
+                  if (isDestructive) buttonStyle = { backgroundColor: AppColors.error };
+                  
+                  let textStyle = [styles.buttonText, { color: '#FFF' }];
+                  if (isCancel && !isDark) textStyle = [styles.buttonText, { color: '#1f2937' }];
+                  if (isCancel && isDark) textStyle = [styles.buttonText, { color: '#CCC' }];
+                  
                   return (
                     <TouchableOpacity
                       key={index}
                       style={[
                         styles.button,
-                        isCancel ? styles.buttonCancel : styles.buttonDefault,
-                        isDestructive ? styles.buttonDestructive : null,
+                        buttonStyle,
                         buttons.length > 1 ? { flex: 1, marginHorizontal: 4 } : { width: '100%' }
                       ]}
                       onPress={() => handlePress(btn)}
                     >
-                      <Text
-                        style={[
-                          styles.buttonText,
-                          isCancel ? styles.buttonTextCancel : styles.buttonTextDefault,
-                        ]}
-                      >
+                      <Text style={textStyle}>
                         {btn.text}
                       </Text>
                     </TouchableOpacity>

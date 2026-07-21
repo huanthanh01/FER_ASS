@@ -25,7 +25,7 @@ export const ProductInfo = ({ product, colors }: ProductInfoProps) => {
 
   return (
     <View style={styles.detailsContainer}>
-      <Text style={[styles.brand, { color: AppColors.primaryOrange }]}>
+      <Text style={[styles.brand, { color: colors.primary }]}>
         {product.brand}
       </Text>
       <Text style={[styles.name, { color: colors.text }]}>{product.name}</Text>

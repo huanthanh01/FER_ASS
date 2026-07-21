@@ -12,6 +12,7 @@ import { router } from "expo-router";
 import { styles } from "../styles/landing/FeaturedProducts.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 import { Product } from "../../models/types";
 import { getProducts } from "../../utils/database";
 import { useAppContext } from "../../controllers/useAppController";
@@ -28,6 +29,7 @@ import Animated, {
 
 export const FeaturedProducts = () => {
   const { addToCart, productRefreshKey } = useAppContext();
+  const { colors } = useTheme();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -80,7 +82,7 @@ export const FeaturedProducts = () => {
             <Ionicons
               name="arrow-forward"
               size={16}
-              color={AppColors.primaryOrange}
+              color={colors.primary}
             />
           </Animated.View>
         </AnimatedButton>
@@ -136,7 +138,7 @@ export const FeaturedProducts = () => {
                   <Ionicons
                     name="heart-outline"
                     size={20}
-                    color={AppColors.primaryOrange}
+                    color={colors.primary}
                   />
                 </TouchableOpacity>
               </View>

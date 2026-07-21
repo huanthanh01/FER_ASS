@@ -21,7 +21,7 @@ export default function AdminProductsScreen() {
   // Form State
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Product>>({
-    name: '', brand: '', price: 0, image: '', category: 'Rackets', description: '', stock: 0
+    name: '', brand: '', price: 0, images: [''], category: 'Rackets', description: '', stock: 0
   });
 
   // Pagination state
@@ -62,15 +62,13 @@ export default function AdminProductsScreen() {
 
   const handleOpenAddModal = () => {
     setEditingId(null);
-    setFormData({
-      name: '', brand: '', price: 0, image: '', category: 'Rackets', description: '', stock: 0
-    });
+    setFormData({ name: '', brand: '', price: 0, images: [''], category: 'Rackets', description: '', stock: 0 });
     setModalVisible(true);
   };
 
   const handleOpenEditModal = (product: Product) => {
     setEditingId(product._id);
-    setFormData({ ...product });
+    setFormData({ ...product, images: product.images && product.images.length > 0 ? product.images : [''] });
     setModalVisible(true);
   };
 
@@ -94,7 +92,7 @@ export default function AdminProductsScreen() {
   };
 
   const handleSave = async () => {
-    if (!formData.name || !formData.brand || !formData.price || !formData.image || !formData.category) {
+    if (!formData.name || !formData.brand || !formData.price || !formData.images?.[0] || !formData.category) {
       showAlert('Error', 'Please fill all required fields', undefined, 'error');
       return;
     }
@@ -122,7 +120,7 @@ export default function AdminProductsScreen() {
 
   const renderProduct = ({ item }: { item: Product }) => (
     <View style={styles.card}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.images?.[0] || 'https://via.placeholder.com/150' }} style={styles.image} />
       <View style={styles.cardContent}>
         <Text style={styles.brand}>{item.brand}</Text>
         <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
@@ -245,7 +243,12 @@ export default function AdminProductsScreen() {
             <TextInput style={styles.input} keyboardType="numeric" value={String(formData.stock || '')} onChangeText={t => setFormData({...formData, stock: parseInt(t) || 0})} />
             
             <Text style={styles.label}>Image URL</Text>
-            <TextInput style={styles.input} value={formData.image} onChangeText={t => setFormData({...formData, image: t})} />
+            <TextInput
+              style={styles.input}
+              value={formData.images?.[0] || ''}
+              onChangeText={(text) => setFormData({ ...formData, images: [text] })}
+              placeholder="https://..."
+            />
             
             <Text style={styles.label}>Description</Text>
             <TextInput style={[styles.input, styles.textArea]} multiline value={formData.description} onChangeText={t => setFormData({...formData, description: t})} />

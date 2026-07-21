@@ -117,7 +117,7 @@
 }
 
 .featured-badge {
-  background-color: rgba(249, 115, 22, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-full);

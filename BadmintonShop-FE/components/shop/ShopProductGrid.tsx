@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, Inter
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '../../constants/colors';
+import { useTheme } from '../../constants/ThemeContext';
 import { styles } from '../styles/shop/ShopProductGrid.styles';
 import { Product } from '../../models/types';
 import { getProducts } from '../../utils/database';
@@ -31,6 +32,7 @@ interface ShopProductGridProps {
 }
 
 export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: ShopProductGridProps = {}) => {
+  const { colors } = useTheme();
   const { transition } = useLocalSearchParams<{ transition?: string }>();
   const { addToCart, productRefreshKey } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
@@ -96,7 +98,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
           <Ionicons name="heart-outline" size={16} color={AppColors.white} />
         </TouchableOpacity>
         {product.badge && (
-          <View style={[styles.badge, { backgroundColor: product.badgeColor || AppColors.primaryOrange }]}>
+          <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
             <Text style={[styles.badgeText, { color: product.badgeTextColor || AppColors.white }]}>
               {product.badge}
             </Text>
@@ -184,7 +186,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
                       width: 40,
                       height: 40,
                       borderRadius: 20,
-                      backgroundColor: page === p ? AppColors.primaryOrange : (p === '...' ? 'transparent' : '#e5e7eb'),
+                      backgroundColor: page === p ? colors.primary : (p === '...' ? 'transparent' : '#e5e7eb'),
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginHorizontal: 4
@@ -209,7 +211,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
 
       {/* Floating Action Button */}
       <TouchableOpacity
-        style={fabStyles.fab}
+        style={[fabStyles.fab, { backgroundColor: colors.primary }]}
         onPress={() => setSidebarVisible(true)}
         activeOpacity={0.85}
       >
@@ -260,6 +262,6 @@ const fabStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#22c55e',
     borderWidth: 2,
-    borderColor: AppColors.primaryOrange,
+    borderColor: '#ffffff',
   },
 });
