@@ -2,13 +2,14 @@ const Report = require('../models/Report');
 const User = require('../models/User');
 
 const reportController = {
-  // GET /api/reports/my-report
+  // GET /api/reports/my-report/:userId
   getUserReport: async (req, res) => {
     try {
-      let report = await Report.findOne({ user: req.user.id }).populate('messages.sender', 'fullname username');
+      const userId = req.params.userId;
+      let report = await Report.findOne({ user: userId }).populate('messages.sender', 'fullname username');
       if (!report) {
         // Create an empty report if none exists
-        report = new Report({ user: req.user.id, messages: [] });
+        report = new Report({ user: userId, messages: [] });
         await report.save();
       } else if (report.hasUnreadUser) {
         // Mark as read for user

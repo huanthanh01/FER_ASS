@@ -55,7 +55,8 @@ export default function ReportScreen() {
   }, [user, isLoggedIn]);
 
   const fetchReport = async () => {
-    const res = await getUserReport();
+    if (!user) return;
+    const res = await getUserReport(user.id);
     if (res.success && res.report) {
       setMessages(res.report.messages);
     }
