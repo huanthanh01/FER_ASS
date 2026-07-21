@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, InteractionManager, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, InteractionManager, StyleSheet, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '../../constants/colors';
@@ -157,42 +157,37 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
         ListEmptyComponent={renderEmpty}
         renderItem={renderItem}
         ListFooterComponent={
-          products.length > 0 ? (
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingVertical: 20,
-              paddingHorizontal: 8,
-              marginTop: 10
-            }}>
-              <TouchableOpacity 
-                style={[
-                  { flexDirection: 'row', alignItems: 'center', backgroundColor: AppColors.primaryOrange, paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20 },
-                  page === 1 && { backgroundColor: '#ddd' }
-                ]} 
-                onPress={handlePrevPage}
-                disabled={page === 1}
+          products.length > 0 && totalPages > 1 ? (
+            <View style={{ paddingVertical: 20, alignItems: 'center', marginTop: 10, marginBottom: 80 }}>
+              <ScrollView 
+                horizontal 
+                showsHorizontalScrollIndicator={false} 
+                contentContainerStyle={{ paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center' }}
               >
-                <Ionicons name="chevron-back" size={20} color={page === 1 ? '#999' : '#fff'} />
-                <Text style={[{ color: '#fff', fontWeight: '600', fontSize: 14, marginHorizontal: 4 }, page === 1 && { color: '#999' }]}>Prev</Text>
-              </TouchableOpacity>
-              
-              <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#666' }}>Page {page} of {totalPages}</Text>
-              
-              <TouchableOpacity 
-                style={[
-                  { flexDirection: 'row', alignItems: 'center', backgroundColor: AppColors.primaryOrange, paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20 },
-                  page >= totalPages && { backgroundColor: '#ddd' }
-                ]} 
-                onPress={handleNextPage}
-                disabled={page >= totalPages}
-              >
-                <Text style={[{ color: '#fff', fontWeight: '600', fontSize: 14, marginHorizontal: 4 }, page >= totalPages && { color: '#999' }]}>Next</Text>
-                <Ionicons name="chevron-forward" size={20} color={page >= totalPages ? '#999' : '#fff'} />
-              </TouchableOpacity>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <TouchableOpacity
+                    key={p}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 20,
+                      backgroundColor: page === p ? AppColors.primaryOrange : '#e5e7eb',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginHorizontal: 4
+                    }}
+                    onPress={() => fetchProducts(p)}
+                  >
+                    <Text style={{
+                      color: page === p ? '#fff' : '#4b5563',
+                      fontWeight: 'bold',
+                      fontSize: 16
+                    }}>{p}</Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
             </View>
-          ) : null
+          ) : <View style={{ height: 100 }} />
         }
       />
 
