@@ -16,6 +16,7 @@ export default function ProductDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
+  const [selectedImageIdx, setSelectedImageIdx] = useState(0);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -45,6 +46,7 @@ export default function ProductDetailPage() {
 
     fetchProductDetails();
     setQuantity(1);
+    setSelectedImageIdx(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [id]);
 
@@ -81,7 +83,11 @@ export default function ProductDetailPage() {
     );
   }
 
-  const imageUrl = product.imageUrl || 'https://via.placeholder.com/600x600?text=No+Image';
+  const fallbackImage = product.imageUrl || 'https://via.placeholder.com/600x600?text=No+Image';
+  const hasImagesArray = product.images && product.images.length > 0;
+  const imageUrl = hasImagesArray ? product.images[selectedImageIdx] : fallbackImage;
+  const allImages = hasImagesArray ? product.images : [fallbackImage];
+
   const discountedPrice = product.discount > 0 
     ? product.price * (1 - product.discount / 100) 
     : product.price;
@@ -108,11 +114,16 @@ export default function ProductDetailPage() {
               <span className="product-badge warning">Low Stock</span>
             )}
           </div>
-          {/* Note: If backend supports multiple images, render thumbnails here */}
           <div className="thumbnail-list">
-            <div className="thumbnail active">
-              <img src={imageUrl} alt="Thumbnail 1" />
-            </div>
+            {allImages.map((img, idx) => (
+              <div 
+                key={idx} 
+                className={`thumbnail ${selectedImageIdx === idx ? 'active' : ''}`}
+                onClick={() => setSelectedImageIdx(idx)}
+              >
+                <img src={img} alt={`${product.name} Thumbnail ${idx + 1}`} />
+              </div>
+            ))}
           </div>
         </div>
 

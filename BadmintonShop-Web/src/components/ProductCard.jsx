@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
   };
 
   // Fallback image if none provided
-  const imageUrl = product.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image';
+  const imageUrl = (product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image');
 
   return (
     <div className="product-card" onClick={handleCardClick}>

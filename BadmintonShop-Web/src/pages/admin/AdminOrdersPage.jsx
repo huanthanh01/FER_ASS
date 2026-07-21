@@ -239,7 +239,7 @@ export default function AdminOrdersPage() {
                 {selectedOrder.items?.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-4 p-3 bg-slate-800 rounded-lg border border-slate-700">
                     <div className="w-12 h-12 bg-white rounded-md overflow-hidden flex-shrink-0">
-                      <img src={item.product?.imageUrl || 'https://via.placeholder.com/50'} alt={item.product?.name} className="w-full h-full object-contain" />
+                      <img src={(item.product?.images && item.product?.images.length > 0) ? item.product.images[0] : (item.product?.imageUrl || 'https://via.placeholder.com/50')} alt={item.product?.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-white truncate">{item.product?.name || 'Unknown Product'}</p>

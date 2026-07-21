@@ -30,6 +30,7 @@ export default function AdminProductsPage() {
     discount: '0',
     stock: '',
     imageUrl: '',
+    brand: 'Yonex',
     description: '',
     isFeatured: false
   });
@@ -87,7 +88,8 @@ export default function AdminProductsPage() {
         price: product.price?.toString() || '',
         discount: product.discount?.toString() || '0',
         stock: product.stock?.toString() || '',
-        imageUrl: product.imageUrl || '',
+        imageUrl: (product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || ''),
+        brand: product.brand || 'Yonex',
         description: product.description || '',
         isFeatured: product.isFeatured || false
       });
@@ -101,6 +103,7 @@ export default function AdminProductsPage() {
         discount: '0',
         stock: '',
         imageUrl: '',
+        brand: 'Yonex',
         description: '',
         isFeatured: false
       });
@@ -127,6 +130,7 @@ export default function AdminProductsPage() {
 
     const submitData = {
       ...formData,
+      images: formData.imageUrl ? [formData.imageUrl] : [],
       price: parseFloat(formData.price),
       discount: parseInt(formData.discount, 10),
       stock: parseInt(formData.stock, 10)
@@ -231,7 +235,7 @@ export default function AdminProductsPage() {
                     <tr key={product._id || product.id}>
                       <td>
                         <img 
-                          src={product.imageUrl || 'https://via.placeholder.com/50'} 
+                          src={(product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || 'https://via.placeholder.com/50')} 
                           alt={product.name} 
                           className="table-img"
                         />
@@ -400,6 +404,18 @@ export default function AdminProductsPage() {
                     name="imageUrl" 
                     placeholder="https://example.com/image.jpg"
                     value={formData.imageUrl}
+                    onChange={handleFormChange}
+                  />
+                </div>
+
+                <div className="form-group col-span-2">
+                  <label className="form-label">Brand *</label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    name="brand" 
+                    required
+                    value={formData.brand}
                     onChange={handleFormChange}
                   />
                 </div>

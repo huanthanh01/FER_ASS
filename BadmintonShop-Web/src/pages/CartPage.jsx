@@ -87,7 +87,7 @@ export default function CartPage() {
                 ? product.price * (1 - product.discount / 100)
                 : product.price;
               const itemTotal = price * item.quantity;
-              const imageUrl = product.imageUrl || 'https://via.placeholder.com/150x150?text=No+Image';
+              const imageUrl = (product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || 'https://via.placeholder.com/150x150?text=No+Image');
 
               return (
                 <div key={item.id || product._id} className="cart-item">
