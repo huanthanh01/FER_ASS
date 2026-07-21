@@ -11,6 +11,7 @@ import {
 import { styles } from "../styles/landing/TopHeader.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 import { useAppContext } from "../../controllers/useAppController";
 import { router } from "expo-router";
 
@@ -29,6 +30,7 @@ export const TopHeader = ({
   onSearchChange,
   showCart,
 }: TopHeaderProps = {}) => {
+  const { colors } = useTheme();
   const { handleLogout, currentUser, cartItems } = useAppContext();
   const [adminMenuVisible, setAdminMenuVisible] = useState(false);
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -53,7 +55,7 @@ export const TopHeader = ({
             style={[
               styles.logoText,
               {
-                color: AppColors.primaryOrange,
+                color: colors.primary,
                 fontSize: 18,
                 letterSpacing: 1,
                 marginLeft: 20,
@@ -95,18 +97,18 @@ export const TopHeader = ({
             <Ionicons
               name="search"
               size={20}
-              color={AppColors.textMutedDark}
+              color={colors.textSecondary}
               style={{ marginRight: 8 }}
             />
             <TextInput
               style={{
                 flex: 1,
-                color: AppColors.textDark,
+                color: colors.text,
                 padding: 8,
                 height: 40,
               }}
               placeholder="Search products..."
-              placeholderTextColor={AppColors.textMutedDark}
+              placeholderTextColor={colors.textSecondary}
               value={searchQuery}
               onChangeText={onSearchChange}
             />
@@ -123,7 +125,7 @@ export const TopHeader = ({
             <Ionicons
               name="log-out-outline"
               size={24}
-              color={AppColors.textMutedDark}
+              color={colors.textSecondary}
             />
           </TouchableOpacity>
         )}
@@ -146,7 +148,7 @@ export const TopHeader = ({
                   position: "absolute",
                   top: -5,
                   right: -5,
-                  backgroundColor: AppColors.primaryOrange,
+                  backgroundColor: colors.primary,
                   borderRadius: 10,
                   width: 20,
                   height: 20,
@@ -178,7 +180,7 @@ export const TopHeader = ({
           {currentUser ? (
             <Ionicons name="person" size={16} color={AppColors.white} />
           ) : (
-            <Text style={styles.signupText}>Sign-Up?</Text>
+            <Text style={[styles.signupText, { color: colors.primary }]}>Sign-Up?</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -203,7 +205,7 @@ export const TopHeader = ({
                   <Ionicons
                     name="cube-outline"
                     size={20}
-                    color={AppColors.primaryOrange}
+                    color={colors.primary}
                   />
                   <Text style={styles.dropdownItemText}>Manage Products</Text>
                 </TouchableOpacity>

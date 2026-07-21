@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback, StyleShe
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { SlideInRight, SlideOutRight, FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppColors } from '../../constants/colors';
+import { useTheme } from '../../constants/ThemeContext';
 
 const categories = ['All', 'RACKET', 'SHOES', 'SHIRTS', 'SHORTS', 'SKIRTS', 'BAGS', 'BACKPACKS', 'ACCESSORIES'];
 
@@ -14,6 +15,8 @@ interface CategorySidebarProps {
 }
 
 export const CategorySidebar = ({ visible, activeCategory, onCategoryChange, onClose }: CategorySidebarProps) => {
+  const { colors, isDark } = useTheme();
+  
   if (!visible) return null;
 
   return (
@@ -33,13 +36,13 @@ export const CategorySidebar = ({ visible, activeCategory, onCategoryChange, onC
       <Animated.View
         entering={SlideInRight.duration(300).springify()}
         exiting={SlideOutRight.duration(250)}
-        style={sidebarStyles.panel}
+        style={[sidebarStyles.panel, { backgroundColor: colors.background }]}
       >
         {/* Header */}
-        <View style={sidebarStyles.header}>
-          <Text style={sidebarStyles.headerTitle}>Categories</Text>
+        <View style={[sidebarStyles.header, { borderBottomColor: colors.border }]}>
+          <Text style={[sidebarStyles.headerTitle, { color: colors.text }]}>Categories</Text>
           <TouchableOpacity onPress={onClose} style={sidebarStyles.closeBtn} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <Ionicons name="close" size={24} color={AppColors.white} />
+            <Ionicons name="close" size={24} color={colors.text} />
           </TouchableOpacity>
         </View>
 
@@ -50,16 +53,16 @@ export const CategorySidebar = ({ visible, activeCategory, onCategoryChange, onC
             return (
               <TouchableOpacity
                 key={cat}
-                style={[sidebarStyles.categoryItem, isActive && sidebarStyles.categoryItemActive]}
+                style={[sidebarStyles.categoryItem, isActive && { backgroundColor: colors.primary + '1F' }]}
                 onPress={() => onCategoryChange(cat)}
                 activeOpacity={0.7}
               >
-                <View style={[sidebarStyles.dot, isActive && sidebarStyles.dotActive]} />
-                <Text style={[sidebarStyles.categoryText, isActive && sidebarStyles.categoryTextActive]}>
+                <View style={[sidebarStyles.dot, isActive && { backgroundColor: colors.primary }]} />
+                <Text style={[sidebarStyles.categoryText, isActive && { color: colors.text, fontWeight: '700' }]}>
                   {cat}
                 </Text>
                 {isActive && (
-                  <Ionicons name="checkmark-circle" size={20} color={AppColors.primaryOrange} style={{ marginLeft: 'auto' }} />
+                  <Ionicons name="checkmark-circle" size={20} color={colors.primary} style={{ marginLeft: 'auto' }} />
                 )}
               </TouchableOpacity>
             );

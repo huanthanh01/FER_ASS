@@ -6,9 +6,11 @@ import { useTheme } from '../../constants/ThemeContext';
 import { useAppContext } from '../../controllers/useAppController';
 import { AppColors } from '../../constants/colors';
 import { styles } from '../../components/styles/profile/Profile.styles';
+import { OrderHistory } from '../../components/profile/OrderHistory';
+import { Switch } from 'react-native';
 
 export default function ProfileScreen() {
-  const { colors, isDark } = useTheme();
+  const { colors, isDark, toggleTheme } = useTheme();
   const { currentUser, updateProfile, changePassword, handleLogout, isGlobalLoading, showAlert, setIsSignUp } = useAppContext();
 
   // Personal Info State
@@ -146,7 +148,7 @@ export default function ProfileScreen() {
             <Text style={styles.avatarText}>{currentUser.fullname.charAt(0).toUpperCase()}</Text>
           </View>
           <Text style={[styles.nameText, { color: textColor }]}>{currentUser.fullname}</Text>
-          <Text style={[styles.roleText, { color: AppColors.primaryOrange }]}>
+          <Text style={[styles.roleText, { color: colors.primary }]}>
             {currentUser.role === 'admin' ? 'Administrator' : 'Premium Member'}
           </Text>
         </View>
@@ -278,6 +280,25 @@ export default function ProfileScreen() {
               </>
             )}
           </TouchableOpacity>
+        </View>
+
+        {/* Order History */}
+        <Text style={[styles.sectionTitle, { color: textColor }]}>Order History</Text>
+        <OrderHistory />
+
+        {/* App Settings */}
+        <Text style={[styles.sectionTitle, { color: textColor, marginTop: 16 }]}>App Settings</Text>
+        <View style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name={isDark ? "moon-outline" : "sunny-outline"} size={24} color={mutedColor} style={{ marginRight: 12 }} />
+            <Text style={{ color: textColor, fontSize: 16, fontWeight: '500' }}>Dark Mode</Text>
+          </View>
+          <Switch 
+            value={isDark} 
+            onValueChange={toggleTheme}
+            trackColor={{ false: '#d1d5db', true: btnBg }}
+            thumbColor={'#ffffff'}
+          />
         </View>
 
         {/* Logout Button */}

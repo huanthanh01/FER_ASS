@@ -102,6 +102,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     padding: 12,
+    paddingBottom: 85, // Add padding to avoid the bottom tab bar
     borderTopWidth: 1,
     borderTopColor: AppColors.borderDark,
     backgroundColor: AppColors.cardDark,

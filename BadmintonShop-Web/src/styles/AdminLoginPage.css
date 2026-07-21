@@ -67,7 +67,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 30px rgba(249, 115, 22, 0.15);
+  box-shadow: 0 0 30px rgba(var(--color-primary-rgb), 0.15);
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease;
 }
@@ -160,7 +160,7 @@
 
 .admin-input:focus {
   border-color: #f97316; /* orange-500 */
-  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(var(--color-primary-rgb), 0.5);
 }
 
 .admin-icon {

@@ -64,6 +64,21 @@ const orderController = {
       console.error(error);
       res.status(500).json({ success: false, error: 'Failed to update order status' });
     }
+  },
+
+  // Get orders by user (User)
+  getUserOrders: async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const orders = await Order.find({ user: userId })
+        .populate('items.product', 'name imageUrl price')
+        .sort({ createdAt: -1 });
+
+      res.json({ success: true, orders });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: 'Failed to fetch user orders' });
+    }
   }
 };
 

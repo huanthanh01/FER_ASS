@@ -8,6 +8,7 @@ import {
   NativeScrollEvent,
 } from "react-native";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 
 const bannerImages = [
   require("../../assets/banners/banner1.webp"),
@@ -20,6 +21,7 @@ const bannerImages = [
 ];
 
 export const BannerSlider = () => {
+  const { colors } = useTheme();
   const scrollRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentIndexRef = useRef(0);
@@ -86,7 +88,7 @@ export const BannerSlider = () => {
                 borderRadius: 4,
                 backgroundColor:
                   currentIndex === index
-                    ? AppColors.primaryOrange
+                    ? colors.primary
                     : "rgba(150, 150, 150, 0.4)",
               }}
             />
