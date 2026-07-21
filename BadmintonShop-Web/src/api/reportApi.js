@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
-export async function getUserReport(token) {
+export async function getUserReport(userId, token) {
   try {
-    const res = await axios.get(`${API_URL}/reports/my-report`, {
+    const res = await axios.get(`${API_URL}/reports/my-report/${userId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     return res.data;

@@ -3,10 +3,10 @@ import { getApiUrl } from './database';
 const API_URL = getApiUrl();
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export async function getUserReport() {
+export async function getUserReport(userId: string) {
   try {
     const token = await AsyncStorage.getItem('userToken');
-    const res = await axios.get(`${API_URL}/reports/my-report`, {
+    const res = await axios.get(`${API_URL}/reports/my-report/${userId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     return res.data;

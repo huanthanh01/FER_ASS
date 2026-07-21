@@ -43,8 +43,9 @@ export default function ReportPage() {
   }, [messages]);
 
   const fetchReport = async () => {
+    if (!user) return;
     const token = localStorage.getItem('token');
-    const res = await getUserReport(token);
+    const res = await getUserReport(user.id, token);
     if (res.success && res.report) {
       setMessages(res.report.messages);
     }
