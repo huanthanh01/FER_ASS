@@ -7,7 +7,7 @@
     "BadmintonShop-Web"
   ],
   "scripts": {
-    "app": "npx concurrently \"npm start --workspace=BadmintonShop-BE\" \"npm start --workspace=BadmintonShop-FE\"",
-    "web": "npx concurrently \"npm start --workspace=BadmintonShop-BE\" \"npm run dev --workspace=BadmintonShop-Web\""
+    "app": "npx concurrently \"npm run dev --workspace=BadmintonShop-BE\" \"npx expo start --workspace=BadmintonShop-FE\"",
+    "web": "npx concurrently \"npm run dev --workspace=BadmintonShop-BE\" \"npm run dev --workspace=BadmintonShop-Web\""
   }
 }
