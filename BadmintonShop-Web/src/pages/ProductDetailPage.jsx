@@ -1,21 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getProductById, getProducts } from '../api/productApi';
-import { useAppContext } from '../context/AppContext';
-import ProductCard from '../components/ProductCard';
-import { HiOutlineShoppingCart, HiOutlineMinus, HiOutlinePlus, HiStar, HiOutlineCheck } from 'react-icons/hi';
-import '../styles/ProductDetailPage.css';
+import React, { useState, useEffect, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getProductById, getProducts } from "../api/productApi";
+import { useAppContext } from "../context/AppContext";
+import ProductCard from "../components/ProductCard";
+import {
+  HiOutlineShoppingCart,
+  HiOutlineMinus,
+  HiOutlinePlus,
+  HiStar,
+  HiOutlineCheck,
+  HiOutlineChevronLeft,
+  HiOutlineChevronRight,
+} from "react-icons/hi";
+import "../styles/ProductDetailPage.css";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useAppContext();
-  
+
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState("description");
+  const [selectedImageIdx, setSelectedImageIdx] = useState(0);
+  const thumbnailListRef = useRef(null);
+
+  const scrollThumbnails = (direction) => {
+    if (thumbnailListRef.current) {
+      const scrollAmount = 200;
+      thumbnailListRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -24,12 +41,21 @@ export default function ProductDetailPage() {
         const res = await getProductById(id);
         if (res.success && res.product) {
           setProduct(res.product);
-          
+
           // Fetch related products from same category
           if (res.product.category) {
-            const relatedRes = await getProducts(false, 1, 4, res.product.category);
+            const relatedRes = await getProducts(
+              false,
+              1,
+              4,
+              res.product.category,
+            );
             if (relatedRes.success) {
-              setRelatedProducts(relatedRes.products.filter(p => p._id !== id && p.id !== id).slice(0, 4));
+              setRelatedProducts(
+                relatedRes.products
+                  .filter((p) => p._id !== id && p.id !== id)
+                  .slice(0, 4),
+              );
             }
           }
         } else {
@@ -45,7 +71,8 @@ export default function ProductDetailPage() {
 
     fetchProductDetails();
     setQuantity(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSelectedImageIdx(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
   const handleQuantityChange = (delta) => {
@@ -74,26 +101,49 @@ export default function ProductDetailPage() {
       <div className="page-container empty-state">
         <h2>Product Not Found</h2>
         <p>The product you're looking for doesn't exist or has been removed.</p>
-        <button className="btn btn-primary mt-4" onClick={() => navigate('/shop')}>
+        <button
+          className="btn btn-primary mt-4"
+          onClick={() => navigate("/shop")}
+        >
           Back to Shop
         </button>
       </div>
     );
   }
 
-  const imageUrl = product.imageUrl || 'https://via.placeholder.com/600x600?text=No+Image';
-  const discountedPrice = product.discount > 0 
-    ? product.price * (1 - product.discount / 100) 
-    : product.price;
+  const fallbackImage =
+    product.imageUrl || "https://via.placeholder.com/600x600?text=No+Image";
+  const hasImagesArray = product.images && product.images.length > 0;
+  const imageUrl = hasImagesArray
+    ? product.images[selectedImageIdx]
+    : fallbackImage;
+  const allImages = hasImagesArray ? product.images : [fallbackImage];
+
+  const discountedPrice =
+    product.discount > 0
+      ? product.price * (1 - product.discount / 100)
+      : product.price;
+
+  const getWeightText = (category) => {
+    if (!category) return "4U (Avg. 84g)";
+    const cat = category.toLowerCase();
+    if (cat.includes("racket")) return "4U (Avg. 84g)";
+    if (cat.includes("shoes")) return "190g";
+    if (cat.includes("shirt") || cat.includes("skirt") || cat.includes("short"))
+      return "Light";
+    if (cat.includes("bag") || cat.includes("backpack"))
+      return "Super waterproof";
+    if (cat.includes("accessories")) return "Substantial";
+    return "4U (Avg. 84g)";
+  };
 
   return (
     <div className="product-detail-page page-container">
-      {/* Breadcrumb */}
-      <div className="breadcrumb">
-        <span onClick={() => navigate('/')}>Home</span> / 
-        <span onClick={() => navigate('/shop')}>Shop</span> / 
-        <span onClick={() => navigate(`/shop?category=${product.category}`)}>{product.category}</span> / 
-        <span className="current">{product.name}</span>
+      {/* Back Button */}
+      <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+        <button className="btn btn-primary" onClick={() => navigate(-1)}>
+          Back
+        </button>
       </div>
 
       <div className="product-detail-layout">
@@ -102,17 +152,44 @@ export default function ProductDetailPage() {
           <div className="main-image-container">
             <img src={imageUrl} alt={product.name} className="main-image" />
             {product.discount > 0 && (
-              <span className="product-badge discount">-{product.discount}% OFF</span>
+              <span className="product-badge discount">
+                -{product.discount}% OFF
+              </span>
             )}
             {product.stock <= 5 && product.stock > 0 && (
               <span className="product-badge warning">Low Stock</span>
             )}
           </div>
-          {/* Note: If backend supports multiple images, render thumbnails here */}
-          <div className="thumbnail-list">
-            <div className="thumbnail active">
-              <img src={imageUrl} alt="Thumbnail 1" />
+          <div className="thumbnail-container">
+            {allImages.length > 5 && (
+              <button 
+                onClick={() => scrollThumbnails('left')} 
+                className="thumbnail-scroll-btn"
+                aria-label="Scroll left"
+              >
+                <HiOutlineChevronLeft size={20} />
+              </button>
+            )}
+            <div className="thumbnail-list" ref={thumbnailListRef}>
+              {allImages.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`thumbnail ${selectedImageIdx === idx ? "active" : ""}`}
+                  onClick={() => setSelectedImageIdx(idx)}
+                >
+                  <img src={img} alt={`${product.name} Thumbnail ${idx + 1}`} />
+                </div>
+              ))}
             </div>
+            {allImages.length > 5 && (
+              <button 
+                onClick={() => scrollThumbnails('right')} 
+                className="thumbnail-scroll-btn"
+                aria-label="Scroll right"
+              >
+                <HiOutlineChevronRight size={20} />
+              </button>
+            )}
           </div>
         </div>
 
@@ -120,16 +197,21 @@ export default function ProductDetailPage() {
         <div className="product-info-panel">
           <div className="product-category-label">{product.category}</div>
           <h1 className="product-detail-title">{product.name}</h1>
-          
+
           <div className="product-meta">
             <div className="product-rating">
               <HiStar className="star-icon" />
               <span>{product.rating || 4.5}</span>
-              <span className="review-count">({product.reviews || Math.floor(Math.random() * 100) + 10} reviews)</span>
+              <span className="review-count">
+                ({product.reviews || Math.floor(Math.random() * 100) + 10}{" "}
+                reviews)
+              </span>
             </div>
             <div className="product-stock">
               {product.stock > 0 ? (
-                <span className="in-stock"><HiOutlineCheck /> In Stock ({product.stock})</span>
+                <span className="in-stock">
+                  <HiOutlineCheck /> In Stock ({product.stock})
+                </span>
               ) : (
                 <span className="out-of-stock">Out of Stock</span>
               )}
@@ -139,7 +221,9 @@ export default function ProductDetailPage() {
           <div className="product-price-section">
             {product.discount > 0 ? (
               <>
-                <span className="price-current">${discountedPrice.toFixed(2)}</span>
+                <span className="price-current">
+                  ${discountedPrice.toFixed(2)}
+                </span>
                 <span className="price-old">${product.price.toFixed(2)}</span>
               </>
             ) : (
@@ -148,7 +232,8 @@ export default function ProductDetailPage() {
           </div>
 
           <p className="product-short-desc">
-            {product.description || "Experience the perfect blend of power and control with this premium badminton gear. Designed for players who demand the best performance on the court."}
+            {product.description ||
+              "Experience the perfect blend of power and control with this premium badminton gear. Designed for players who demand the best performance on the court."}
           </p>
 
           <hr className="divider" />
@@ -156,22 +241,22 @@ export default function ProductDetailPage() {
           {/* Quantity and Add to Cart */}
           <div className="add-to-cart-section">
             <div className="quantity-selector">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="qty-btn"
                 onClick={() => handleQuantityChange(-1)}
                 disabled={quantity <= 1}
               >
                 <HiOutlineMinus />
               </button>
-              <input 
-                type="number" 
-                className="qty-input" 
-                value={quantity} 
+              <input
+                type="number"
+                className="qty-input"
+                value={quantity}
                 readOnly
               />
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="qty-btn"
                 onClick={() => handleQuantityChange(1)}
                 disabled={product.stock && quantity >= product.stock}
@@ -179,22 +264,30 @@ export default function ProductDetailPage() {
                 <HiOutlinePlus />
               </button>
             </div>
-            
-            <button 
+
+            <button
               className="btn btn-primary btn-lg add-btn"
               onClick={handleAddToCart}
               disabled={product.stock <= 0}
             >
               <HiOutlineShoppingCart size={20} />
-              {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+              {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
             </button>
           </div>
-          
+
           {/* Features/Guarantees list */}
           <ul className="product-features-list">
-            <li><HiOutlineCheck className="text-success" /> Free shipping on orders over $100</li>
-            <li><HiOutlineCheck className="text-success" /> 30-day return policy</li>
-            <li><HiOutlineCheck className="text-success" /> 100% authentic product guarantee</li>
+            <li>
+              <HiOutlineCheck className="text-success" /> Free shipping on
+              orders over $100
+            </li>
+            <li>
+              <HiOutlineCheck className="text-success" /> 30-day return policy
+            </li>
+            <li>
+              <HiOutlineCheck className="text-success" /> 100% authentic product
+              guarantee
+            </li>
           </ul>
         </div>
       </div>
@@ -202,35 +295,41 @@ export default function ProductDetailPage() {
       {/* Tabs */}
       <div className="product-tabs-section">
         <div className="tabs-header">
-          <button 
-            className={`tab-btn ${activeTab === 'description' ? 'active' : ''}`}
-            onClick={() => setActiveTab('description')}
+          <button
+            className={`tab-btn ${activeTab === "description" ? "active" : ""}`}
+            onClick={() => setActiveTab("description")}
           >
             Description
           </button>
-          <button 
-            className={`tab-btn ${activeTab === 'specifications' ? 'active' : ''}`}
-            onClick={() => setActiveTab('specifications')}
+          <button
+            className={`tab-btn ${activeTab === "specifications" ? "active" : ""}`}
+            onClick={() => setActiveTab("specifications")}
           >
             Specifications
           </button>
-          <button 
-            className={`tab-btn ${activeTab === 'reviews' ? 'active' : ''}`}
-            onClick={() => setActiveTab('reviews')}
+          <button
+            className={`tab-btn ${activeTab === "reviews" ? "active" : ""}`}
+            onClick={() => setActiveTab("reviews")}
           >
             Reviews
           </button>
         </div>
-        
+
         <div className="tab-content">
-          {activeTab === 'description' && (
+          {activeTab === "description" && (
             <div className="tab-pane">
               <h3>Product Description</h3>
-              <p>{product.description || "No detailed description provided."}</p>
-              <p>Enhance your game with our state-of-the-art badminton equipment. Engineered with advanced materials for superior durability and performance, giving you the edge in every match.</p>
+              <p>
+                {product.description || "No detailed description provided."}
+              </p>
+              <p>
+                Enhance your game with our state-of-the-art badminton equipment.
+                Engineered with advanced materials for superior durability and
+                performance, giving you the edge in every match.
+              </p>
             </div>
           )}
-          {activeTab === 'specifications' && (
+          {activeTab === "specifications" && (
             <div className="tab-pane">
               <h3>Technical Specifications</h3>
               <table className="specs-table">
@@ -244,8 +343,8 @@ export default function ProductDetailPage() {
                     <td>{product.category}</td>
                   </tr>
                   <tr>
-                    <td>Weight</td>
-                    <td>{product.weight || "4U (Avg. 83g)"}</td>
+                    <td>Characteristics</td>
+                    <td>{getWeightText(product.category)}</td>
                   </tr>
                   <tr>
                     <td>Flex</td>
@@ -255,7 +354,7 @@ export default function ProductDetailPage() {
               </table>
             </div>
           )}
-          {activeTab === 'reviews' && (
+          {activeTab === "reviews" && (
             <div className="tab-pane">
               <h3>Customer Reviews</h3>
               <p>Reviews will be displayed here.</p>
@@ -269,7 +368,7 @@ export default function ProductDetailPage() {
         <div className="related-products-section">
           <h2>You May Also Like</h2>
           <div className="products-grid">
-            {relatedProducts.map(p => (
+            {relatedProducts.map((p) => (
               <ProductCard key={p._id || p.id} product={p} />
             ))}
           </div>

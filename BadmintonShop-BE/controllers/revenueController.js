@@ -50,6 +50,36 @@ const revenueController = {
         return { name, revenue: found ? found.revenue : 0 };
       });
 
+      // Weekly Chart Data (Current Month)
+      const weeklyData = [
+        { name: 'Week 1', revenue: 0 },
+        { name: 'Week 2', revenue: 0 },
+        { name: 'Week 3', revenue: 0 },
+        { name: 'Week 4', revenue: 0 }
+      ];
+      currentMonthOrders.forEach(order => {
+        const day = order.createdAt.getDate();
+        if (day <= 7) weeklyData[0].revenue += order.totalAmount;
+        else if (day <= 14) weeklyData[1].revenue += order.totalAmount;
+        else if (day <= 21) weeklyData[2].revenue += order.totalAmount;
+        else weeklyData[3].revenue += order.totalAmount;
+      });
+
+      // Order Status Stats
+      const orderStatsAgg = await Order.aggregate([
+        { $group: { _id: "$status", count: { $sum: 1 } } }
+      ]);
+      const orderStats = [
+        { name: 'Completed', value: 0, color: '#10b981' }, // emerald-500
+        { name: 'Pending', value: 0, color: '#f59e0b' },   // amber-500
+        { name: 'Cancelled', value: 0, color: '#f43f5e' }  // rose-500
+      ];
+      orderStatsAgg.forEach(stat => {
+        const statusName = stat._id || 'Completed'; // fallback for old orders without status
+        const statusItem = orderStats.find(s => s.name === statusName);
+        if (statusItem) statusItem.value = stat.count;
+      });
+
       // 5. Recent Orders
       const recentOrders = await Order.find()
         .populate('user', 'fullname username')
@@ -67,7 +97,7 @@ const revenueController = {
           } 
         },
         { $sort: { totalSold: -1 } },
-        { $limit: 4 },
+        { $limit: 5 },
         {
           $lookup: {
             from: 'products',
@@ -88,6 +118,8 @@ const revenueController = {
           currentMonthOrderCount,
           growthRate: parseFloat(growthRate.toFixed(1)),
           chartData,
+          weeklyData,
+          orderStats,
           recentOrders,
           topProducts
         }
