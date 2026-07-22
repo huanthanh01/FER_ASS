@@ -88,6 +88,23 @@ export async function loginUser(
   }
 }
 
+export async function googleLoginDB(
+  accessToken: string,
+): Promise<{ success: boolean; error?: string; user?: User }> {
+  try {
+    const response = await axios.post(`${API_URL}/auth/google-login`, {
+      access_token: accessToken,
+    });
+    return {
+      success: true,
+      user: response.data.user,
+    };
+  } catch (error: any) {
+    const msg = error.response?.data?.error || "Google login failed";
+    return { success: false, error: msg };
+  }
+}
+
 export async function updateUserProfileDB(
   userId: string, // MongoDB uses string ObjectId usually, wait, it was number before. We'll typecast.
   fullname: string,
