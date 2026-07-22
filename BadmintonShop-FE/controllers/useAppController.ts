@@ -339,7 +339,7 @@ export function useAppController() {
 
       const clientId = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID || "746750664886-i7gf88m81i3g8nfpm3kpviftsu128c5f.apps.googleusercontent.com";
       const appRedirectUrl = Linking.createURL('/oauthredirect');
-      const webRedirectUri = process.env.EXPO_PUBLIC_WEB_REDIRECT_URI || "https://moody-carrots-see.loca.lt/login";
+      const webRedirectUri = process.env.EXPO_PUBLIC_WEB_REDIRECT_URI || "https://huan-badminton-shop.loca.lt/login";
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(webRedirectUri)}&state=${encodeURIComponent(appRedirectUrl)}&scope=openid%20profile%20email&prompt=select_account`;
 
       console.log('Opening Auth Session with URL:', authUrl);
