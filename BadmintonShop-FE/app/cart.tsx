@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, StatusBar, Text } from 'react-native';
+import { View, ScrollView, StatusBar, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { styles } from '../components/styles/cart/Cart.styles';
 import { useTheme } from '../constants/ThemeContext';
 import { CartHeader } from '../components/cart/CartHeader';
 import { CartItem } from '../components/cart/CartItem';
@@ -61,16 +62,3 @@ export default function CartScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 16,
-    paddingBottom: 100, // space for tab bar
-  },
-  itemsContainer: {
-    gap: 16,
-  },
-});

@@ -7,7 +7,6 @@ import { useTheme } from '../../constants/ThemeContext';
 import { useAppContext } from '../../controllers/useAppController';
 import { AppColors } from '../../constants/colors';
 import { styles } from '../../components/styles/profile/Profile.styles';
-import { OrderHistory } from '../../components/profile/OrderHistory';
 
 export default function ProfileScreen() {
   const { colors, isDark, toggleTheme } = useTheme();
@@ -301,9 +300,18 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Order History */}
-        <Text style={[styles.sectionTitle, { color: textColor }]}>Order History</Text>
-        <OrderHistory />
+        {/* Order History Link */}
+        <Text style={[styles.sectionTitle, { color: textColor }]}>My Orders</Text>
+        <TouchableOpacity 
+          style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18 }]}
+          onPress={() => router.push('/orders')}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="receipt-outline" size={24} color={colors.primary} style={{ marginRight: 12 }} />
+            <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>Order History</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={mutedColor} />
+        </TouchableOpacity>
 
         {/* Wishlist Link */}
         <Text style={[styles.sectionTitle, { color: textColor, marginTop: 16 }]}>My Wishlist</Text>
