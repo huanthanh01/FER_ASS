@@ -9,7 +9,10 @@ import {
   fetchCartDB,
   addToCartDB,
   updateCartQuantityDB,
-  removeFromCartDB
+  removeFromCartDB,
+  fetchFavoritesDB,
+  addFavoriteDB,
+  removeFavoriteDB
 } from "../utils/database";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
@@ -33,6 +36,7 @@ export function useAppController() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   // Notifications State
   const [notifications, setNotifications] = useState<{
@@ -119,6 +123,12 @@ export function useAppController() {
               if (cartResult.success && cartResult.cart) {
                 setCartItems(cartResult.cart.items);
               }
+              
+              // Load favorites for auto-logged in user
+              const favoritesResult = await fetchFavoritesDB(result.user.id);
+              if (favoritesResult.success && favoritesResult.favorites) {
+                setFavoriteIds(favoritesResult.favorites.map((p: any) => p._id));
+              }
 
               router.replace('/(tabs)' as any);
             }
@@ -180,6 +190,12 @@ export function useAppController() {
     const cartResult = await fetchCartDB(user.id);
     if (cartResult.success && cartResult.cart) {
       setCartItems(cartResult.cart.items);
+    }
+
+    // Fetch favorites on login
+    const favoritesResult = await fetchFavoritesDB(user.id);
+    if (favoritesResult.success && favoritesResult.favorites) {
+      setFavoriteIds(favoritesResult.favorites.map((p: any) => p._id));
     }
     
     if (router.canGoBack()) {
@@ -273,6 +289,40 @@ export function useAppController() {
     setIsGlobalLoading(false);
   };
 
+  const toggleFavorite = async (productId: string) => {
+    if (!currentUser) {
+      showAlert(
+        "Login Required", 
+        "Please login to manage your wishlist.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Login", onPress: () => router.push('/auth' as any) }
+        ],
+        "warning"
+      );
+      return;
+    }
+
+    const isFav = favoriteIds.includes(productId);
+    if (isFav) {
+      // Remove favorite
+      const result = await removeFavoriteDB(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => prev.filter(id => id !== productId));
+      } else {
+        showAlert("Error", result.error || "Failed to remove from wishlist", undefined, "error");
+      }
+    } else {
+      // Add favorite
+      const result = await addFavoriteDB(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => [...prev, productId]);
+      } else {
+        showAlert("Error", result.error || "Failed to add to wishlist", undefined, "error");
+      }
+    }
+  };
+
   // ======================================================
 
   const handleRegisterSuccess = (fullname: string) => {
@@ -295,6 +345,7 @@ export function useAppController() {
       setIsLoggedIn(false);
       setCurrentUser(null);
       setCartItems([]);
+      setFavoriteIds([]);
       setNotifications([]);
       await AsyncStorage.removeItem("saved_username");
       await AsyncStorage.removeItem("saved_password");
@@ -359,6 +410,8 @@ export function useAppController() {
     registerOpacity,
     registerTranslateY,
     cartItems,
+    favoriteIds,
+    toggleFavorite,
     productRefreshKey,
     addToCart,
     updateCartQuantity,

@@ -24,4 +24,9 @@ router.post('/reset-password', authController.resetPassword);
 // Google Login
 router.post('/google-login', authController.googleLogin);
 
+// Favorites / Wishlist
+router.get('/favorites/:id', authController.getFavorites);
+router.post('/favorites/:id', authController.addFavorite);
+router.delete('/favorites/:id/:productId', authController.removeFavorite);
+
 module.exports = router;

@@ -441,3 +441,34 @@ export async function getUserOrdersDB(userId: string): Promise<{ success: boolea
   }
 }
 
+// ==================== FAVORITES / WISHLIST ENDPOINTS ====================
+export async function fetchFavoritesDB(userId: string): Promise<{ success: boolean; error?: string; favorites?: Product[] }> {
+  try {
+    const response = await axios.get(`${API_URL}/auth/favorites/${userId}`);
+    return { success: true, favorites: response.data.favorites };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to fetch favorites." };
+  }
+}
+
+export async function addFavoriteDB(userId: string, productId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const response = await axios.post(`${API_URL}/auth/favorites/${userId}`, { productId });
+    return { success: response.data.success };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to add favorite." };
+  }
+}
+
+export async function removeFavoriteDB(userId: string, productId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const response = await axios.delete(`${API_URL}/auth/favorites/${userId}/${productId}`);
+    return { success: response.data.success };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to remove favorite." };
+  }
+}
+

@@ -28,7 +28,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 export const FeaturedProducts = () => {
-  const { addToCart, productRefreshKey } = useAppContext();
+  const { addToCart, productRefreshKey, favoriteIds, toggleFavorite } = useAppContext();
   const { colors, isDark } = useTheme();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -134,9 +134,12 @@ export const FeaturedProducts = () => {
                   style={styles.image}
                   resizeMode="cover"
                 />
-                <TouchableOpacity style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(20,20,20,0.8)' : 'rgba(240,240,240,0.8)' }]}>
+                <TouchableOpacity 
+                  style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(20,20,20,0.8)' : 'rgba(240,240,240,0.8)' }]}
+                  onPress={() => toggleFavorite(product._id)}
+                >
                   <Ionicons
-                    name="heart-outline"
+                    name={favoriteIds.includes(product._id) ? "heart" : "heart-outline"}
                     size={20}
                     color={colors.primary}
                   />

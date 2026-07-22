@@ -34,7 +34,7 @@ interface ShopProductGridProps {
 export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: ShopProductGridProps = {}) => {
   const { colors, isDark } = useTheme();
   const { transition } = useLocalSearchParams<{ transition?: string }>();
-  const { addToCart, productRefreshKey } = useAppContext();
+  const { addToCart, productRefreshKey, favoriteIds, toggleFavorite } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -94,8 +94,15 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
     >
       <View style={[styles.imageContainer, { backgroundColor: isDark ? 'rgba(42, 42, 42, 1)' : '#F3F2EB' }]}>
         <Image source={{ uri: product.images?.[0] }} style={styles.image} resizeMode="cover" />
-        <TouchableOpacity style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(19, 19, 19, 0.5)' : 'rgba(0, 0, 0, 0.05)' }]}>
-          <Ionicons name="heart-outline" size={16} color={colors.text} />
+        <TouchableOpacity 
+          style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(19, 19, 19, 0.5)' : 'rgba(0, 0, 0, 0.05)' }]}
+          onPress={() => toggleFavorite(product._id)}
+        >
+          <Ionicons 
+            name={favoriteIds.includes(product._id) ? "heart" : "heart-outline"} 
+            size={16} 
+            color={favoriteIds.includes(product._id) ? colors.primary : colors.text} 
+          />
         </TouchableOpacity>
         {product.badge ? (
           <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>

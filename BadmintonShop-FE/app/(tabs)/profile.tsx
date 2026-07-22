@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { useTheme } from '../../constants/ThemeContext';
 import { useAppContext } from '../../controllers/useAppController';
 import { AppColors } from '../../constants/colors';
@@ -303,6 +304,19 @@ export default function ProfileScreen() {
         {/* Order History */}
         <Text style={[styles.sectionTitle, { color: textColor }]}>Order History</Text>
         <OrderHistory />
+
+        {/* Wishlist Link */}
+        <Text style={[styles.sectionTitle, { color: textColor, marginTop: 16 }]}>My Wishlist</Text>
+        <TouchableOpacity 
+          style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18 }]}
+          onPress={() => router.push('/favorites')}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="heart-outline" size={24} color={colors.primary} style={{ marginRight: 12 }} />
+            <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>Favorite Products</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={mutedColor} />
+        </TouchableOpacity>
 
 
 

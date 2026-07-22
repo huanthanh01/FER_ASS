@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineLockClosed, HiOutlineLogout } from 'react-icons/hi';
+import { HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineLockClosed, HiOutlineLogout, HiOutlineHeart } from 'react-icons/hi';
 import { toast } from 'react-toastify';
+import ProductCard from '../components/ProductCard';
 import '../styles/ProfilePage.css';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
-  const { currentUser, isLoggedIn, updateProfile, changePassword, handleLogout, isGlobalLoading } = useAppContext();
+  const { currentUser, isLoggedIn, updateProfile, changePassword, handleLogout, isGlobalLoading, favoriteIds } = useAppContext();
   
-  const [activeTab, setActiveTab] = useState('personal'); // personal, security
+  const [activeTab, setActiveTab] = useState('personal'); // personal, security, favorites
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [loadingFavorites, setLoadingFavorites] = useState(false);
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (activeTab === 'favorites' && currentUser) {
+        setLoadingFavorites(true);
+        const { fetchFavorites } = await import('../api/authApi');
+        const result = await fetchFavorites(currentUser.id);
+        if (result.success && result.favorites) {
+          setFavoriteProducts(result.favorites);
+        }
+        setLoadingFavorites(false);
+      }
+    };
+    loadFavorites();
+  }, [activeTab, currentUser, favoriteIds]);
   
   // Profile Form
   const [profileData, setProfileData] = useState({
@@ -127,6 +145,12 @@ export default function ProfilePage() {
             >
               <HiOutlineLockClosed /> Security & Password
             </button>
+            <button 
+              className={`profile-nav-btn ${activeTab === 'favorites' ? 'active' : ''}`}
+              onClick={() => setActiveTab('favorites')}
+            >
+              <HiOutlineHeart /> Favorite Products
+            </button>
           </nav>
         </aside>
 
@@ -240,6 +264,33 @@ export default function ProfilePage() {
                   {isGlobalLoading ? 'Updating...' : 'Update Password'}
                 </button>
               </form>
+            </div>
+          )}
+
+          {activeTab === 'favorites' && (
+            <div className="profile-section">
+              <h2>Favorite Products</h2>
+              <p className="section-desc">Keep track of the gear you love.</p>
+              
+              {loadingFavorites ? (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
+                  <div className="spinner">Loading...</div>
+                </div>
+              ) : favoriteProducts.length > 0 ? (
+                <div className="favorites-grid">
+                  {favoriteProducts.map(product => (
+                    <ProductCard key={product._id || product.id} product={product} />
+                  ))}
+                </div>
+              ) : (
+                <div className="no-favorites" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+                  <HiOutlineHeart size={48} style={{ color: 'var(--color-text-muted)', marginBottom: '1rem' }} />
+                  <p>You haven't favorited any products yet.</p>
+                  <button onClick={() => navigate('/shop')} className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
+                    Browse Products
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </main>

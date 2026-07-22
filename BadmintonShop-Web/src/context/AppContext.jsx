@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loginUser, updateUserProfile, changeUserPassword } from '../api/authApi';
+import { loginUser, updateUserProfile, changeUserPassword, fetchFavorites, addFavorite, removeFavorite } from '../api/authApi';
 import { fetchCart, addToCartAPI, updateCartQuantityAPI, removeFromCartAPI, checkoutCartAPI } from '../api/cartApi';
 
 const AppContext = createContext(null);
@@ -36,6 +36,7 @@ export function AppProvider({ children }) {
   const [currentAdmin, setCurrentAdmin] = useState(null);
 
   const [cartItems, setCartItems] = useState([]);
+  const [favoriteIds, setFavoriteIds] = useState([]);
   const [isGlobalLoading, setIsGlobalLoading] = useState(false);
   const [productRefreshKey, setProductRefreshKey] = useState(0);
 
@@ -64,6 +65,11 @@ export function AppProvider({ children }) {
               const cartResult = await fetchCart(result.user.id);
               if (cartResult.success && cartResult.cart) {
                 setCartItems(cartResult.cart.items);
+              }
+              
+              const favResult = await fetchFavorites(result.user.id);
+              if (favResult.success && favResult.favorites) {
+                setFavoriteIds(favResult.favorites.map(p => p._id));
               }
             }
           } else {
@@ -118,6 +124,12 @@ export function AppProvider({ children }) {
       setCartItems(cartResult.cart.items);
     }
 
+    // Fetch favorites on login
+    const favResult = await fetchFavorites(user.id);
+    if (favResult.success && favResult.favorites) {
+      setFavoriteIds(favResult.favorites.map(p => p._id));
+    }
+
     navigate('/');
 
     if (!user.phoneNumber) {
@@ -139,6 +151,7 @@ export function AppProvider({ children }) {
     setIsLoggedIn(false);
     setCurrentUser(null);
     setCartItems([]);
+    setFavoriteIds([]);
     setNotifications([]);
     localStorage.removeItem('saved_username');
     localStorage.removeItem('saved_password');
@@ -161,6 +174,33 @@ export function AppProvider({ children }) {
     navigate('/admin/login');
     toast.info('Admin logged out successfully');
   }, [navigate]);
+
+  const toggleFavorite = useCallback(async (productId) => {
+    if (!currentUser) {
+      toast.warning('Please login to manage your wishlist.');
+      navigate('/login');
+      return;
+    }
+
+    const isFav = favoriteIds.includes(productId);
+    if (isFav) {
+      const result = await removeFavorite(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => prev.filter(id => id !== productId));
+        toast.info('Removed from wishlist');
+      } else {
+        toast.error(result.error || 'Failed to remove from wishlist');
+      }
+    } else {
+      const result = await addFavorite(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => [...prev, productId]);
+        toast.success('Added to wishlist!');
+      } else {
+        toast.error(result.error || 'Failed to add to wishlist');
+      }
+    }
+  }, [currentUser, favoriteIds, navigate]);
 
   // Cart actions
   const addToCart = useCallback(async (productId, quantity = 1) => {
@@ -246,13 +286,13 @@ export function AppProvider({ children }) {
   const value = {
     isLoggedIn, currentUser,
     isAdminLoggedIn, currentAdmin,
-    cartItems, isGlobalLoading, productRefreshKey,
+    cartItems, favoriteIds, isGlobalLoading, productRefreshKey,
     notifications, addNotification, markNotificationRead, clearNotifications,
     theme, toggleTheme,
     handleLoginSuccess, handleRegisterSuccess, handleLogout,
     handleAdminLoginSuccess, handleAdminLogout,
     addToCart, updateCartQuantity, removeFromCart, checkoutCart,
-    updateProfile, changePassword,
+    updateProfile, changePassword, toggleFavorite,
   };
 
   return (

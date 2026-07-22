@@ -89,7 +89,21 @@ export default function ForgotPasswordScreen() {
         Alert.alert(
           "Success", 
           "Your password has been reset successfully.",
-          [{ text: "Go to Login", onPress: () => router.push('/auth') }]
+          [{ 
+            text: "Go to Login", 
+            onPress: () => {
+              setStep(1);
+              setUsername('');
+              setPhoneNumber('');
+              setNewPassword('');
+              setConfirmPassword('');
+              if (router.canGoBack()) {
+                router.back();
+              } else {
+                router.replace('/auth');
+              }
+            }
+          }]
         );
       }
     } catch (err: any) {
