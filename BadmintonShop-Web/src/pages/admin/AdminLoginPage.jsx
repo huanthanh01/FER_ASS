@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineUser, HiOutlineLockClosed } from 'react-icons/hi';
 import { adminLogin } from '../../api/authApi';
@@ -14,6 +14,21 @@ export default function AdminLoginPage() {
   
   const { handleAdminLoginSuccess } = useAppContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Force dark theme for admin login page by overriding root data-theme attribute
+    const originalTheme = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    
+    return () => {
+      // Restore user theme on unmount
+      if (originalTheme) {
+        document.documentElement.setAttribute('data-theme', originalTheme);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    };
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,7 +50,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="admin-login-wrapper">
+    <div className="admin-login-wrapper admin-theme-override">
       
       {/* Animated Background Shapes */}
       <div className="admin-bg-shape-1"></div>

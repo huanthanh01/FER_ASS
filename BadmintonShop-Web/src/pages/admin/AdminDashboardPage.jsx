@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HiOutlineCurrencyDollar, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineTrendingUp, HiOutlineChevronLeft, HiOutlineChevronRight, HiOutlineStar } from 'react-icons/hi';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ComposedChart, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { getDashboardStats } from '../../api/revenueApi';
 
 export default function AdminDashboardPage() {
@@ -121,7 +121,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartView === 'monthly' ? dashboardData.chartData : dashboardData.weeklyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <ComposedChart data={chartView === 'monthly' ? dashboardData.chartData : dashboardData.weeklyData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#f97316" stopOpacity={0.3}/>
@@ -130,13 +130,15 @@ export default function AdminDashboardPage() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
+                <YAxis yAxisId={0} stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
+                <YAxis yAxisId={1} orientation="right" stroke="#10b981" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `${value}`} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '0.5rem', color: '#f8fafc' }}
-                  itemStyle={{ color: '#f97316' }}
                 />
-                <Area type="monotone" dataKey="revenue" stroke="#f97316" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
-              </AreaChart>
+                <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '12px' }} />
+                <Bar yAxisId={1} dataKey="products" fill="#10b981" fillOpacity={0.8} barSize={20} radius={[4, 4, 0, 0]} name="Products Sold" />
+                <Area yAxisId={0} type="monotone" dataKey="revenue" stroke="#f97316" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" name="Revenue" />
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
         </div>
@@ -151,7 +153,11 @@ export default function AdminDashboardPage() {
               dashboardData.topProducts.map((item, index) => (
                 <div key={item._id} className="flex items-center gap-4 bg-slate-800/50 p-3 rounded-lg border border-slate-800/50 hover:bg-slate-800 transition-colors">
                   <div className="w-12 h-12 bg-white rounded-md overflow-hidden flex-shrink-0">
-                    <img src={item.productDetails.image} alt={item.productDetails.name} className="w-full h-full object-contain" />
+                    <img 
+                      src={(item.productDetails.images && item.productDetails.images.length > 0) ? item.productDetails.images[0] : (item.productDetails.imageUrl || 'https://via.placeholder.com/150')} 
+                      alt={item.productDetails.name} 
+                      className="w-full h-full object-contain" 
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-white truncate" title={item.productDetails.name}>{item.productDetails.name}</p>

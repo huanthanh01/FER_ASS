@@ -240,4 +240,48 @@
 .form-control::placeholder {
   color: var(--color-text-muted);
 }
+
+/* Admin Theme Override to force orange primary colors regardless of shop theme */
+.admin-theme-override {
+  --color-primary: #f97316;
+  --color-primary-rgb: 249, 115, 22;
+  --color-primary-hover: #ea580c;
+  --color-primary-light: rgba(249, 115, 22, 0.15);
+}
+
+/* Reusable Search Bar Utilities */
+.search-bar {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input {
+  padding-right: 3rem;
+  background-color: var(--color-bg-base);
+  border-radius: var(--radius-full);
+}
+
+.search-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.search-btn:hover {
+  color: var(--color-primary);
+  background-color: var(--color-bg-surface-hover);
+}
 }

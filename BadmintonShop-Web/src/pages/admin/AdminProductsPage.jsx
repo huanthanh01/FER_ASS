@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../../api/productApi';
 import { useAppContext } from '../../context/AppContext';
 import { HiOutlinePlus, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
@@ -9,10 +9,11 @@ import '../../styles/AdminProductsPage.css';
 export default function AdminProductsPage() {
   const navigate = useNavigate();
   const { currentUser } = useAppContext();
+  const [searchParams, setSearchParams] = useSearchParams();
   
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('search') || '');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   
@@ -38,8 +39,10 @@ export default function AdminProductsPage() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    const query = searchParams.get('search') || '';
+    setSearch(query);
+    fetchProducts(query, 1);
+  }, [searchParams]);
 
   const fetchProducts = async (searchQuery = '', page = 1) => {
     setIsLoading(true);
@@ -74,8 +77,7 @@ export default function AdminProductsPage() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setCurrentPage(1);
-    fetchProducts(search, 1);
+    setSearchParams(search ? { search } : {});
   };
 
   const openModal = (product = null) => {
@@ -194,7 +196,7 @@ export default function AdminProductsPage() {
         <form className="search-bar" onSubmit={handleSearch}>
           <input
             type="text"
-            className="form-control"
+            className="form-control search-input"
             placeholder="Search products by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}

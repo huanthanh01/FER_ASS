@@ -128,11 +128,11 @@ export default function FloatingThemeToggle() {
     height: '56px',
     borderRadius: '50%',
     background: theme === 'dark' 
-      ? 'linear-gradient(135deg, #1e293b, #0f172a)' 
+      ? 'linear-gradient(135deg, #222222, #111111)' 
       : 'linear-gradient(135deg, #ffffff, #f1f5f9)',
     border: theme === 'dark'
-      ? '2px solid rgba(249, 115, 22, 0.4)'
-      : '2px solid rgba(132, 204, 22, 0.4)',
+      ? '2px solid #f97316'
+      : '2px solid #84cc16',
     color: theme === 'dark' ? '#f97316' : '#84cc16',
     boxShadow: theme === 'dark'
       ? '0 0 20px rgba(249, 115, 22, 0.3), 0 4px 6px -1px rgba(0,0,0,0.5)'
@@ -167,9 +167,9 @@ export default function FloatingThemeToggle() {
       title="Drag me! Click to switch theme"
     >
       {theme === 'dark' ? (
-        <HiOutlineSun size={26} style={{ pointerEvents: 'none', animation: 'spin 10s linear infinite' }} />
-      ) : (
         <HiOutlineMoon size={26} style={{ pointerEvents: 'none' }} />
+      ) : (
+        <HiOutlineSun size={26} style={{ pointerEvents: 'none', animation: 'spin 10s linear infinite' }} />
       )}
 
       <style>{`

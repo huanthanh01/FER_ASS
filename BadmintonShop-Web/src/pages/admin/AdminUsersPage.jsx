@@ -1,16 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { HiOutlineSearch, HiOutlineShieldCheck, HiOutlineUser, HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
 import { getUsers, updateUserRole, toggleUserStatus } from '../../api/userApi';
 import { toast } from 'react-toastify';
 
 export default function AdminUsersPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('search') || '');
   
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
+
+  useEffect(() => {
+    const query = searchParams.get('search') || '';
+    setSearch(query);
+  }, [searchParams]);
 
   const fetchUsers = useCallback(async () => {
     setIsLoading(true);
@@ -81,7 +88,10 @@ export default function AdminUsersPage() {
             type="text"
             placeholder="Search users..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setSearchParams(e.target.value ? { search: e.target.value } : {});
+            }}
             className="w-full bg-slate-900 border border-slate-700 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors placeholder:text-slate-500"
           />
           <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
