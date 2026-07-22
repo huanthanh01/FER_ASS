@@ -115,7 +115,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <Text style={[styles.subtitle, { color: mutedColor, marginTop: 8 }]}>
           If you don't have an account,{' '}
           <Text 
-            style={[styles.forgotPasswordText, { color: textColor }]} 
+            style={[styles.forgotPasswordText, { color: colors.primary }]} 
             onPress={() => setIsSignUp(true)}
           >
             please register
@@ -213,7 +213,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push("/forgot-password")}>
-          <Text style={[styles.forgotPasswordText, { color: textColor }]}>
+          <Text style={[styles.forgotPasswordText, { color: colors.primary }]}>
             Forgot Password?
           </Text>
         </TouchableOpacity>

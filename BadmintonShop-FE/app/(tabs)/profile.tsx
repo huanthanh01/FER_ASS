@@ -7,7 +7,6 @@ import { useAppContext } from '../../controllers/useAppController';
 import { AppColors } from '../../constants/colors';
 import { styles } from '../../components/styles/profile/Profile.styles';
 import { OrderHistory } from '../../components/profile/OrderHistory';
-import { Switch } from 'react-native';
 
 export default function ProfileScreen() {
   const { colors, isDark, toggleTheme } = useTheme();
@@ -25,6 +24,13 @@ export default function ProfileScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
+
+  const isInfoUnchanged = 
+    fullname === (currentUser?.fullname || '') &&
+    email === (currentUser?.email || '') &&
+    phoneNumber === (currentUser?.phoneNumber || '');
+
+  const isPasswordUnfilled = !currentPassword || !newPassword || !confirmPassword;
 
   useEffect(() => {
     if (currentUser) {
@@ -144,7 +150,7 @@ export default function ProfileScreen() {
         
         {/* Header section */}
         <View style={styles.headerContainer}>
-          <View style={styles.avatarContainer}>
+          <View style={[styles.avatarContainer, { backgroundColor: colors.primary, borderColor: colors.primary }]}>
             <Text style={styles.avatarText}>{currentUser.fullname.charAt(0).toUpperCase()}</Text>
           </View>
           <Text style={[styles.nameText, { color: textColor }]}>{currentUser.fullname}</Text>
@@ -200,9 +206,15 @@ export default function ProfileScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.saveButton, { backgroundColor: btnBg }]}
+            style={[
+              styles.saveButton,
+              { 
+                backgroundColor: btnBg,
+                opacity: (isUpdatingInfo || isGlobalLoading || isInfoUnchanged) ? 0.6 : 1 
+              }
+            ]}
             onPress={handleUpdateInfo}
-            disabled={isUpdatingInfo || isGlobalLoading}
+            disabled={isUpdatingInfo || isGlobalLoading || isInfoUnchanged}
           >
             {isUpdatingInfo ? (
               <ActivityIndicator color={btnText} />
@@ -267,9 +279,15 @@ export default function ProfileScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.saveButton, { backgroundColor: btnBg }]}
+            style={[
+              styles.saveButton,
+              { 
+                backgroundColor: btnBg,
+                opacity: (isUpdatingPassword || isGlobalLoading || isPasswordUnfilled) ? 0.6 : 1 
+              }
+            ]}
             onPress={handleChangePassword}
-            disabled={isUpdatingPassword || isGlobalLoading}
+            disabled={isUpdatingPassword || isGlobalLoading || isPasswordUnfilled}
           >
             {isUpdatingPassword ? (
               <ActivityIndicator color={btnText} />
@@ -286,20 +304,7 @@ export default function ProfileScreen() {
         <Text style={[styles.sectionTitle, { color: textColor }]}>Order History</Text>
         <OrderHistory />
 
-        {/* App Settings */}
-        <Text style={[styles.sectionTitle, { color: textColor, marginTop: 16 }]}>App Settings</Text>
-        <View style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Ionicons name={isDark ? "moon-outline" : "sunny-outline"} size={24} color={mutedColor} style={{ marginRight: 12 }} />
-            <Text style={{ color: textColor, fontSize: 16, fontWeight: '500' }}>Dark Mode</Text>
-          </View>
-          <Switch 
-            value={isDark} 
-            onValueChange={toggleTheme}
-            trackColor={{ false: '#d1d5db', true: btnBg }}
-            thumbColor={'#ffffff'}
-          />
-        </View>
+
 
         {/* Logout Button */}
         <TouchableOpacity style={styles.logoutButton} onPress={confirmLogout}>

@@ -84,6 +84,16 @@ export default function ProfilePage() {
     }
   };
 
+  const isProfileUnchanged = 
+    profileData.fullname === (currentUser?.fullname || '') &&
+    profileData.email === (currentUser?.email || '') &&
+    profileData.phoneNumber === (currentUser?.phoneNumber || '');
+
+  const isPasswordUnfilled = 
+    !passwordData.currentPassword || 
+    !passwordData.newPassword || 
+    !passwordData.confirmPassword;
+
   return (
     <div className="profile-page page-container">
       <div className="profile-header">
@@ -171,7 +181,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary" disabled={isGlobalLoading}>
+                <button type="submit" className="btn btn-primary" disabled={isGlobalLoading || isProfileUnchanged}>
                   {isGlobalLoading ? 'Saving...' : 'Save Changes'}
                 </button>
               </form>
@@ -226,7 +236,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary" disabled={isGlobalLoading}>
+                <button type="submit" className="btn btn-primary" disabled={isGlobalLoading || isPasswordUnfilled}>
                   {isGlobalLoading ? 'Updating...' : 'Update Password'}
                 </button>
               </form>

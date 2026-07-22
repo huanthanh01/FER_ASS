@@ -97,13 +97,19 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
         <TouchableOpacity style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(19, 19, 19, 0.5)' : 'rgba(0, 0, 0, 0.05)' }]}>
           <Ionicons name="heart-outline" size={16} color={colors.text} />
         </TouchableOpacity>
-        {product.badge && (
+        {product.badge ? (
           <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
             <Text style={[styles.badgeText, { color: product.badgeTextColor || AppColors.white }]}>
               {product.badge}
             </Text>
           </View>
-        )}
+        ) : product.isFeatured ? (
+          <View style={[styles.badge, { backgroundColor: '#ef4444' }]}>
+            <Text style={[styles.badgeText, { color: AppColors.white }]}>
+              Hot
+            </Text>
+          </View>
+        ) : null}
       </View>
       <View style={styles.cardContent}>
         <Text style={[styles.brand, { color: colors.primary }]}>{product.brand}</Text>

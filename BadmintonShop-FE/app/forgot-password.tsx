@@ -21,7 +21,7 @@ import { AnimatedButton } from '../components/ui/AnimatedButton';
 
 export default function ForgotPasswordScreen() {
   const router = useRouter();
-  const { isDark } = useTheme();
+  const { colors, isDark } = useTheme();
   
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState('');
@@ -34,13 +34,13 @@ export default function ForgotPasswordScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const mutedColor = isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
-  const inputBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const inputBg = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const primaryBtn = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
-  const primaryBtnText = isDark ? AppColors.primaryTextDark : AppColors.primaryTextLight;
-  const bgColor = isDark ? AppColors.bgDark : AppColors.bgLight;
+  const textColor = colors.text;
+  const mutedColor = colors.textSecondary;
+  const inputBorder = colors.border;
+  const inputBg = colors.inputBg;
+  const primaryBtn = colors.primary;
+  const primaryBtnText = AppColors.white;
+  const bgColor = colors.background;
 
   const handleVerify = async () => {
     if (!username || !phoneNumber) {

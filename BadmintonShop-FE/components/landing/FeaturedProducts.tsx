@@ -141,6 +141,19 @@ export const FeaturedProducts = () => {
                     color={colors.primary}
                   />
                 </TouchableOpacity>
+                {product.badge ? (
+                  <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
+                    <Text style={[styles.badgeText, { color: product.badgeTextColor || AppColors.white }]}>
+                      {product.badge}
+                    </Text>
+                  </View>
+                ) : product.isFeatured ? (
+                  <View style={[styles.badge, { backgroundColor: '#ef4444' }]}>
+                    <Text style={[styles.badgeText, { color: AppColors.white }]}>
+                      Hot
+                    </Text>
+                  </View>
+                ) : null}
               </View>
               <View style={styles.cardContent}>
                 <Text style={[styles.brand, { color: colors.textSecondary }]}>{product.brand}</Text>
