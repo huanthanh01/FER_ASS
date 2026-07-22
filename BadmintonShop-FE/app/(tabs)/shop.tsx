@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar, Platform } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../../constants/ThemeContext';
 import { AppColors } from '../../constants/colors';
@@ -8,6 +8,7 @@ import { useLocalSearchParams } from 'expo-router';
 
 import { TopHeader } from '../../components/landing/TopHeader';
 import { ShopProductGrid } from '../../components/shop/ShopProductGrid';
+import { styles } from '../../components/styles/index.styles';
 
 export default function ShopScreen() {
   const { colors, isDark } = useTheme();
@@ -30,12 +31,3 @@ export default function ShopScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingBottom: 100, // Space for custom bottom tab bar
-  },
-});

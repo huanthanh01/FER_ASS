@@ -5,7 +5,7 @@ import { useTheme } from '../../constants/ThemeContext';
 import { AppColors } from '../../constants/colors';
 
 import { TopHeader } from '../../components/landing/TopHeader';
-import { styles } from '../../components/styles/tabs/index.styles';
+import { styles } from '../../components/styles/index.styles';
 import { HeroSection } from '../../components/landing/HeroSection';
 import { BannerSlider } from '../../components/landing/BannerSlider';
 import { CategoryGrid } from '../../components/landing/CategoryGrid';

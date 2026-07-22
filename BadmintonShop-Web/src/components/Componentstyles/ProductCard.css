@@ -135,3 +135,40 @@
   padding: 0.5rem;
   border-radius: var(--radius-full);
 }
+
+.product-favorite-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: all var(--transition-fast);
+  color: var(--color-text-secondary);
+}
+
+.product-favorite-btn:hover {
+  background-color: var(--color-bg-surface-hover);
+  transform: scale(1.1);
+}
+
+.product-favorite-btn.active {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.2);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.product-favorite-btn.active:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.product-badge.featured {
+  top: 3.25rem !important;
+}

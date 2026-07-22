@@ -121,7 +121,7 @@ export default function LoginScreen() {
               ]}
               onPress={() => handleTabPress(false)}
             >
-              <Text style={[styles.segmentText, { color: !isSignUp ? textColor : AppColors.textMutedDark }]}>
+              <Text style={[styles.segmentText, { color: !isSignUp ? colors.primary : AppColors.textMutedDark }]}>
                 Login
               </Text>
             </TouchableOpacity>
@@ -140,7 +140,7 @@ export default function LoginScreen() {
               ]}
               onPress={() => handleTabPress(true)}
             >
-              <Text style={[styles.segmentText, { color: isSignUp ? textColor : AppColors.textMutedDark }]}>
+              <Text style={[styles.segmentText, { color: isSignUp ? colors.primary : AppColors.textMutedDark }]}>
                 Register
               </Text>
             </TouchableOpacity>

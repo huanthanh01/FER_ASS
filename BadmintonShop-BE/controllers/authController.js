@@ -283,6 +283,61 @@ const authController = {
       console.error('Google login error:', err);
       res.status(500).json({ success: false, error: 'Google authentication failed' });
     }
+  },
+
+  // Get User Favorites
+  getFavorites: async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id).populate('favorites');
+      if (!user) {
+        return res.status(404).json({ success: false, error: 'User not found' });
+      }
+      res.json({ success: true, favorites: user.favorites || [] });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Failed to fetch favorites' });
+    }
+  },
+
+  // Add Product to Favorites
+  addFavorite: async (req, res) => {
+    const { productId } = req.body;
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ success: false, error: 'User not found' });
+      }
+      if (!user.favorites) {
+        user.favorites = [];
+      }
+      if (!user.favorites.includes(productId)) {
+        user.favorites.push(productId);
+        await user.save();
+      }
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Failed to add favorite' });
+    }
+  },
+
+  // Remove Product from Favorites
+  removeFavorite: async (req, res) => {
+    const { productId } = req.params;
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ success: false, error: 'User not found' });
+      }
+      if (user.favorites) {
+        user.favorites = user.favorites.filter(id => id.toString() !== productId);
+        await user.save();
+      }
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Failed to remove favorite' });
+    }
   }
 };
 

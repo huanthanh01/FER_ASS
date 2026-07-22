@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Animated, Easing, useWindowDimensions } from "react-native";
 import { useTheme } from "../constants/ThemeContext";
+import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 import { User } from "../models/types";
 import {
   initDB,
@@ -9,7 +11,10 @@ import {
   fetchCartDB,
   addToCartDB,
   updateCartQuantityDB,
-  removeFromCartDB
+  removeFromCartDB,
+  fetchFavoritesDB,
+  addFavoriteDB,
+  removeFavoriteDB
 } from "../utils/database";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
@@ -33,6 +38,7 @@ export function useAppController() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   // Notifications State
   const [notifications, setNotifications] = useState<{
@@ -119,6 +125,12 @@ export function useAppController() {
               if (cartResult.success && cartResult.cart) {
                 setCartItems(cartResult.cart.items);
               }
+              
+              // Load favorites for auto-logged in user
+              const favoritesResult = await fetchFavoritesDB(result.user.id);
+              if (favoritesResult.success && favoritesResult.favorites) {
+                setFavoriteIds(favoritesResult.favorites.map((p: any) => p._id));
+              }
 
               router.replace('/(tabs)' as any);
             }
@@ -180,6 +192,12 @@ export function useAppController() {
     const cartResult = await fetchCartDB(user.id);
     if (cartResult.success && cartResult.cart) {
       setCartItems(cartResult.cart.items);
+    }
+
+    // Fetch favorites on login
+    const favoritesResult = await fetchFavoritesDB(user.id);
+    if (favoritesResult.success && favoritesResult.favorites) {
+      setFavoriteIds(favoritesResult.favorites.map((p: any) => p._id));
     }
     
     if (router.canGoBack()) {
@@ -273,6 +291,40 @@ export function useAppController() {
     setIsGlobalLoading(false);
   };
 
+  const toggleFavorite = async (productId: string) => {
+    if (!currentUser) {
+      showAlert(
+        "Login Required", 
+        "Please login to manage your wishlist.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Login", onPress: () => router.push('/auth' as any) }
+        ],
+        "warning"
+      );
+      return;
+    }
+
+    const isFav = favoriteIds.includes(productId);
+    if (isFav) {
+      // Remove favorite
+      const result = await removeFavoriteDB(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => prev.filter(id => id !== productId));
+      } else {
+        showAlert("Error", result.error || "Failed to remove from wishlist", undefined, "error");
+      }
+    } else {
+      // Add favorite
+      const result = await addFavoriteDB(currentUser.id, productId);
+      if (result.success) {
+        setFavoriteIds(prev => [...prev, productId]);
+      } else {
+        showAlert("Error", result.error || "Failed to add to wishlist", undefined, "error");
+      }
+    }
+  };
+
   // ======================================================
 
   const handleRegisterSuccess = (fullname: string) => {
@@ -280,13 +332,54 @@ export function useAppController() {
     setIsSignUp(false);
   };
 
-  const handleSocialLogin = (platform: string) => {
-    showAlert(
-      "Feature in Development",
-      `Logging in with ${platform} is currently unavailable and under development. Please use a system account!`,
-      undefined,
-      "info"
-    );
+  const signInWithGoogle = async () => {
+    setIsGlobalLoading(true);
+    try {
+      const { googleLoginDB } = await import('../utils/database');
+
+      const clientId = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID || "746750664886-i7gf88m81i3g8nfpm3kpviftsu128c5f.apps.googleusercontent.com";
+      const appRedirectUrl = Linking.createURL('/oauthredirect');
+      const webRedirectUri = process.env.EXPO_PUBLIC_WEB_REDIRECT_URI || "https://huan-badminton-shop-fpt.loca.lt/login";
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(webRedirectUri)}&state=${encodeURIComponent(appRedirectUrl)}&scope=openid%20profile%20email&prompt=select_account`;
+
+      console.log('Opening Auth Session with URL:', authUrl);
+      const result = await WebBrowser.openAuthSessionAsync(authUrl, appRedirectUrl);
+      
+      if (result.type === 'success' && result.url) {
+        const parsedUrl = Linking.parse(result.url);
+        const accessToken = parsedUrl.queryParams?.access_token as string;
+        
+        if (accessToken) {
+          console.log('Obtained Google Access Token:', accessToken);
+          const loginResult = await googleLoginDB(accessToken);
+          if (loginResult.success && loginResult.user) {
+            await handleLoginSuccess(loginResult.user);
+          } else {
+            showAlert("Login Failed", loginResult.error || "Google Authentication failed.", undefined, "error");
+          }
+        } else {
+          showAlert("Login Failed", "Failed to retrieve access token from Google.", undefined, "error");
+        }
+      }
+    } catch (e: any) {
+      console.error('Google Sign In Error:', e);
+      showAlert("Error", "An unexpected error occurred during Google Sign In.", undefined, "error");
+    } finally {
+      setIsGlobalLoading(false);
+    }
+  };
+
+  const handleSocialLogin = async (platform: string) => {
+    if (platform === 'Google') {
+      await signInWithGoogle();
+    } else {
+      showAlert(
+        "Feature in Development",
+        `Logging in with ${platform} is currently unavailable and under development. Please use a system account!`,
+        undefined,
+        "info"
+      );
+    }
   };
 
   const handleLogout = async () => {
@@ -295,6 +388,7 @@ export function useAppController() {
       setIsLoggedIn(false);
       setCurrentUser(null);
       setCartItems([]);
+      setFavoriteIds([]);
       setNotifications([]);
       await AsyncStorage.removeItem("saved_username");
       await AsyncStorage.removeItem("saved_password");
@@ -359,6 +453,8 @@ export function useAppController() {
     registerOpacity,
     registerTranslateY,
     cartItems,
+    favoriteIds,
+    toggleFavorite,
     productRefreshKey,
     addToCart,
     updateCartQuantity,

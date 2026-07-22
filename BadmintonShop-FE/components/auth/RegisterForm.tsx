@@ -210,9 +210,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       <Animated.View style={styles.termsContainer} entering={FadeInDown.delay(700).duration(500)}>
         <Text style={[styles.termsText, { color: mutedColor }]}>
           By joining, you agree to our{' '}
-          <Text style={[styles.termsLink, { color: textColor, textDecorationColor: primaryColor }]}>Terms</Text>
+          <Text style={[styles.termsLink, { color: primaryColor, textDecorationColor: primaryColor }]}>Terms</Text>
           {' '}and{' '}
-          <Text style={[styles.termsLink, { color: textColor, textDecorationColor: primaryColor }]}>Privacy Policy</Text>
+          <Text style={[styles.termsLink, { color: primaryColor, textDecorationColor: primaryColor }]}>Privacy Policy</Text>
           .
         </Text>
       </Animated.View>
