@@ -33,15 +33,19 @@ export const CategorySidebar = ({ visible, activeCategory, onCategoryChange, onC
       </Animated.View>
 
       {/* Sidebar panel */}
-      <Animated.View
+      <Animated.View 
         entering={SlideInRight.duration(300).springify()}
         exiting={SlideOutRight.duration(250)}
-        style={[sidebarStyles.panel, { backgroundColor: colors.background }]}
+        style={[sidebarStyles.panel, { backgroundColor: colors.background, borderLeftColor: colors.border }]}
       >
         {/* Header */}
         <View style={[sidebarStyles.header, { borderBottomColor: colors.border }]}>
           <Text style={[sidebarStyles.headerTitle, { color: colors.text }]}>Categories</Text>
-          <TouchableOpacity onPress={onClose} style={sidebarStyles.closeBtn} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <TouchableOpacity 
+            onPress={onClose} 
+            style={[sidebarStyles.closeBtn, { backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)' }]} 
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
             <Ionicons name="close" size={24} color={colors.text} />
           </TouchableOpacity>
         </View>
@@ -57,8 +61,16 @@ export const CategorySidebar = ({ visible, activeCategory, onCategoryChange, onC
                 onPress={() => onCategoryChange(cat)}
                 activeOpacity={0.7}
               >
-                <View style={[sidebarStyles.dot, isActive && { backgroundColor: colors.primary }]} />
-                <Text style={[sidebarStyles.categoryText, isActive && { color: colors.text, fontWeight: '700' }]}>
+                <View style={[
+                  sidebarStyles.dot, 
+                  { backgroundColor: isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)' },
+                  isActive && { backgroundColor: colors.primary }
+                ]} />
+                <Text style={[
+                  sidebarStyles.categoryText, 
+                  { color: isDark ? 'rgba(255, 255, 255, 0.6)' : colors.textSecondary },
+                  isActive && { color: colors.text, fontWeight: '700' }
+                ]}>
                   {cat}
                 </Text>
                 {isActive && (

@@ -42,7 +42,7 @@ export const SortingInfo = ({ totalProducts, sortOrder, onSortChange }: SortingI
 
   return (
     <View style={styles.container}>
-      <Text style={styles.productsFound}>{totalProducts} Products Found</Text>
+      <Text style={[styles.productsFound, { color: colors.textSecondary }]}>{totalProducts} Products Found</Text>
       
       <View ref={buttonRef} collapsable={false}>
         <TouchableOpacity 
@@ -50,7 +50,7 @@ export const SortingInfo = ({ totalProducts, sortOrder, onSortChange }: SortingI
           activeOpacity={0.8} 
           onPress={openDropdown}
         >
-          <Text style={styles.sortText}>{getSortText(sortOrder)}</Text>
+          <Text style={[styles.sortText, { color: colors.primary }]}>{getSortText(sortOrder)}</Text>
           <Ionicons name="chevron-down" size={18} color={colors.primary} />
         </TouchableOpacity>
       </View>
@@ -64,23 +64,23 @@ export const SortingInfo = ({ totalProducts, sortOrder, onSortChange }: SortingI
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.modalOverlay}>
             <TouchableWithoutFeedback>
-              <View style={[styles.modalContent, { top: dropdownTop, right: dropdownRight }]}>
+              <View style={[styles.modalContent, { top: dropdownTop, right: dropdownRight, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border }]}>
                 <TouchableOpacity style={styles.sortOption} onPress={() => handleSortSelect('newest')}>
-                  <Text style={[styles.sortOptionText, sortOrder === 'newest' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
+                  <Text style={[styles.sortOptionText, { color: colors.text }, sortOrder === 'newest' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
                     {getSortText('newest')}
                   </Text>
                   {sortOrder === 'newest' && <Ionicons name="checkmark" size={20} color={colors.primary} />}
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.sortOption} onPress={() => handleSortSelect('asc')}>
-                  <Text style={[styles.sortOptionText, sortOrder === 'asc' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
+                  <Text style={[styles.sortOptionText, { color: colors.text }, sortOrder === 'asc' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
                     {getSortText('asc')}
                   </Text>
                   {sortOrder === 'asc' && <Ionicons name="checkmark" size={20} color={colors.primary} />}
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.sortOption} onPress={() => handleSortSelect('desc')}>
-                  <Text style={[styles.sortOptionText, sortOrder === 'desc' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
+                  <Text style={[styles.sortOptionText, { color: colors.text }, sortOrder === 'desc' && [styles.sortOptionTextActive, { color: colors.primary }]]}>
                     {getSortText('desc')}
                   </Text>
                   {sortOrder === 'desc' && <Ionicons name="checkmark" size={20} color={colors.primary} />}

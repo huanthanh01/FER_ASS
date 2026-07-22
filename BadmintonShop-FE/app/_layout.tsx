@@ -9,6 +9,7 @@ import { AppProvider } from '../controllers/AppProvider';
 import { ThemeProvider as AppThemeProvider } from '../constants/ThemeContext';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider, adaptNavigationTheme } from 'react-native-paper';
 import { AppColors } from '../constants/colors';
+import FloatingThemeToggle from '../components/FloatingThemeToggle';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -63,6 +64,7 @@ export default function RootLayout() {
                 <Stack.Screen name="index" />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               </Stack>
+              <FloatingThemeToggle />
             </AppProvider>
           </AppThemeProvider>
           <StatusBar style="auto" />
