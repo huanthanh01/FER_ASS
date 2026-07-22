@@ -11,11 +11,11 @@ class ClassStateSummary extends Component {
         <div style={{ marginBottom: '6px', color: 'var(--color-text-primary)' }}><strong>Activity Summary</strong></div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
             <span>Cart Items:</span>
-            <span style={{ fontWeight: 'bold', color: 'var(--color-info)' }}>{cartCount}</span>
+            <span style={{ fontWeight: 'bold', color: 'var(--color-primary)' }}>{cartCount}</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span>Unread Alerts:</span>
-            <span style={{ fontWeight: 'bold', color: 'var(--color-danger)' }}>{unreadCount}</span>
+            <span style={{ fontWeight: 'bold', color: 'var(--color-primary)' }}>{unreadCount}</span>
         </div>
       </div>
     );
