@@ -123,9 +123,9 @@ Follow these steps to run the mobile app and test Google Login on your physical 
 3. **Start the Local Tunnel (Important for Google Login on physical phones):**
    Open a new terminal at the root directory and run localtunnel with the custom subdomain to tunnel the web port `5173`:
    ```bash
-   npx localtunnel --port 5173 --subdomain huan-badminton-shop
+   npx localtunnel --port 5173 --subdomain huan-badminton-shop-fpt
    ```
-   *This keeps the OAuth redirection URL fixed at `https://huan-badminton-shop.loca.lt`.*
+   *This keeps the OAuth redirection URL fixed at `https://huan-badminton-shop-fpt.loca.lt`.*
 
 4. **Start the Mobile App:**
    Navigate to the mobile directory, install dependencies, and start Expo (clearing cache is recommended):
@@ -137,7 +137,7 @@ Follow these steps to run the mobile app and test Google Login on your physical 
 
 5. **Test Google Login on Phone:**
    * Open the Expo Go app on your phone and scan the Metro server's QR code.
-   * Open Safari/Chrome on your phone, navigate to `https://huan-badminton-shop.loca.lt` once, type the host machine's public IP shown on the screen, and click **Continue** to bypass the localtunnel warning page.
+   * Open Safari/Chrome on your phone, navigate to `https://huan-badminton-shop-fpt.loca.lt` once, type the host machine's public IP shown on the screen, and click **Continue** to bypass the localtunnel warning page.
    * Go back to the mobile app, click **Login with Google**, choose your account, and it will authenticate successfully.
 
 ## 📄 License
