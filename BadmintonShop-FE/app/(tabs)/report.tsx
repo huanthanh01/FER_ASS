@@ -9,9 +9,11 @@ import { getApiUrl } from '../../utils/database';
 const API_URL = getApiUrl();
 import { io, Socket } from 'socket.io-client';
 import { useNavigation } from 'expo-router';
+import { useTheme } from '../../constants/ThemeContext';
 
 export default function ReportScreen() {
   const { currentUser: user, isLoggedIn } = useAppContext();
+  const { colors, isDark } = useTheme();
   const [messages, setMessages] = useState<any[]>([]);
   const [messageText, setMessageText] = useState('');
   const [loading, setLoading] = useState(true);
@@ -83,27 +85,27 @@ export default function ReportScreen() {
 
   if (!isLoggedIn) {
     return (
-      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <Text style={styles.emptyText}>Please login to access support chat.</Text>
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }]}>
+        <Text style={[styles.emptyText, { color: colors.textSecondary }]}>Please login to access support chat.</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <KeyboardAvoidingView 
-        style={styles.container}
+        style={[styles.container, { backgroundColor: colors.background }]}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
         {/* Header */}
-        <View style={styles.header}>
+        <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
           <View style={styles.headerAvatar}>
             <Text style={styles.headerAvatarText}>A</Text>
           </View>
           <View>
-            <Text style={styles.headerTitle}>Admin Support</Text>
-            <Text style={styles.headerSubtitle}>Online</Text>
+            <Text style={[styles.headerTitle, { color: colors.text }]}>Admin Support</Text>
+            <Text style={[styles.headerSubtitle, { color: isDark ? '#4ade80' : '#15803d' }]}>Online</Text>
           </View>
         </View>
 
@@ -115,20 +117,24 @@ export default function ReportScreen() {
           onContentSizeChange={scrollToBottom}
         >
           {loading ? (
-            <Text style={styles.emptyText}>Loading chat...</Text>
+            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>Loading chat...</Text>
           ) : messages.length === 0 ? (
             <View style={styles.emptyContainer}>
-              <Text style={styles.emptyTitle}>Welcome to Support!</Text>
-              <Text style={styles.emptyText}>Send a message to start chatting with an admin.</Text>
+              <Text style={[styles.emptyTitle, { color: colors.text }]}>Welcome to Support!</Text>
+              <Text style={[styles.emptyText, { color: colors.textSecondary }]}>Send a message to start chatting with an admin.</Text>
             </View>
           ) : (
             messages.map((msg, idx) => {
               const isMe = !msg.isAdmin;
               return (
                 <View key={idx} style={[styles.messageWrapper, isMe ? styles.messageWrapperRight : styles.messageWrapperLeft]}>
-                  <View style={[styles.messageBubble, isMe ? styles.messageBubbleRight : styles.messageBubbleLeft]}>
-                    <Text style={styles.messageText}>{msg.content}</Text>
-                    <Text style={[styles.messageTime, isMe ? styles.messageTimeRight : styles.messageTimeLeft]}>
+                  <View style={[
+                    styles.messageBubble, 
+                    isMe ? styles.messageBubbleRight : [styles.messageBubbleLeft, { backgroundColor: isDark ? '#1C1C16' : '#E5E4DE' }],
+                    isMe && { backgroundColor: colors.primary }
+                  ]}>
+                    <Text style={[styles.messageText, { color: isMe ? '#ffffff' : colors.text }]}>{msg.content}</Text>
+                    <Text style={[styles.messageTime, isMe ? styles.messageTimeRight : [styles.messageTimeLeft, { color: colors.textSecondary }]]}>
                       {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </Text>
                   </View>
@@ -139,17 +145,17 @@ export default function ReportScreen() {
         </ScrollView>
 
         {/* Input */}
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { backgroundColor: colors.card, borderTopColor: colors.border }]}>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
             value={messageText}
             onChangeText={setMessageText}
             placeholder="Type your message..."
-            placeholderTextColor={AppColors.textMutedDark}
+            placeholderTextColor={colors.textSecondary}
             multiline
           />
           <TouchableOpacity 
-            style={[styles.sendButton, !messageText.trim() && styles.sendButtonDisabled]} 
+            style={[styles.sendButton, { backgroundColor: colors.primary }, !messageText.trim() && styles.sendButtonDisabled]} 
             onPress={handleSendMessage}
             disabled={!messageText.trim()}
           >

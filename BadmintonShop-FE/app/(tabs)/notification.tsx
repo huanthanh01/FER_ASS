@@ -61,12 +61,22 @@ export default function NotificationScreen() {
     return null;
   };
 
+  const cardBg = (item: typeof notifications[0]) => {
+    if (isDark) {
+      return item.read ? 'rgba(32, 31, 31, 0.6)' : 'rgba(32, 31, 31, 1)';
+    }
+    return item.read ? '#F3F2EB' : colors.card;
+  };
+
   const renderNotification = ({ item }: { item: typeof notifications[0] }) => (
     <TouchableOpacity
       style={[
         styles.notifCard,
-        { backgroundColor: item.read ? 'rgba(32, 31, 31, 0.6)' : 'rgba(32, 31, 31, 1)' },
-        !item.read && styles.notifCardUnread,
+        { 
+          backgroundColor: cardBg(item),
+          borderColor: isDark ? 'rgba(90, 65, 54, 0.3)' : colors.border
+        },
+        !item.read && [styles.notifCardUnread, { borderLeftColor: colors.primary }],
       ]}
       onPress={() => handleNotifPress(item)}
       activeOpacity={0.7}
@@ -83,7 +93,7 @@ export default function NotificationScreen() {
           {item.message}
         </Text>
       </View>
-      {!item.read && <View style={styles.unreadDot} />}
+      {!item.read && <View style={[styles.unreadDot, { backgroundColor: colors.primary }]} />}
     </TouchableOpacity>
   );
 
@@ -98,14 +108,14 @@ export default function NotificationScreen() {
             {notifications.filter(n => !n.read).length} unread
           </Text>
           <TouchableOpacity onPress={clearNotifications}>
-            <Text style={styles.clearBtn}>Clear All</Text>
+            <Text style={[styles.clearBtn, { color: colors.primary }]}>Clear All</Text>
           </TouchableOpacity>
         </View>
       )}
 
       {notifications.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="notifications-outline" size={64} color={AppColors.textMutedDark} />
+          <Ionicons name="notifications-outline" size={64} color={colors.textSecondary} />
           <Text style={[styles.emptyText, { color: colors.text }]}>No new notifications</Text>
         </View>
       ) : (
@@ -126,35 +136,32 @@ export default function NotificationScreen() {
         onRequestClose={() => setSelectedNotif(null)}
       >
         <View style={styles.modalBackdrop}>
-          <View style={[styles.modalCard, { backgroundColor: colors.headerBg || '#1a1a1a' }]}>
+          <View style={[styles.modalCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
             {selectedNotif && (
               <>
-                {/* Modal Header */}
                 <View style={styles.modalHeader}>
                   <View style={[styles.modalIcon, { backgroundColor: `${getIconColor(selectedNotif.type)}20` }]}>
-                    <Ionicons name={getIconName(selectedNotif.type) as any} size={32} color={getIconColor(selectedNotif.type)} />
+                    <Ionicons name={getIconName(selectedNotif.type) as any} size={28} color={getIconColor(selectedNotif.type)} />
                   </View>
-                  <TouchableOpacity onPress={() => setSelectedNotif(null)} style={styles.modalClose}>
-                    <Ionicons name="close" size={22} color="#999" />
+                  <TouchableOpacity 
+                    style={[styles.modalClose, { backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)' }]} 
+                    onPress={() => setSelectedNotif(null)}
+                  >
+                    <Ionicons name="close" size={20} color={colors.text} />
                   </TouchableOpacity>
                 </View>
 
-                {/* Modal Body */}
-                <ScrollView style={styles.modalBody} showsVerticalScrollIndicator={false}>
+                <View style={styles.modalBody}>
                   <Text style={[styles.modalTitle, { color: colors.text }]}>{selectedNotif.title}</Text>
                   <Text style={styles.modalTimestamp}>{formatFullTime(selectedNotif.timestamp)}</Text>
-                  <View style={[styles.modalDivider, { backgroundColor: 'rgba(90, 65, 54, 0.3)' }]} />
-                  <Text style={[styles.modalMessage, { color: colors.textSecondary || '#ccc' }]}>
-                    {selectedNotif.message}
-                  </Text>
-                </ScrollView>
+                  <View style={[styles.modalDivider, { backgroundColor: colors.border }]} />
+                  <Text style={[styles.modalMessage, { color: colors.textSecondary }]}>{selectedNotif.message}</Text>
+                </View>
 
-                {/* Action Button */}
                 {getActionButton(selectedNotif) && (
-                  <TouchableOpacity
-                    style={styles.modalActionBtn}
+                  <TouchableOpacity 
+                    style={[styles.modalActionBtn, { backgroundColor: colors.primary }]} 
                     onPress={getActionButton(selectedNotif)!.action}
-                    activeOpacity={0.8}
                   >
                     <Text style={styles.modalActionText}>{getActionButton(selectedNotif)!.label}</Text>
                     <Ionicons name="arrow-forward" size={18} color="#fff" />

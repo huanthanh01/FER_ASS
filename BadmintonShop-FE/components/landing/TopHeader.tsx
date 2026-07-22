@@ -30,13 +30,13 @@ export const TopHeader = ({
   onSearchChange,
   showCart,
 }: TopHeaderProps = {}) => {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const { handleLogout, currentUser, cartItems } = useAppContext();
   const [adminMenuVisible, setAdminMenuVisible] = useState(false);
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
       {!showSearch && (
         <View
           style={{
@@ -93,20 +93,23 @@ export const TopHeader = ({
             />
           </TouchableOpacity>
         ) : (
-          <View style={[styles.searchContainer, { flex: 1, marginRight: 10 }]}>
+          <View style={[
+            styles.searchContainer,
+            {
+              flex: 1,
+              marginRight: 10,
+              backgroundColor: colors.inputBg,
+              borderWidth: 1,
+              borderColor: colors.border
+            }
+          ]}>
             <Ionicons
               name="search"
               size={20}
               color={colors.textSecondary}
-              style={{ marginRight: 8 }}
             />
             <TextInput
-              style={{
-                flex: 1,
-                color: colors.text,
-                padding: 8,
-                height: 40,
-              }}
+              style={{ color: colors.text, flex: 1, height: 40, paddingHorizontal: 8 }}
               placeholder="Search products..."
               placeholderTextColor={colors.textSecondary}
               value={searchQuery}
@@ -125,7 +128,7 @@ export const TopHeader = ({
             <Ionicons
               name="log-out-outline"
               size={24}
-              color={colors.textSecondary}
+              color={colors.text}
             />
           </TouchableOpacity>
         )}
@@ -141,7 +144,7 @@ export const TopHeader = ({
               }
             }}
           >
-            <Ionicons name="cart-outline" size={24} color={AppColors.white} />
+            <Ionicons name="cart-outline" size={24} color={colors.text} />
             {cartItemCount > 0 && (
               <View
                 style={{
@@ -167,7 +170,10 @@ export const TopHeader = ({
         )}
 
         <TouchableOpacity
-          style={currentUser ? styles.profileButton : styles.signupButton}
+          style={[
+            currentUser ? styles.profileButton : styles.signupButton,
+            { backgroundColor: colors.primary }
+          ]}
           onPress={() => {
             if (!currentUser) {
               router.push("/auth" as any);
@@ -180,7 +186,7 @@ export const TopHeader = ({
           {currentUser ? (
             <Ionicons name="person" size={16} color={AppColors.white} />
           ) : (
-            <Text style={[styles.signupText, { color: colors.primary }]}>Sign-Up?</Text>
+            <Text style={styles.signupText}>Sign-Up?</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -194,7 +200,7 @@ export const TopHeader = ({
         <TouchableWithoutFeedback onPress={() => setAdminMenuVisible(false)}>
           <View style={styles.modalOverlay}>
             <TouchableWithoutFeedback>
-              <View style={styles.modalContent}>
+              <View style={[styles.modalContent, { backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border }]}>
                 <TouchableOpacity
                   style={styles.dropdownItem}
                   onPress={() => {
@@ -207,7 +213,7 @@ export const TopHeader = ({
                     size={20}
                     color={colors.primary}
                   />
-                  <Text style={styles.dropdownItemText}>Manage Products</Text>
+                  <Text style={[styles.dropdownItemText, { color: colors.text }]}>Manage Products</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -220,9 +226,9 @@ export const TopHeader = ({
                   <Ionicons
                     name="stats-chart-outline"
                     size={20}
-                    color={AppColors.primaryLime}
+                    color={colors.primary}
                   />
-                  <Text style={styles.dropdownItemText}>Revenue Stats</Text>
+                  <Text style={[styles.dropdownItemText, { color: colors.text }]}>Revenue Stats</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>

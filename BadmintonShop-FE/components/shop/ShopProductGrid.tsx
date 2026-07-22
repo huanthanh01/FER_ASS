@@ -32,7 +32,7 @@ interface ShopProductGridProps {
 }
 
 export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: ShopProductGridProps = {}) => {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const { transition } = useLocalSearchParams<{ transition?: string }>();
   const { addToCart, productRefreshKey } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
@@ -88,14 +88,14 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
 
   const renderItem = ({ item: product }: { item: Product }) => (
     <TouchableOpacity 
-      style={styles.card} 
+      style={[styles.card, { backgroundColor: colors.card }]} 
       activeOpacity={0.9}
       onPress={() => router.push({ pathname: '/product/[id]', params: { id: product._id } })}
     >
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, { backgroundColor: isDark ? 'rgba(42, 42, 42, 1)' : '#F3F2EB' }]}>
         <Image source={{ uri: product.images?.[0] }} style={styles.image} resizeMode="cover" />
-        <TouchableOpacity style={styles.favoriteButton}>
-          <Ionicons name="heart-outline" size={16} color={AppColors.white} />
+        <TouchableOpacity style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(19, 19, 19, 0.5)' : 'rgba(0, 0, 0, 0.05)' }]}>
+          <Ionicons name="heart-outline" size={16} color={colors.text} />
         </TouchableOpacity>
         {product.badge && (
           <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
@@ -106,19 +106,19 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
         )}
       </View>
       <View style={styles.cardContent}>
-        <Text style={styles.brand}>{product.brand}</Text>
-        <Text style={styles.productName} numberOfLines={2}>{product.name}</Text>
-        <Text style={styles.description} numberOfLines={1}>{product.description}</Text>
-        <Text style={{ fontSize: 12, color: '#f59e0b', marginTop: 6, fontWeight: '600' }}>
+        <Text style={[styles.brand, { color: colors.primary }]}>{product.brand}</Text>
+        <Text style={[styles.productName, { color: colors.text }]} numberOfLines={2}>{product.name}</Text>
+        <Text style={[styles.description, { color: colors.textSecondary }]} numberOfLines={1}>{product.description}</Text>
+        <Text style={{ fontSize: 12, color: (product.stock && product.stock > 0) ? colors.primary : '#ef4444', marginTop: 6, fontWeight: '600' }}>
           {product.stock && product.stock > 0 ? `In Stock: ${product.stock}` : 'Out of Stock'}
         </Text>
         <View style={styles.footer}>
           <View style={styles.priceContainer}>
             {product.oldPrice && <Text style={styles.oldPrice}>${product.oldPrice.toFixed(2)}</Text>}
-            <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+            <Text style={[styles.price, { color: colors.text }]}>${product.price.toFixed(2)}</Text>
           </View>
-          <TouchableOpacity style={styles.cartButton} onPress={() => addToCart(product._id, 1)}>
-            <Ionicons name="cart" size={20} color={'#572000'} />
+          <TouchableOpacity style={[styles.cartButton, { backgroundColor: colors.primary }]} onPress={() => addToCart(product._id, 1)}>
+            <Ionicons name="cart" size={20} color={isDark ? '#572000' : '#ffffff'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -186,7 +186,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
                       width: 40,
                       height: 40,
                       borderRadius: 20,
-                      backgroundColor: page === p ? colors.primary : (p === '...' ? 'transparent' : '#e5e7eb'),
+                      backgroundColor: page === p ? colors.primary : (p === '...' ? 'transparent' : (isDark ? '#232325' : '#e5e7eb')),
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginHorizontal: 4
@@ -197,7 +197,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
                     disabled={p === '...'}
                   >
                     <Text style={{
-                      color: page === p ? '#fff' : '#4b5563',
+                      color: page === p ? '#fff' : colors.textSecondary,
                       fontWeight: 'bold',
                       fontSize: 16
                     }}>{p}</Text>
@@ -215,7 +215,7 @@ export const ShopProductGrid = ({ searchQuery = '', initialCategory = 'All' }: S
         onPress={() => setSidebarVisible(true)}
         activeOpacity={0.85}
       >
-        <Ionicons name="filter" size={22} color={AppColors.white} />
+        <Ionicons name="filter" size={22} color="#fff" />
         {activeCategory !== 'All' && (
           <View style={fabStyles.badge}>
             <View style={fabStyles.badgeDot} />
