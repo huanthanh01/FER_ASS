@@ -32,7 +32,6 @@ export const TopHeader = ({
 }: TopHeaderProps = {}) => {
   const { colors, isDark } = useTheme();
   const { handleLogout, currentUser, cartItems } = useAppContext();
-  const [adminMenuVisible, setAdminMenuVisible] = useState(false);
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -177,11 +176,11 @@ export const TopHeader = ({
           onPress={() => {
             if (!currentUser) {
               router.push("/auth" as any);
-            } else if (currentUser.role === "admin") {
-              setAdminMenuVisible(true);
+            } else {
+              router.push("/(tabs)/profile" as any);
             }
           }}
-          activeOpacity={currentUser?.role === "admin" ? 0.7 : 1}
+          activeOpacity={0.7}
         >
           {currentUser ? (
             <Ionicons name="person" size={16} color={AppColors.white} />
@@ -190,51 +189,6 @@ export const TopHeader = ({
           )}
         </TouchableOpacity>
       </View>
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={adminMenuVisible}
-        onRequestClose={() => setAdminMenuVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setAdminMenuVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback>
-              <View style={[styles.modalContent, { backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border }]}>
-                <TouchableOpacity
-                  style={styles.dropdownItem}
-                  onPress={() => {
-                    setAdminMenuVisible(false);
-                    router.push("/admin/products" as any);
-                  }}
-                >
-                  <Ionicons
-                    name="cube-outline"
-                    size={20}
-                    color={colors.primary}
-                  />
-                  <Text style={[styles.dropdownItemText, { color: colors.text }]}>Manage Products</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={[styles.dropdownItem, { marginTop: 10 }]}
-                  onPress={() => {
-                    setAdminMenuVisible(false);
-                    router.push("/admin/revenue" as any);
-                  }}
-                >
-                  <Ionicons
-                    name="stats-chart-outline"
-                    size={20}
-                    color={colors.primary}
-                  />
-                  <Text style={[styles.dropdownItemText, { color: colors.text }]}>Revenue Stats</Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
     </View>
   );
 };
