@@ -264,7 +264,7 @@ export default function HomePage() {
         <div className="promo-content">
           <h2>Get 20% Off on Yonex Astrox Series</h2>
           <p>Limited time offer. Upgrade your smash power today.</p>
-          <button className="btn btn-primary" onClick={() => navigate("/shop")}>
+          <button className="promo-banner-btn" onClick={() => navigate("/shop")}>
             Shop Sale
           </button>
         </div>
