@@ -88,14 +88,14 @@ export default function ProfileScreen() {
     );
   };
 
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const mutedColor = isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
-  const inputBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const inputBg = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const btnBg = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
-  const btnText = isDark ? AppColors.primaryTextDark : AppColors.primaryTextLight;
-  const cardBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const cardBg = isDark ? AppColors.cardDark : AppColors.white;
+  const textColor = colors.text;
+  const mutedColor = colors.textSecondary;
+  const inputBorder = colors.border;
+  const inputBg = colors.inputBg;
+  const btnBg = colors.primary;
+  const btnText = AppColors.white;
+  const cardBorder = colors.border;
+  const cardBg = colors.card;
 
   if (!currentUser) {
     return (

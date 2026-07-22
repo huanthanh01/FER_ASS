@@ -28,7 +28,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   onLoginSuccess,
   onSocialLogin,
 }) => {
-  const { isDark } = useTheme();
+  const { colors, isDark } = useTheme();
   const { setIsSignUp } = useAppContext();
   const router = useRouter();
 
@@ -93,17 +93,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     }
   };
 
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const mutedColor = isDark
-    ? AppColors.textMutedDark
-    : AppColors.textMutedLight;
-  const inputBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const inputBg = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const primaryBtn = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
-  const primaryBtnText = isDark
-    ? AppColors.primaryTextDark
-    : AppColors.primaryTextLight;
-  const socialBg = isDark ? AppColors.bgDark : AppColors.white;
+  const textColor = colors.text;
+  const mutedColor = colors.textSecondary;
+  const inputBorder = colors.border;
+  const inputBg = colors.inputBg;
+  const primaryBtn = colors.primary;
+  const primaryBtnText = AppColors.white;
+  const socialBg = colors.card;
 
   return (
     <View style={styles.container}>

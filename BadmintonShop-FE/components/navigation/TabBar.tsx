@@ -24,6 +24,11 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             ? options.title
             : route.name;
 
+        let labelText = label as string;
+        if (labelText === 'Notification') {
+          labelText = 'Notifs';
+        }
+
         const isFocused = state.index === index;
 
         const onPress = () => {
@@ -90,8 +95,11 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                 </View>
               )}
             </View>
-            <Text style={[styles.tabText, { color: isFocused ? AppColors.white : colors.textSecondary }]}>
-              {label as string}
+            <Text 
+              numberOfLines={1}
+              style={[styles.tabText, { color: isFocused ? AppColors.white : colors.textSecondary }]}
+            >
+              {labelText}
             </Text>
           </TouchableOpacity>
         );

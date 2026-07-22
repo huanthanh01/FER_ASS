@@ -23,7 +23,7 @@ import { useAppContext } from "../controllers/useAppController";
 const { width } = Dimensions.get("window");
 
 export default function LoginScreen() {
-  const { isDark, toggleTheme } = useTheme();
+  const { colors, isDark, toggleTheme } = useTheme();
   const {
     isSignUp,
     setIsSignUp,
@@ -55,12 +55,12 @@ export default function LoginScreen() {
   };
 
   // Colors based on theme
-  const bgColor = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const logoBg = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
-  const logoTextIconColor = isDark ? AppColors.primaryTextDark : AppColors.primaryTextLight;
-  const segmentBg = isDark ? AppColors.borderDark : '#f3f4f6';
-  const activeTabBg = isDark ? AppColors.bgDark : AppColors.white;
+  const bgColor = colors.background;
+  const textColor = colors.text;
+  const logoBg = colors.primary;
+  const logoTextIconColor = AppColors.white;
+  const segmentBg = colors.border;
+  const activeTabBg = colors.card;
   const activeTabShadow = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)';
 
   return (
