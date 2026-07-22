@@ -26,6 +26,8 @@
 
   --color-border: #e2e8f0; /* Slate 200 */
   --color-border-light: #f8fafc; /* Slate 50 */
+  --color-glass-bg: rgba(255, 255, 255, 0.75);
+  --color-glass-border: rgba(15, 23, 42, 0.08);
 }
 
 [data-theme='dark'] {
@@ -38,7 +40,7 @@
   --color-primary: #f97316; /* Orange */
   --color-primary-rgb: 249, 115, 22;
   --color-primary-hover: #ea580c;
-  --color-primary-light: #ffedd5;
+  --color-primary-light: rgba(249, 115, 22, 0.15);
   
   --color-text-primary: #ffffff;
   --color-text-secondary: #a3a3a3;
@@ -51,6 +53,8 @@
 
   --color-border: #333333;
   --color-border-light: #444444;
+  --color-glass-bg: rgba(17, 17, 17, 0.7);
+  --color-glass-border: rgba(255, 255, 255, 0.05);
 }
 
 :root {
@@ -149,10 +153,10 @@
 
 @layer utilities {
   .glass {
-    background: rgba(17, 17, 17, 0.7);
+    background: var(--color-glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-glass-border);
   }
 }
 
