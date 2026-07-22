@@ -320,7 +320,7 @@
 .promo-banner {
   margin: 0 2rem;
   border-radius: var(--radius-xl);
-  background: linear-gradient(45deg, #ea580c, #f97316);
+  background: linear-gradient(45deg, var(--color-primary-hover), var(--color-primary));
   padding: 4rem 2rem;
   text-align: center;
   color: white;
@@ -368,6 +368,35 @@
   font-size: 1.125rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+}
+
+.promo-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: var(--color-primary-hover);
+  padding: 0.85rem 2.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+  margin-top: 0.5rem;
+}
+
+.promo-banner-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+  background-color: #f8fafc;
+  color: var(--color-primary);
+}
+
+.promo-banner-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
