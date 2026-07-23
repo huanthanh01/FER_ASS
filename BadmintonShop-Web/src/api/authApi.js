@@ -110,3 +110,35 @@ export async function resetPassword(username, newPassword) {
     return { success: false, error: msg };
   }
 }
+
+// ==================== FAVORITES / WISHLIST ====================
+
+export async function fetchFavorites(userId) {
+  try {
+    const response = await axios.get(`${API_URL}/auth/favorites/${userId}`);
+    return { success: true, favorites: response.data.favorites };
+  } catch (error) {
+    const msg = error.response?.data?.error || 'Failed to fetch favorites.';
+    return { success: false, error: msg };
+  }
+}
+
+export async function addFavorite(userId, productId) {
+  try {
+    const response = await axios.post(`${API_URL}/auth/favorites/${userId}`, { productId });
+    return { success: response.data.success };
+  } catch (error) {
+    const msg = error.response?.data?.error || 'Failed to add favorite.';
+    return { success: false, error: msg };
+  }
+}
+
+export async function removeFavorite(userId, productId) {
+  try {
+    const response = await axios.delete(`${API_URL}/auth/favorites/${userId}/${productId}`);
+    return { success: response.data.success };
+  } catch (error) {
+    const msg = error.response?.data?.error || 'Failed to remove favorite.';
+    return { success: false, error: msg };
+  }
+}

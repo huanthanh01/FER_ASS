@@ -14,11 +14,14 @@ import {
   HiOutlineMenu,
   HiOutlineX,
   HiOutlineSupport,
+  HiOutlineChatAlt2,
+  HiOutlineSun,
+  HiOutlineMoon,
 } from "react-icons/hi";
 import ClassStateSummary from "./ClassStateSummary";
 
 export default function Sidebar() {
-  const { isLoggedIn, currentUser, cartItems, notifications, handleLogout } =
+  const { isLoggedIn, currentUser, cartItems, notifications, handleLogout, theme, toggleTheme } =
     useAppContext();
   const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -41,7 +44,8 @@ export default function Sidebar() {
       badge: unreadCount,
     },
     { to: "/profile", icon: HiOutlineUser, label: "Profile" },
-    { to: "/report", icon: HiOutlineSupport, label: "Report / Support" },
+    { to: "/support", icon: HiOutlineSupport, label: "Support" },
+    { to: "/report", icon: HiOutlineChatAlt2, label: "Report" },
   ];
 
   return (
@@ -97,6 +101,7 @@ export default function Sidebar() {
       />
 
       <div className="sidebar-footer">
+
         {isLoggedIn ? (
           <div className="user-card">
             <div className="user-avatar">

@@ -5,14 +5,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../styles/navigation/TabBar.styles';
 import { AppColors } from '../../constants/colors';
 import { useAppContext } from '../../controllers/useAppController';
+import { useTheme } from '../../constants/ThemeContext';
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const { cartItems, notifications } = useAppContext();
+  const { colors, isDark } = useTheme();
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const unreadNotifCount = notifications ? notifications.filter(n => !n.read).length : 0;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.card, borderTopColor: colors.border }]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -21,6 +23,11 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             : options.title !== undefined
             ? options.title
             : route.name;
+
+        let labelText = label as string;
+        if (labelText === 'Notification') {
+          labelText = 'Notifs';
+        }
 
         const isFocused = state.index === index;
 
@@ -58,21 +65,21 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             onPress={onPress}
-            style={[styles.tabItem, isFocused && styles.activeTabItem]}
+            style={[styles.tabItem, isFocused && { backgroundColor: colors.primary }]}
             activeOpacity={0.8}
           >
             <View>
               <Ionicons
                 name={iconName}
                 size={24}
-                color={isFocused ? AppColors.white : AppColors.textMutedDark}
+                color={isFocused ? AppColors.white : colors.textSecondary}
               />
               {route.name === 'notification' && unreadNotifCount > 0 && (
                 <View style={{
                   position: 'absolute',
                   top: -4,
                   right: -6,
-                  backgroundColor: '#ff6b00',
+                  backgroundColor: colors.primary,
                   borderRadius: 10,
                   minWidth: 16,
                   height: 16,
@@ -80,7 +87,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                   alignItems: 'center',
                   paddingHorizontal: 4,
                   borderWidth: 1.5,
-                  borderColor: '#1e1d1d'
+                  borderColor: colors.card
                 }}>
                   <Text style={{ color: 'white', fontSize: 9, fontWeight: 'bold' }}>
                     {unreadNotifCount > 9 ? '9+' : unreadNotifCount}
@@ -88,8 +95,11 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                 </View>
               )}
             </View>
-            <Text style={[styles.tabText, { color: isFocused ? AppColors.white : AppColors.textMutedDark }]}>
-              {label as string}
+            <Text 
+              numberOfLines={1}
+              style={[styles.tabText, { color: isFocused ? AppColors.white : colors.textSecondary }]}
+            >
+              {labelText}
             </Text>
           </TouchableOpacity>
         );

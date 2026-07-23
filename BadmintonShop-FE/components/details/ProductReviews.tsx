@@ -78,7 +78,7 @@ export const ProductReviews = ({
             />
             <View style={{ flexDirection: 'row', gap: 10 }}>
               <TouchableOpacity 
-                style={[styles.submitButton, { flex: 1 }, isSubmitting && styles.submitButtonDisabled]}
+                style={[styles.submitButton, { flex: 1, backgroundColor: colors.primary }, isSubmitting && styles.submitButtonDisabled]}
                 disabled={isSubmitting}
                 onPress={async () => {
                   const success = await onSubmitReview(rating, comment);
@@ -129,7 +129,7 @@ export const ProductReviews = ({
                   {currentUser && review.user?._id === currentUser.id && !isEditing && (
                     <TouchableOpacity 
                       onPress={() => setIsEditing(true)}
-                      style={{ paddingHorizontal: 8, paddingVertical: 4, backgroundColor: AppColors.primaryOrange, borderRadius: 4 }}
+                      style={{ paddingHorizontal: 8, paddingVertical: 4, backgroundColor: colors.primary, borderRadius: 4 }}
                     >
                       <Text style={{ color: '#fff', fontSize: 12, fontWeight: 'bold' }}>Edit</Text>
                     </TouchableOpacity>
@@ -192,7 +192,10 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
   submitButton: {
-    backgroundColor: AppColors.primaryOrange,
+    // Background color is handled dynamically in style prop below if needed,
+    // or just hardcoded here if not possible. But we want it dynamic.
+    // Wait, submitButton is a style object, we can't use colors here unless we pass it inline.
+    // Let's remove backgroundColor from here.
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',

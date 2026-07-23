@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Image, Text, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { AppColors } from '../../constants/colors';
+import { useTheme } from '../../constants/ThemeContext';
 import { styles } from '../styles/details/ProductDetails.styles';
 import { Product } from '../../models/types';
 
@@ -9,6 +10,7 @@ interface ProductImageProps {
 }
 
 export const ProductImage = ({ product }: ProductImageProps) => {
+  const { colors } = useTheme();
   const scrollRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentIndexRef = useRef(0);
@@ -47,7 +49,7 @@ export const ProductImage = ({ product }: ProductImageProps) => {
       </ScrollView>
 
       {product.badge && (
-        <View style={[styles.badge, { backgroundColor: product.badgeColor || AppColors.primaryOrange }]}>
+        <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
           <Text style={[styles.badgeText, { color: product.badgeTextColor || AppColors.white }]}>
             {product.badge}
           </Text>
@@ -73,7 +75,7 @@ export const ProductImage = ({ product }: ProductImageProps) => {
                 borderRadius: 4,
                 backgroundColor:
                   currentIndex === index
-                    ? AppColors.primaryOrange
+                    ? colors.primary
                     : "rgba(150, 150, 150, 0.4)",
               }}
             />

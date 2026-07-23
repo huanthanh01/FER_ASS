@@ -88,6 +88,23 @@ export async function loginUser(
   }
 }
 
+export async function googleLoginDB(
+  accessToken: string,
+): Promise<{ success: boolean; error?: string; user?: User }> {
+  try {
+    const response = await axios.post(`${API_URL}/auth/google-login`, {
+      access_token: accessToken,
+    });
+    return {
+      success: true,
+      user: response.data.user,
+    };
+  } catch (error: any) {
+    const msg = error.response?.data?.error || "Google login failed";
+    return { success: false, error: msg };
+  }
+}
+
 export async function updateUserProfileDB(
   userId: string, // MongoDB uses string ObjectId usually, wait, it was number before. We'll typecast.
   fullname: string,
@@ -428,3 +445,47 @@ export async function getRevenue(
     return { success: false, error: msg };
   }
 }
+
+
+// ==================== ORDER ENDPOINTS ====================
+export async function getUserOrdersDB(userId: string): Promise<{ success: boolean; error?: string; orders?: any[] }> {
+  try {
+    const response = await axios.get(`${API_URL}/orders/user/${userId}`);
+    return { success: true, orders: response.data.orders };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to fetch orders." };
+  }
+}
+
+// ==================== FAVORITES / WISHLIST ENDPOINTS ====================
+export async function fetchFavoritesDB(userId: string): Promise<{ success: boolean; error?: string; favorites?: Product[] }> {
+  try {
+    const response = await axios.get(`${API_URL}/auth/favorites/${userId}`);
+    return { success: true, favorites: response.data.favorites };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to fetch favorites." };
+  }
+}
+
+export async function addFavoriteDB(userId: string, productId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const response = await axios.post(`${API_URL}/auth/favorites/${userId}`, { productId });
+    return { success: response.data.success };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to add favorite." };
+  }
+}
+
+export async function removeFavoriteDB(userId: string, productId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const response = await axios.delete(`${API_URL}/auth/favorites/${userId}/${productId}`);
+    return { success: response.data.success };
+  } catch (error: any) {
+    if (!error.response) return { success: false, error: "Network error. Is the backend running?" };
+    return { success: false, error: error.response?.data?.error || "Failed to remove favorite." };
+  }
+}
+

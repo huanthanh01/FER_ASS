@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { HiOutlineSearch, HiOutlineEye, HiOutlineX } from 'react-icons/hi';
 import { getOrders, updateOrderStatus } from '../../api/orderApi';
 import { toast } from 'react-toastify';
 
 export default function AdminOrdersPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('search') || '');
   
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,6 +17,11 @@ export default function AdminOrdersPage() {
   // Modal
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const query = searchParams.get('search') || '';
+    setSearch(query);
+  }, [searchParams]);
 
   const fetchOrders = useCallback(async () => {
     setIsLoading(true);
@@ -80,7 +87,10 @@ export default function AdminOrdersPage() {
             type="text"
             placeholder="Search by ID or customer..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setSearchParams(e.target.value ? { search: e.target.value } : {});
+            }}
             className="w-full bg-slate-900 border border-slate-700 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors placeholder:text-slate-500"
           />
           <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />

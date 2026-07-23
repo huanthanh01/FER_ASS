@@ -71,18 +71,22 @@ const categories = [
   },
 ];
 
+import { useTheme } from "../../constants/ThemeContext";
+
 export const CategoryGrid = () => {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Text style={styles.sectionTitle}>BROWSE CATEGORIES</Text>
-        <Text style={styles.sectionSubtitle}>Find the perfect gear for your game.</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>BROWSE CATEGORIES</Text>
+        <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>Find the perfect gear for your game.</Text>
       </View>
       <View style={styles.grid}>
         {categories.map((cat) => (
           <TouchableOpacity
             key={cat.id}
-            style={styles.card}
+            style={[styles.card, { borderColor: colors.border }]}
             activeOpacity={0.9}
             onPress={() => router.push({ pathname: '/shop', params: { category: cat.tag } })}
           >
@@ -97,7 +101,7 @@ export const CategoryGrid = () => {
             />
             <View style={styles.content}>
               <Text style={styles.title}>{cat.title}</Text>
-              <Text style={styles.subtitle}>{cat.subtitle}</Text>
+              <Text style={[styles.subtitle, { color: colors.primary }]}>{cat.subtitle}</Text>
             </View>
           </TouchableOpacity>
         ))}

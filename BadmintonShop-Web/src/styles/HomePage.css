@@ -45,14 +45,14 @@
 }
 
 .hero-badge {
-  background-color: rgba(249, 115, 22, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
   font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(249, 115, 22, 0.2);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
 }
 
 .hero-title {
@@ -111,7 +111,7 @@
 }
 
 .feature-icon-wrapper {
-  background-color: rgba(249, 115, 22, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
   width: 3.5rem;
   height: 3.5rem;
@@ -170,7 +170,7 @@
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
-  background-color: rgba(249, 115, 22, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
   transition: all var(--transition-fast);
 }
 
@@ -267,7 +267,7 @@
 .category-card:hover .category-overlay {
   background: linear-gradient(
     to top,
-    rgba(249, 115, 22, 0.8) 0%,
+    rgba(var(--color-primary-rgb), 0.8) 0%,
     rgba(0, 0, 0, 0.4) 50%,
     transparent 100%
   );
@@ -295,7 +295,7 @@
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(249, 115, 22, 0.2);
+  border: 4px solid rgba(var(--color-primary-rgb), 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -320,7 +320,7 @@
 .promo-banner {
   margin: 0 2rem;
   border-radius: var(--radius-xl);
-  background: linear-gradient(45deg, #ea580c, #f97316);
+  background: linear-gradient(45deg, var(--color-primary-hover), var(--color-primary));
   padding: 4rem 2rem;
   text-align: center;
   color: white;
@@ -368,6 +368,35 @@
   font-size: 1.125rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+}
+
+.promo-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: var(--color-primary-hover);
+  padding: 0.85rem 2.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+  margin-top: 0.5rem;
+}
+
+.promo-banner-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+  background-color: #f8fafc;
+  color: var(--color-primary);
+}
+
+.promo-banner-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */

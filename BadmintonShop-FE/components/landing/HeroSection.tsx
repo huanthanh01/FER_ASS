@@ -7,10 +7,17 @@ import {
 import { styles } from "../styles/landing/HeroSection.styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 
 export const HeroSection = () => {
+  const { colors, isDark } = useTheme();
+  
+  const gradientColors = isDark 
+    ? (["transparent", "rgba(10,10,10,0.8)", "rgba(10,10,10,1)"] as const)
+    : (["transparent", "rgba(250,249,245,0.8)", "rgba(250,249,245,1)"] as const);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Image
         source={{
           uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuBcAQC-Xcay6C_wtqzIRHV6rSXR3paQKwhg5aiOZq_UzRxAYlycuzf1-5UX4oHiIbOc2yQhoA4Wp4Bn8sYDruQGnxtex1qBQEM5Pb_zll2ObMEGkWJP5cRc38zUOwct0k4ptDDESUgRXWHRMFvSFwDgT2Ne-LQrWMvefqkZul8By8QTlFaiViTgCnTQDu3jd4MvAW-jxIuQuPPvtYdX4CO9gt3dECrVpXVfyjJn_owg5mfBSkG2pDalkM_8b4nHp5d9uUGEONOrC8o",
@@ -19,16 +26,16 @@ export const HeroSection = () => {
         resizeMode="cover"
       />
       <LinearGradient
-        colors={["transparent", "rgba(10,10,10,0.8)", "rgba(10,10,10,1)"]}
+        colors={gradientColors}
         style={styles.overlay}
       />
 
       <View style={styles.content}>
-        <View style={styles.badge}>
+        <View style={[styles.badge, { backgroundColor: colors.primary }]}>
           <Text style={styles.badgeText}>Elite Performance</Text>
         </View>
-        <Text style={styles.title}>DOMINATE{"\n"}THE COURT.</Text>
-        <Text style={styles.subtitle}>
+        <Text style={[styles.title, { color: colors.text }]}>DOMINATE{"\n"}THE COURT.</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           Precision engineered rackets and footwear for players who demand
           maximum velocity and control.
         </Text>

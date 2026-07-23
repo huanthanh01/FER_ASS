@@ -110,6 +110,36 @@ Follow these instructions to set up the project locally on your machine.
     ```
     *The app will typically run on `http://localhost:5173`.*
 
+### 3. Mobile Setup & Google Sign-In Testing (Expo Go)
+
+Follow these steps to run the mobile app and test Google Login on your physical device (e.g. iPhone):
+
+1. **Start the Backend:**
+   Ensure the backend is running at `http://localhost:5000` (refer to Backend Setup).
+
+2. **Start the Web App:**
+   Ensure the Vite web server is running at `http://localhost:5173` (refer to Frontend Setup).
+
+3. **Start the Local Tunnel (Important for Google Login on physical phones):**
+   Open a new terminal at the root directory and run localtunnel with the custom subdomain to tunnel the web port `5173`:
+   ```bash
+   npx localtunnel --port 5173 --subdomain huan-badminton-shop-fpt
+   ```
+   *This keeps the OAuth redirection URL fixed at `https://huan-badminton-shop-fpt.loca.lt`.*
+
+4. **Start the Mobile App:**
+   Navigate to the mobile directory, install dependencies, and start Expo (clearing cache is recommended):
+   ```bash
+   cd BadmintonShop-FE
+   npm install
+   npx expo start -c
+   ```
+
+5. **Test Google Login on Phone:**
+   * Open the Expo Go app on your phone and scan the Metro server's QR code.
+   * Open Safari/Chrome on your phone, navigate to `https://huan-badminton-shop-fpt.loca.lt` once, type the host machine's public IP shown on the screen, and click **Continue** to bypass the localtunnel warning page.
+   * Go back to the mobile app, click **Login with Google**, choose your account, and it will authenticate successfully.
+
 ## 📄 License
 
 This project is open-source and available under the ISC License.

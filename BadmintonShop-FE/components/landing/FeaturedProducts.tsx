@@ -12,6 +12,7 @@ import { router } from "expo-router";
 import { styles } from "../styles/landing/FeaturedProducts.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 import { Product } from "../../models/types";
 import { getProducts } from "../../utils/database";
 import { useAppContext } from "../../controllers/useAppController";
@@ -27,7 +28,8 @@ import Animated, {
 } from "react-native-reanimated";
 
 export const FeaturedProducts = () => {
-  const { addToCart, productRefreshKey } = useAppContext();
+  const { addToCart, productRefreshKey, favoriteIds, toggleFavorite } = useAppContext();
+  const { colors, isDark } = useTheme();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -65,22 +67,22 @@ export const FeaturedProducts = () => {
   }, [productRefreshKey]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.title}>RECOMMEND PRODUCTS</Text>
-          <Text style={styles.subtitle}>Some impressive products for you.</Text>
+          <Text style={[styles.title, { color: colors.text }]}>RECOMMEND PRODUCTS</Text>
+          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Some impressive products for you.</Text>
         </View>
         <AnimatedButton 
           style={styles.viewAllContainer}
           onPress={() => router.push({ pathname: '/shop', params: { category: 'All', transition: Date.now().toString() } })}
         >
-          <Text style={styles.viewAllText}>VIEW ALL</Text>
+          <Text style={[styles.viewAllText, { color: colors.primary }]}>VIEW ALL</Text>
           <Animated.View style={animatedArrowStyle}>
             <Ionicons
               name="arrow-forward"
               size={16}
-              color={AppColors.primaryOrange}
+              color={colors.primary}
             />
           </Animated.View>
         </AnimatedButton>
@@ -93,7 +95,7 @@ export const FeaturedProducts = () => {
           contentContainerStyle={styles.scrollView}
         >
           {[1, 2, 3].map((item) => (
-            <View key={item} style={styles.card}>
+            <View key={item} style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
               <Skeleton height={250} borderRadius={0} />
               <View style={styles.cardContent}>
                 <Skeleton width={80} height={12} style={{ marginBottom: 4 }} />
@@ -117,7 +119,7 @@ export const FeaturedProducts = () => {
           {products.map((product) => (
             <TouchableOpacity
               key={product._id}
-              style={styles.card}
+              style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}
               activeOpacity={0.9}
               onPress={() =>
                 router.push({
@@ -132,27 +134,43 @@ export const FeaturedProducts = () => {
                   style={styles.image}
                   resizeMode="cover"
                 />
-                <TouchableOpacity style={styles.favoriteButton}>
+                <TouchableOpacity 
+                  style={[styles.favoriteButton, { backgroundColor: isDark ? 'rgba(20,20,20,0.8)' : 'rgba(240,240,240,0.8)' }]}
+                  onPress={() => toggleFavorite(product._id)}
+                >
                   <Ionicons
-                    name="heart-outline"
+                    name={favoriteIds.includes(product._id) ? "heart" : "heart-outline"}
                     size={20}
-                    color={AppColors.primaryOrange}
+                    color={colors.primary}
                   />
                 </TouchableOpacity>
+                {product.badge ? (
+                  <View style={[styles.badge, { backgroundColor: product.badgeColor || colors.primary }]}>
+                    <Text style={[styles.badgeText, { color: product.badgeTextColor || AppColors.white }]}>
+                      {product.badge}
+                    </Text>
+                  </View>
+                ) : product.isFeatured ? (
+                  <View style={[styles.badge, { backgroundColor: '#ef4444' }]}>
+                    <Text style={[styles.badgeText, { color: AppColors.white }]}>
+                      Hot
+                    </Text>
+                  </View>
+                ) : null}
               </View>
               <View style={styles.cardContent}>
-                <Text style={styles.brand}>{product.brand}</Text>
-                <Text style={styles.productName}>{product.name}</Text>
-                <Text style={styles.description} numberOfLines={2}>
+                <Text style={[styles.brand, { color: colors.textSecondary }]}>{product.brand}</Text>
+                <Text style={[styles.productName, { color: colors.text }]}>{product.name}</Text>
+                <Text style={[styles.description, { color: colors.textSecondary }]} numberOfLines={2}>
                   {product.description}
                 </Text>
-                <Text style={{ fontSize: 12, color: '#f59e0b', marginTop: 6, fontWeight: '600' }}>
+                <Text style={{ fontSize: 12, color: (product.stock && product.stock > 0) ? colors.primary : '#ef4444', marginTop: 6, fontWeight: '600' }}>
                   {product.stock && product.stock > 0 ? `In Stock: ${product.stock}` : 'Out of Stock'}
                 </Text>
                 <View style={styles.footer}>
-                  <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+                  <Text style={[styles.price, { color: colors.primary }]}>${product.price.toFixed(2)}</Text>
                   <TouchableOpacity
-                    style={styles.cartButton}
+                    style={[styles.cartButton, { backgroundColor: colors.primary }]}
                     onPress={() => addToCart(product._id, 1)}
                   >
                     <Ionicons

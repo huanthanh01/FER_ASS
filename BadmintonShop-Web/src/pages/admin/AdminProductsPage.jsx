@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../../api/productApi';
 import { useAppContext } from '../../context/AppContext';
 import { HiOutlinePlus, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
@@ -9,10 +9,11 @@ import '../../styles/AdminProductsPage.css';
 export default function AdminProductsPage() {
   const navigate = useNavigate();
   const { currentUser } = useAppContext();
+  const [searchParams, setSearchParams] = useSearchParams();
   
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('search') || '');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   
@@ -29,7 +30,7 @@ export default function AdminProductsPage() {
     price: '',
     discount: '0',
     stock: '',
-    imageUrl: '',
+    images: [''],
     brand: 'Yonex',
     description: '',
     isFeatured: false
@@ -38,8 +39,10 @@ export default function AdminProductsPage() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    const query = searchParams.get('search') || '';
+    setSearch(query);
+    fetchProducts(query, 1);
+  }, [searchParams]);
 
   const fetchProducts = async (searchQuery = '', page = 1) => {
     setIsLoading(true);
@@ -74,8 +77,7 @@ export default function AdminProductsPage() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setCurrentPage(1);
-    fetchProducts(search, 1);
+    setSearchParams(search ? { search } : {});
   };
 
   const openModal = (product = null) => {
@@ -88,7 +90,7 @@ export default function AdminProductsPage() {
         price: product.price?.toString() || '',
         discount: product.discount?.toString() || '0',
         stock: product.stock?.toString() || '',
-        imageUrl: (product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || ''),
+        images: (product.images && product.images.length > 0) ? [...product.images] : (product.imageUrl ? [product.imageUrl] : ['']),
         brand: product.brand || 'Yonex',
         description: product.description || '',
         isFeatured: product.isFeatured || false
@@ -102,7 +104,7 @@ export default function AdminProductsPage() {
         price: '',
         discount: '0',
         stock: '',
-        imageUrl: '',
+        images: [''],
         brand: 'Yonex',
         description: '',
         isFeatured: false
@@ -124,13 +126,38 @@ export default function AdminProductsPage() {
     }));
   };
 
+  const handleImageURLChange = (index, value) => {
+    setFormData(prev => {
+      const updatedImages = [...prev.images];
+      updatedImages[index] = value;
+      return { ...prev, images: updatedImages };
+    });
+  };
+
+  const handleAddImageField = () => {
+    setFormData(prev => ({
+      ...prev,
+      images: [...(prev.images || []), '']
+    }));
+  };
+
+  const handleRemoveImageField = (index) => {
+    setFormData(prev => {
+      const updatedImages = [...prev.images];
+      updatedImages.splice(index, 1);
+      return { ...prev, images: updatedImages };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const cleanedImages = formData.images.filter(url => url.trim() !== '');
+
     const submitData = {
       ...formData,
-      images: formData.imageUrl ? [formData.imageUrl] : [],
+      images: cleanedImages,
       price: parseFloat(formData.price),
       discount: parseInt(formData.discount, 10),
       stock: parseInt(formData.stock, 10)
@@ -194,7 +221,7 @@ export default function AdminProductsPage() {
         <form className="search-bar" onSubmit={handleSearch}>
           <input
             type="text"
-            className="form-control"
+            className="form-control search-input"
             placeholder="Search products by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -397,15 +424,40 @@ export default function AdminProductsPage() {
                 </div>
                 
                 <div className="form-group col-span-2">
-                  <label className="form-label">Image URL</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    name="imageUrl" 
-                    placeholder="https://example.com/image.jpg"
-                    value={formData.imageUrl}
-                    onChange={handleFormChange}
-                  />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <label className="form-label" style={{ margin: 0 }}>Product Images (URLs) *</label>
+                    <button 
+                      type="button" 
+                      className="btn btn-secondary" 
+                      style={{ padding: '4px 10px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+                      onClick={handleAddImageField}
+                    >
+                      <HiOutlinePlus /> Add Image
+                    </button>
+                  </div>
+                  
+                  {formData.images && formData.images.map((url, idx) => (
+                    <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder={`https://example.com/image${idx + 1}.jpg`}
+                        value={url}
+                        onChange={(e) => handleImageURLChange(idx, e.target.value)}
+                        required={idx === 0}
+                      />
+                      {formData.images.length > 1 && (
+                        <button 
+                          type="button" 
+                          className="btn btn-secondary" 
+                          style={{ padding: '0 12px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px' }}
+                          onClick={() => handleRemoveImageField(idx)}
+                        >
+                          <HiOutlineX size={16} />
+                        </button>
+                      )}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="form-group col-span-2">

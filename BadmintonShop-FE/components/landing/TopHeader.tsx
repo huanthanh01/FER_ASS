@@ -11,6 +11,7 @@ import {
 import { styles } from "../styles/landing/TopHeader.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AppColors } from "../../constants/colors";
+import { useTheme } from "../../constants/ThemeContext";
 import { useAppContext } from "../../controllers/useAppController";
 import { router } from "expo-router";
 
@@ -29,12 +30,12 @@ export const TopHeader = ({
   onSearchChange,
   showCart,
 }: TopHeaderProps = {}) => {
+  const { colors, isDark } = useTheme();
   const { handleLogout, currentUser, cartItems } = useAppContext();
-  const [adminMenuVisible, setAdminMenuVisible] = useState(false);
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
       {!showSearch && (
         <View
           style={{
@@ -53,7 +54,7 @@ export const TopHeader = ({
             style={[
               styles.logoText,
               {
-                color: AppColors.primaryOrange,
+                color: colors.primary,
                 fontSize: 18,
                 letterSpacing: 1,
                 marginLeft: 20,
@@ -91,22 +92,25 @@ export const TopHeader = ({
             />
           </TouchableOpacity>
         ) : (
-          <View style={[styles.searchContainer, { flex: 1, marginRight: 10 }]}>
+          <View style={[
+            styles.searchContainer,
+            {
+              flex: 1,
+              marginRight: 10,
+              backgroundColor: colors.inputBg,
+              borderWidth: 1,
+              borderColor: colors.border
+            }
+          ]}>
             <Ionicons
               name="search"
               size={20}
-              color={AppColors.textMutedDark}
-              style={{ marginRight: 8 }}
+              color={colors.textSecondary}
             />
             <TextInput
-              style={{
-                flex: 1,
-                color: AppColors.textDark,
-                padding: 8,
-                height: 40,
-              }}
+              style={{ color: colors.text, flex: 1, height: 40, paddingHorizontal: 8 }}
               placeholder="Search products..."
-              placeholderTextColor={AppColors.textMutedDark}
+              placeholderTextColor={colors.textSecondary}
               value={searchQuery}
               onChangeText={onSearchChange}
             />
@@ -123,7 +127,7 @@ export const TopHeader = ({
             <Ionicons
               name="log-out-outline"
               size={24}
-              color={AppColors.textMutedDark}
+              color={colors.text}
             />
           </TouchableOpacity>
         )}
@@ -139,14 +143,14 @@ export const TopHeader = ({
               }
             }}
           >
-            <Ionicons name="cart-outline" size={24} color={AppColors.white} />
+            <Ionicons name="cart-outline" size={24} color={colors.text} />
             {cartItemCount > 0 && (
               <View
                 style={{
                   position: "absolute",
                   top: -5,
                   right: -5,
-                  backgroundColor: AppColors.primaryOrange,
+                  backgroundColor: colors.primary,
                   borderRadius: 10,
                   width: 20,
                   height: 20,
@@ -165,15 +169,18 @@ export const TopHeader = ({
         )}
 
         <TouchableOpacity
-          style={currentUser ? styles.profileButton : styles.signupButton}
+          style={[
+            currentUser ? styles.profileButton : styles.signupButton,
+            { backgroundColor: colors.primary }
+          ]}
           onPress={() => {
             if (!currentUser) {
               router.push("/auth" as any);
-            } else if (currentUser.role === "admin") {
-              setAdminMenuVisible(true);
+            } else {
+              router.push("/(tabs)/profile" as any);
             }
           }}
-          activeOpacity={currentUser?.role === "admin" ? 0.7 : 1}
+          activeOpacity={0.7}
         >
           {currentUser ? (
             <Ionicons name="person" size={16} color={AppColors.white} />
@@ -182,51 +189,6 @@ export const TopHeader = ({
           )}
         </TouchableOpacity>
       </View>
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={adminMenuVisible}
-        onRequestClose={() => setAdminMenuVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setAdminMenuVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback>
-              <View style={styles.modalContent}>
-                <TouchableOpacity
-                  style={styles.dropdownItem}
-                  onPress={() => {
-                    setAdminMenuVisible(false);
-                    router.push("/admin/products" as any);
-                  }}
-                >
-                  <Ionicons
-                    name="cube-outline"
-                    size={20}
-                    color={AppColors.primaryOrange}
-                  />
-                  <Text style={styles.dropdownItemText}>Manage Products</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={[styles.dropdownItem, { marginTop: 10 }]}
-                  onPress={() => {
-                    setAdminMenuVisible(false);
-                    router.push("/admin/revenue" as any);
-                  }}
-                >
-                  <Ionicons
-                    name="stats-chart-outline"
-                    size={20}
-                    color={AppColors.primaryLime}
-                  />
-                  <Text style={styles.dropdownItemText}>Revenue Stats</Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
     </View>
   );
 };

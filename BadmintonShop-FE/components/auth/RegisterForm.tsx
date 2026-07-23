@@ -18,7 +18,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   onRegisterSuccess,
   onSocialLogin,
 }) => {
-  const { isDark } = useTheme();
+  const { colors, isDark } = useTheme();
   
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
@@ -69,13 +69,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
     }
   };
 
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const mutedColor = isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
-  const inputBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const inputBg = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const btnBg = isDark ? AppColors.white : AppColors.black;
-  const btnText = isDark ? AppColors.black : AppColors.white;
-  const primaryColor = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
+  const textColor = colors.text;
+  const mutedColor = colors.textSecondary;
+  const inputBorder = colors.border;
+  const inputBg = colors.inputBg;
+  const btnBg = colors.primary;
+  const btnText = AppColors.white;
+  const primaryColor = colors.primary;
 
   return (
     <View style={styles.container}>
@@ -200,7 +200,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           ) : (
             <>
               <Text style={[styles.submitButtonText, { color: btnText }]}>CREATE ACCOUNT</Text>
-              <Ionicons name="arrow-forward" size={20} color={primaryColor} />
+              <Ionicons name="arrow-forward" size={20} color={btnText} />
             </>
           )}
         </AnimatedButton>
@@ -210,9 +210,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       <Animated.View style={styles.termsContainer} entering={FadeInDown.delay(700).duration(500)}>
         <Text style={[styles.termsText, { color: mutedColor }]}>
           By joining, you agree to our{' '}
-          <Text style={[styles.termsLink, { color: textColor, textDecorationColor: primaryColor }]}>Terms</Text>
+          <Text style={[styles.termsLink, { color: primaryColor, textDecorationColor: primaryColor }]}>Terms</Text>
           {' '}and{' '}
-          <Text style={[styles.termsLink, { color: textColor, textDecorationColor: primaryColor }]}>Privacy Policy</Text>
+          <Text style={[styles.termsLink, { color: primaryColor, textDecorationColor: primaryColor }]}>Privacy Policy</Text>
           .
         </Text>
       </Animated.View>

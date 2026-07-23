@@ -42,27 +42,54 @@ const revenueController = {
       // 4. Monthly Chart Data
       const monthlyData = await Order.aggregate([
         { $match: { createdAt: { $gte: yearStart, $lt: yearEnd } } },
-        { $group: { _id: { $month: "$createdAt" }, revenue: { $sum: "$totalAmount" } } }
+        {
+          $project: {
+            createdAt: 1,
+            totalAmount: 1,
+            orderProductsCount: { $sum: "$items.quantity" }
+          }
+        },
+        { 
+          $group: { 
+            _id: { $month: "$createdAt" }, 
+            revenue: { $sum: "$totalAmount" },
+            products: { $sum: "$orderProductsCount" }
+          } 
+        }
       ]);
       const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const chartData = monthNames.map((name, index) => {
         const found = monthlyData.find(item => item._id === index + 1);
-        return { name, revenue: found ? found.revenue : 0 };
+        return { 
+          name, 
+          revenue: found ? found.revenue : 0,
+          products: found ? found.products : 0
+        };
       });
 
       // Weekly Chart Data (Current Month)
       const weeklyData = [
-        { name: 'Week 1', revenue: 0 },
-        { name: 'Week 2', revenue: 0 },
-        { name: 'Week 3', revenue: 0 },
-        { name: 'Week 4', revenue: 0 }
+        { name: 'Week 1', revenue: 0, products: 0 },
+        { name: 'Week 2', revenue: 0, products: 0 },
+        { name: 'Week 3', revenue: 0, products: 0 },
+        { name: 'Week 4', revenue: 0, products: 0 }
       ];
       currentMonthOrders.forEach(order => {
         const day = order.createdAt.getDate();
-        if (day <= 7) weeklyData[0].revenue += order.totalAmount;
-        else if (day <= 14) weeklyData[1].revenue += order.totalAmount;
-        else if (day <= 21) weeklyData[2].revenue += order.totalAmount;
-        else weeklyData[3].revenue += order.totalAmount;
+        const productCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
+        if (day <= 7) {
+          weeklyData[0].revenue += order.totalAmount;
+          weeklyData[0].products += productCount;
+        } else if (day <= 14) {
+          weeklyData[1].revenue += order.totalAmount;
+          weeklyData[1].products += productCount;
+        } else if (day <= 21) {
+          weeklyData[2].revenue += order.totalAmount;
+          weeklyData[2].products += productCount;
+        } else {
+          weeklyData[3].revenue += order.totalAmount;
+          weeklyData[3].products += productCount;
+        }
       });
 
       // Order Status Stats
@@ -77,7 +104,7 @@ const revenueController = {
       orderStatsAgg.forEach(stat => {
         const statusName = stat._id || 'Completed'; // fallback for old orders without status
         const statusItem = orderStats.find(s => s.name === statusName);
-        if (statusItem) statusItem.value = stat.count;
+        if (statusItem) statusItem.value += stat.count;
       });
 
       // 5. Recent Orders

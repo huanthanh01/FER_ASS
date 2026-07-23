@@ -16,12 +16,27 @@ export default function AdminLayout() {
     }
   }, [currentAdmin, isAdminLoggedIn, navigate]);
 
+  useEffect(() => {
+    // Force dark theme for admin pages by overriding root data-theme attribute
+    const originalTheme = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    
+    return () => {
+      // Restore user theme on unmount
+      if (originalTheme) {
+        document.documentElement.setAttribute('data-theme', originalTheme);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    };
+  }, []);
+
   if (!isAdminLoggedIn || !currentAdmin) {
     return null; // Or a loading spinner
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex text-slate-200 font-sans selection:bg-orange-500/30">
+    <div className="min-h-screen bg-slate-950 flex text-slate-200 font-sans selection:bg-orange-500/30 admin-theme-override">
       <AdminSidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader />

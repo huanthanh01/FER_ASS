@@ -21,6 +21,7 @@ export default function AdminSettingsPage() {
     standardShippingFee: 0,
     freeShippingThreshold: 0
   });
+  const [initialSettings, setInitialSettings] = useState(null);
 
   // Profile State
   const [profile, setProfile] = useState({
@@ -28,6 +29,7 @@ export default function AdminSettingsPage() {
     email: '',
     phoneNumber: ''
   });
+  const [initialProfile, setInitialProfile] = useState(null);
 
   // Password State
   const [passwordForm, setPasswordForm] = useState({
@@ -39,11 +41,13 @@ export default function AdminSettingsPage() {
   useEffect(() => {
     fetchData();
     if (currentAdmin) {
-      setProfile({
+      const initialProf = {
         fullname: currentAdmin.fullname || '',
         email: currentAdmin.email || '',
         phoneNumber: currentAdmin.phoneNumber || ''
-      });
+      };
+      setProfile(initialProf);
+      setInitialProfile(initialProf);
     }
   }, [currentAdmin]);
 
@@ -52,6 +56,7 @@ export default function AdminSettingsPage() {
     const res = await getSettings();
     if (res.success && res.settings) {
       setSettings(res.settings);
+      setInitialSettings(res.settings);
     } else if (res.error) {
       toast.error(res.error);
     }
@@ -73,12 +78,39 @@ export default function AdminSettingsPage() {
     setPasswordForm(prev => ({ ...prev, [name]: value }));
   };
 
+  const hasSettingsChanged = () => {
+    if (!initialSettings) return false;
+    return (
+      settings.storeName !== initialSettings.storeName ||
+      settings.storeEmail !== initialSettings.storeEmail ||
+      settings.storePhone !== initialSettings.storePhone ||
+      settings.storeAddress !== initialSettings.storeAddress ||
+      settings.logoUrl !== initialSettings.logoUrl ||
+      Number(settings.standardShippingFee) !== Number(initialSettings.standardShippingFee) ||
+      Number(settings.freeShippingThreshold) !== Number(initialSettings.freeShippingThreshold)
+    );
+  };
+
+  const hasProfileChanged = () => {
+    if (!initialProfile) return false;
+    return (
+      profile.fullname !== initialProfile.fullname ||
+      profile.email !== initialProfile.email ||
+      profile.phoneNumber !== initialProfile.phoneNumber
+    );
+  };
+
   const handleSaveSettings = async (e) => {
     e.preventDefault();
+    if (!hasSettingsChanged()) {
+      toast.info('No changes detected');
+      return;
+    }
     setIsSaving(true);
     const res = await updateSettings(settings);
     if (res.success) {
       toast.success('Store settings updated successfully');
+      setInitialSettings(settings);
     } else {
       toast.error(res.error);
     }
@@ -88,10 +120,15 @@ export default function AdminSettingsPage() {
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     if (!currentAdmin) return;
+    if (!hasProfileChanged()) {
+      toast.info('No changes detected');
+      return;
+    }
     setIsSaving(true);
     const res = await updateUserProfile(currentAdmin.id, profile.fullname, profile.email, profile.phoneNumber);
     if (res.success) {
       toast.success('Admin profile updated successfully. Please refresh to see changes globally.');
+      setInitialProfile(profile);
     } else {
       toast.error(res.error);
     }
@@ -208,7 +245,7 @@ export default function AdminSettingsPage() {
                   </div>
                 </div>
                 <div className="pt-4 border-t border-slate-800 flex justify-end">
-                  <button type="submit" disabled={isSaving} className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white px-6 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-orange-500/20 disabled:opacity-70">
+                  <button type="submit" disabled={isSaving || !hasSettingsChanged()} className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white px-6 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:pointer-events-none">
                     <HiOutlineSave className="w-5 h-5" />
                     {isSaving ? 'Saving...' : 'Save Changes'}
                   </button>
@@ -240,7 +277,7 @@ export default function AdminSettingsPage() {
                   </div>
                 </div>
                 <div className="pt-4 flex justify-end">
-                  <button type="submit" disabled={isSaving} className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white px-6 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-orange-500/20 disabled:opacity-70">
+                  <button type="submit" disabled={isSaving || !hasSettingsChanged()} className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white px-6 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:pointer-events-none">
                     <HiOutlineSave className="w-5 h-5" />
                     {isSaving ? 'Saving...' : 'Save Settings'}
                   </button>
@@ -275,7 +312,7 @@ export default function AdminSettingsPage() {
                     </div>
                   </div>
                   <div className="flex justify-start">
-                    <button type="submit" disabled={isSaving} className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg font-medium transition-colors border border-slate-700 disabled:opacity-70">
+                    <button type="submit" disabled={isSaving || !hasProfileChanged()} className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg font-medium transition-colors border border-slate-700 disabled:opacity-50 disabled:pointer-events-none">
                       Update Profile
                     </button>
                   </div>

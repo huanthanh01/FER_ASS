@@ -6,6 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <title>BadmintonShop - Premium Badminton Gear</title>
+    <script>
+      (function() {
+        const hash = window.location.hash.substring(1);
+        const searchParams = new URLSearchParams(hash || window.location.search);
+        const accessToken = searchParams.get('access_token');
+        const state = searchParams.get('state');
+
+        if (accessToken && state && (state.indexOf('exp://') === 0 || state.indexOf('badmintonshop://') === 0)) {
+          const redirectUrl = decodeURIComponent(state);
+          const joinChar = redirectUrl.includes('?') ? '&' : '?';
+          const finalUrl = redirectUrl + joinChar + 'access_token=' + accessToken;
+          window.location.href = finalUrl;
+          
+          // Show feedback during transition
+          document.addEventListener('DOMContentLoaded', () => {
+            const root = document.getElementById('root');
+            if (root) {
+              root.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#374151;"><h2>Redirecting back to App...</h2><p>If it doesn\'t open, tap <a href="' + finalUrl + '">here</a></p></div>';
+            }
+          });
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { getAllReports, getAdminReport } from '../../api/reportApi';
-import { AppContext } from '../../context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 import { io } from 'socket.io-client';
 import { API_URL } from '../../api/config';
 import { toast } from 'react-toastify';
 
 export default function AdminReportsPage() {
-  const { user } = useContext(AppContext);
+  const { currentAdmin: user } = useAppContext();
   const [reports, setReports] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [currentReport, setCurrentReport] = useState(null);
@@ -105,10 +105,10 @@ export default function AdminReportsPage() {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (!messageText.trim() || !selectedUserId) return;
+    if (!messageText.trim() || !selectedUserId || !user) return;
 
     const data = {
-      senderId: user.id,
+      senderId: user.id || user._id,
       receiverId: selectedUserId,
       isAdmin: true,
       content: messageText

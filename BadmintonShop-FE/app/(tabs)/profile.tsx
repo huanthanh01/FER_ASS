@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { useTheme } from '../../constants/ThemeContext';
 import { useAppContext } from '../../controllers/useAppController';
 import { AppColors } from '../../constants/colors';
 import { styles } from '../../components/styles/profile/Profile.styles';
 
 export default function ProfileScreen() {
-  const { colors, isDark } = useTheme();
+  const { colors, isDark, toggleTheme } = useTheme();
   const { currentUser, updateProfile, changePassword, handleLogout, isGlobalLoading, showAlert, setIsSignUp } = useAppContext();
 
   // Personal Info State
@@ -23,6 +24,13 @@ export default function ProfileScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
+
+  const isInfoUnchanged = 
+    fullname === (currentUser?.fullname || '') &&
+    email === (currentUser?.email || '') &&
+    phoneNumber === (currentUser?.phoneNumber || '');
+
+  const isPasswordUnfilled = !currentPassword || !newPassword || !confirmPassword;
 
   useEffect(() => {
     if (currentUser) {
@@ -86,14 +94,14 @@ export default function ProfileScreen() {
     );
   };
 
-  const textColor = isDark ? AppColors.textDark : AppColors.textLight;
-  const mutedColor = isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
-  const inputBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const inputBg = isDark ? AppColors.bgDark : AppColors.bgLight;
-  const btnBg = isDark ? AppColors.primaryOrange : AppColors.primaryLime;
-  const btnText = isDark ? AppColors.primaryTextDark : AppColors.primaryTextLight;
-  const cardBorder = isDark ? AppColors.borderDark : AppColors.borderLight;
-  const cardBg = isDark ? AppColors.cardDark : AppColors.white;
+  const textColor = colors.text;
+  const mutedColor = colors.textSecondary;
+  const inputBorder = colors.border;
+  const inputBg = colors.inputBg;
+  const btnBg = colors.primary;
+  const btnText = AppColors.white;
+  const cardBorder = colors.border;
+  const cardBg = colors.card;
 
   if (!currentUser) {
     return (
@@ -142,11 +150,11 @@ export default function ProfileScreen() {
         
         {/* Header section */}
         <View style={styles.headerContainer}>
-          <View style={styles.avatarContainer}>
+          <View style={[styles.avatarContainer, { backgroundColor: colors.primary, borderColor: colors.primary }]}>
             <Text style={styles.avatarText}>{currentUser.fullname.charAt(0).toUpperCase()}</Text>
           </View>
           <Text style={[styles.nameText, { color: textColor }]}>{currentUser.fullname}</Text>
-          <Text style={[styles.roleText, { color: AppColors.primaryOrange }]}>
+          <Text style={[styles.roleText, { color: colors.primary }]}>
             {currentUser.role === 'admin' ? 'Administrator' : 'Premium Member'}
           </Text>
         </View>
@@ -198,9 +206,15 @@ export default function ProfileScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.saveButton, { backgroundColor: btnBg }]}
+            style={[
+              styles.saveButton,
+              { 
+                backgroundColor: btnBg,
+                opacity: (isUpdatingInfo || isGlobalLoading || isInfoUnchanged) ? 0.6 : 1 
+              }
+            ]}
             onPress={handleUpdateInfo}
-            disabled={isUpdatingInfo || isGlobalLoading}
+            disabled={isUpdatingInfo || isGlobalLoading || isInfoUnchanged}
           >
             {isUpdatingInfo ? (
               <ActivityIndicator color={btnText} />
@@ -265,9 +279,15 @@ export default function ProfileScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.saveButton, { backgroundColor: btnBg }]}
+            style={[
+              styles.saveButton,
+              { 
+                backgroundColor: btnBg,
+                opacity: (isUpdatingPassword || isGlobalLoading || isPasswordUnfilled) ? 0.6 : 1 
+              }
+            ]}
             onPress={handleChangePassword}
-            disabled={isUpdatingPassword || isGlobalLoading}
+            disabled={isUpdatingPassword || isGlobalLoading || isPasswordUnfilled}
           >
             {isUpdatingPassword ? (
               <ActivityIndicator color={btnText} />
@@ -279,6 +299,34 @@ export default function ProfileScreen() {
             )}
           </TouchableOpacity>
         </View>
+
+        {/* Order History Link */}
+        <Text style={[styles.sectionTitle, { color: textColor }]}>My Orders</Text>
+        <TouchableOpacity 
+          style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18 }]}
+          onPress={() => router.push('/orders')}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="receipt-outline" size={24} color={colors.primary} style={{ marginRight: 12 }} />
+            <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>Order History</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={mutedColor} />
+        </TouchableOpacity>
+
+        {/* Wishlist Link */}
+        <Text style={[styles.sectionTitle, { color: textColor, marginTop: 16 }]}>My Wishlist</Text>
+        <TouchableOpacity 
+          style={[styles.card, { backgroundColor: cardBg, borderColor: cardBorder, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 18 }]}
+          onPress={() => router.push('/favorites')}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="heart-outline" size={24} color={colors.primary} style={{ marginRight: 12 }} />
+            <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>Favorite Products</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={mutedColor} />
+        </TouchableOpacity>
+
+
 
         {/* Logout Button */}
         <TouchableOpacity style={styles.logoutButton} onPress={confirmLogout}>

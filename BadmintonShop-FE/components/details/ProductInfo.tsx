@@ -25,7 +25,7 @@ export const ProductInfo = ({ product, colors }: ProductInfoProps) => {
 
   return (
     <View style={styles.detailsContainer}>
-      <Text style={[styles.brand, { color: AppColors.primaryOrange }]}>
+      <Text style={[styles.brand, { color: colors.primary }]}>
         {product.brand}
       </Text>
       <Text style={[styles.name, { color: colors.text }]}>{product.name}</Text>
@@ -48,8 +48,8 @@ export const ProductInfo = ({ product, colors }: ProductInfoProps) => {
             <Text style={styles.oldPrice}>${product.oldPrice.toFixed(2)}</Text>
           )}
         </View>
-        <View style={styles.stockBadge}>
-          <Text style={styles.stockText}>
+        <View style={[styles.stockBadge, { backgroundColor: (product.stock ?? 0) > 0 ? `${colors.primary}1A` : 'rgba(239, 68, 68, 0.1)' }]}>
+          <Text style={[styles.stockText, { color: (product.stock ?? 0) > 0 ? colors.primary : '#ef4444' }]}>
             {(product.stock ?? 0) > 0 ? "In Stock" : "Out of Stock"}
           </Text>
         </View>
