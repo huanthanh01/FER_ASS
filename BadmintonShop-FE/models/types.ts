@@ -42,6 +42,9 @@ export interface Product {
   category: string;
   rating?: number;
   numReviews?: number;
+  weight?: string;
+  stiffness?: string;
+  balance?: string;
 }
 
 export interface Review {

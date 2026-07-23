@@ -33,7 +33,10 @@ export default function AdminProductsPage() {
     images: [''],
     brand: 'Yonex',
     description: '',
-    isFeatured: false
+    isFeatured: false,
+    weight: '',
+    stiffness: '',
+    balance: ''
   });
 
   const [categories, setCategories] = useState([]);
@@ -93,7 +96,10 @@ export default function AdminProductsPage() {
         images: (product.images && product.images.length > 0) ? [...product.images] : (product.imageUrl ? [product.imageUrl] : ['']),
         brand: product.brand || 'Yonex',
         description: product.description || '',
-        isFeatured: product.isFeatured || false
+        isFeatured: product.isFeatured || false,
+        weight: product.weight || '',
+        stiffness: product.stiffness || '',
+        balance: product.balance || ''
       });
     } else {
       setIsEditMode(false);
@@ -107,7 +113,10 @@ export default function AdminProductsPage() {
         images: [''],
         brand: 'Yonex',
         description: '',
-        isFeatured: false
+        isFeatured: false,
+        weight: '',
+        stiffness: '',
+        balance: ''
       });
     }
     setIsModalOpen(true);
@@ -471,6 +480,51 @@ export default function AdminProductsPage() {
                     onChange={handleFormChange}
                   />
                 </div>
+
+                {formData.category && formData.category.toLowerCase().includes('racket') && (
+                  <>
+                    <div className="form-group">
+                      <label className="form-label">Weight</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        name="weight" 
+                        placeholder="e.g. 4U (Avg. 83g)"
+                        value={formData.weight}
+                        onChange={handleFormChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Stiffness (Flex)</label>
+                      <select 
+                        className="form-control" 
+                        name="stiffness" 
+                        value={formData.stiffness}
+                        onChange={handleFormChange}
+                      >
+                        <option value="">Select Stiffness</option>
+                        <option value="Flexible">Flexible</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Stiff">Stiff</option>
+                        <option value="Extra Stiff">Extra Stiff</option>
+                      </select>
+                    </div>
+                    <div className="form-group col-span-2">
+                      <label className="form-label">Balance Point</label>
+                      <select 
+                        className="form-control" 
+                        name="balance" 
+                        value={formData.balance}
+                        onChange={handleFormChange}
+                      >
+                        <option value="">Select Balance Point</option>
+                        <option value="Head Heavy">Head Heavy (Tấn công)</option>
+                        <option value="Even Balance">Even Balance (Toàn diện)</option>
+                        <option value="Head Light">Head Light (Phòng thủ)</option>
+                      </select>
+                    </div>
+                  </>
+                )}
                 
                 <div className="form-group col-span-2">
                   <label className="form-label">Description</label>

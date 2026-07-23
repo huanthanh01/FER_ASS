@@ -17,6 +17,7 @@ import {
   HiOutlineChatAlt2,
   HiOutlineSun,
   HiOutlineMoon,
+  HiOutlineSparkles,
 } from "react-icons/hi";
 import ClassStateSummary from "./ClassStateSummary";
 
@@ -31,6 +32,7 @@ export default function Sidebar() {
   const navItems = [
     { to: "/", icon: HiOutlineHome, label: "Home" },
     { to: "/shop", icon: HiOutlineShoppingBag, label: "Shop" },
+    { to: "/racket-finder", icon: HiOutlineSparkles, label: "Racket Finder" },
     {
       to: "/cart",
       icon: HiOutlineShoppingCart,

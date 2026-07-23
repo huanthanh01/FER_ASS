@@ -392,14 +392,33 @@ export default function ProductDetailPage() {
                     <td>Category</td>
                     <td>{product.category}</td>
                   </tr>
-                  <tr>
-                    <td>Characteristics</td>
-                    <td>{getWeightText(product.category)}</td>
-                  </tr>
-                  <tr>
-                    <td>Flex</td>
-                    <td>{product.flex || "Medium"}</td>
-                  </tr>
+                  {product.category && product.category.toLowerCase().includes('racket') ? (
+                    <>
+                      <tr>
+                        <td>Weight</td>
+                        <td>{product.weight || getWeightText(product.category)}</td>
+                      </tr>
+                      <tr>
+                        <td>Stiffness (Flex)</td>
+                        <td>{product.stiffness || "Medium"}</td>
+                      </tr>
+                      <tr>
+                        <td>Balance Point</td>
+                        <td>{product.balance || "Even Balance"}</td>
+                      </tr>
+                    </>
+                  ) : (
+                    <>
+                      <tr>
+                        <td>Characteristics</td>
+                        <td>{getWeightText(product.category)}</td>
+                      </tr>
+                      <tr>
+                        <td>Flex</td>
+                        <td>{product.flex || "Medium"}</td>
+                      </tr>
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>
