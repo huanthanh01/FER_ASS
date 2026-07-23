@@ -10,7 +10,7 @@ import HomePage from './pages/HomePage';
 const ShopPage = React.lazy(() => import('./pages/ShopPage'));
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
-import AuthPage from './pages/Auth/AuthPage';
+import AuthPage from './pages/auth/AuthPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
