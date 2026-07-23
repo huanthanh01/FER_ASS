@@ -104,34 +104,83 @@ export const ProductInfo = ({ product, colors }: ProductInfoProps) => {
             {product.category || "Uncategorized"}
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingVertical: 4,
-          }}
-        >
-          <Text style={{ color: colors.textSecondary, width: "40%" }}>
-            Characteristics
-          </Text>
-          <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
-            {getWeightText(product.category)}
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingVertical: 4,
-          }}
-        >
-          <Text style={{ color: colors.textSecondary, width: "40%" }}>
-            Flex
-          </Text>
-          <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
-            Medium
-          </Text>
-        </View>
+        {product.category && product.category.toLowerCase().includes("racket") ? (
+          <>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 4,
+              }}
+            >
+              <Text style={{ color: colors.textSecondary, width: "40%" }}>
+                Weight
+              </Text>
+              <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
+                {product.weight || getWeightText(product.category)}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 4,
+              }}
+            >
+              <Text style={{ color: colors.textSecondary, width: "40%" }}>
+                Stiffness (Flex)
+              </Text>
+              <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
+                {product.stiffness || "Medium"}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 4,
+              }}
+            >
+              <Text style={{ color: colors.textSecondary, width: "40%" }}>
+                Balance
+              </Text>
+              <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
+                {product.balance || "Even Balance"}
+              </Text>
+            </View>
+          </>
+        ) : (
+          <>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 4,
+              }}
+            >
+              <Text style={{ color: colors.textSecondary, width: "40%" }}>
+                Characteristics
+              </Text>
+              <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
+                {getWeightText(product.category)}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 4,
+              }}
+            >
+              <Text style={{ color: colors.textSecondary, width: "40%" }}>
+                Flex
+              </Text>
+              <Text style={{ color: colors.text, flex: 1, fontWeight: "500" }}>
+                Medium
+              </Text>
+            </View>
+          </>
+        )}
       </View>
     </View>
   );
