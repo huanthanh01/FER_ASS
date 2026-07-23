@@ -60,6 +60,21 @@ export async function createProduct(productData) {
   }
 }
 
+export async function uploadProductImages(files) {
+  try {
+    const formData = new FormData();
+    files.forEach((file) => formData.append('images', file));
+
+    const response = await axios.post(`${API_URL}/products/upload-images`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    return { success: true, images: response.data.images || [] };
+  } catch (error) {
+    return { success: false, error: error.response?.data?.error || 'Failed to upload images.' };
+  }
+}
+
 export async function updateProduct(id, productData) {
   try {
     const response = await axios.put(`${API_URL}/products/${id}`, productData);

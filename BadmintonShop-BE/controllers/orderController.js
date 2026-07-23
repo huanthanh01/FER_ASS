@@ -1,4 +1,5 @@
 const Order = require('../models/Order');
+const mongoose = require('mongoose');
 
 const orderController = {
   // Get all orders (Admin)
@@ -18,7 +19,7 @@ const orderController = {
 
       const orders = await Order.find(query)
         .populate('user', 'fullname email username')
-        .populate('items.product', 'name imageUrl price')
+        .populate('items.product', 'name imageUrl images price')
         .sort({ createdAt: -1 });
 
       // If search exists but wasn't an exact ObjectId, filter in JS by user name or email
@@ -53,7 +54,7 @@ const orderController = {
         id, 
         { status }, 
         { new: true }
-      ).populate('user', 'fullname email username').populate('items.product', 'name imageUrl price');
+      ).populate('user', 'fullname email username').populate('items.product', 'name imageUrl images price');
 
       if (!updatedOrder) {
         return res.status(404).json({ success: false, error: 'Order not found' });
@@ -70,8 +71,12 @@ const orderController = {
   getUserOrders: async (req, res) => {
     try {
       const { userId } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.json({ success: true, orders: [] });
+      }
+
       const orders = await Order.find({ user: userId })
-        .populate('items.product', 'name imageUrl price')
+        .populate('items.product', 'name imageUrl images price')
         .sort({ createdAt: -1 });
 
       res.json({ success: true, orders });

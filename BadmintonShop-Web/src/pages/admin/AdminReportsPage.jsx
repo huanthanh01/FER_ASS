@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getAllReports, getAdminReport } from '../../api/reportApi';
 import { useAppContext } from '../../context/AppContext';
 import { io } from 'socket.io-client';

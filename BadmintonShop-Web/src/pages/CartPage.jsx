@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { HiOutlineTrash, HiOutlineMinus, HiOutlinePlus, HiOutlineShoppingBag, HiOutlineArrowRight } from 'react-icons/hi';
 import { toast } from 'react-toastify';
+import ConfirmModal from '../components/ConfirmModal';
 import '../styles/CartPage.css';
 
 export default function CartPage() {
@@ -11,6 +12,7 @@ export default function CartPage() {
   
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
+  const [pendingRemoveItem, setPendingRemoveItem] = useState(null);
 
   // Calculate totals
   const subtotal = cartItems.reduce((sum, item) => {
@@ -50,6 +52,12 @@ export default function CartPage() {
     }
     
     checkoutCart();
+  };
+
+  const confirmRemoveItem = async () => {
+    if (!pendingRemoveItem) return;
+    await removeFromCart(pendingRemoveItem.productId);
+    setPendingRemoveItem(null);
   };
 
   if (cartItems.length === 0) {
@@ -136,11 +144,10 @@ export default function CartPage() {
                     <span className="item-total-price">${itemTotal.toFixed(2)}</span>
                     <button 
                       className="remove-btn"
-                      onClick={() => {
-                        if (window.confirm(`Are you sure you want to remove ${product.name} from your cart?`)) {
-                          removeFromCart(product._id || product.id);
-                        }
-                      }}
+                      onClick={() => setPendingRemoveItem({
+                        productId: product._id || product.id,
+                        name: product.name
+                      })}
                       disabled={isGlobalLoading}
                       title="Remove Item"
                     >
@@ -207,6 +214,16 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={Boolean(pendingRemoveItem)}
+        title="Remove item?"
+        message={`Remove ${pendingRemoveItem?.name || 'this item'} from your cart?`}
+        confirmText="Remove"
+        isLoading={isGlobalLoading}
+        onCancel={() => setPendingRemoveItem(null)}
+        onConfirm={confirmRemoveItem}
+      />
     </div>
   );
 }

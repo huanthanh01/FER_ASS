@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 
 const authController = {
@@ -288,6 +289,10 @@ const authController = {
   // Get User Favorites
   getFavorites: async (req, res) => {
     try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.json({ success: true, favorites: [] });
+      }
+
       const user = await User.findById(req.params.id).populate('favorites');
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' });
@@ -303,6 +308,10 @@ const authController = {
   addFavorite: async (req, res) => {
     const { productId } = req.body;
     try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(productId)) {
+        return res.status(400).json({ success: false, error: 'Invalid favorite request' });
+      }
+
       const user = await User.findById(req.params.id);
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' });
@@ -325,6 +334,10 @@ const authController = {
   removeFavorite: async (req, res) => {
     const { productId } = req.params;
     try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(productId)) {
+        return res.status(400).json({ success: false, error: 'Invalid favorite request' });
+      }
+
       const user = await User.findById(req.params.id);
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' });
