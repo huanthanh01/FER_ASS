@@ -17,6 +17,7 @@ import NotificationsPage from './pages/NotificationsPage';
 import NotificationDetailPage from './pages/NotificationDetailPage';
 import ReportPage from './pages/ReportPage';
 import SupportPage from './pages/SupportPage';
+import RacketFinderPage from './pages/RacketFinderPage';
 
 // Admin Pages & Layout
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -50,6 +51,7 @@ function App() {
           <Route path="notifications/:id" element={<NotificationDetailPage />} />
           <Route path="support" element={<SupportPage />} />
           <Route path="report" element={<ReportPage />} />
+          <Route path="racket-finder" element={<RacketFinderPage />} />
         </Route>
 
         {/* Admin Login (Isolated from Layout) */}

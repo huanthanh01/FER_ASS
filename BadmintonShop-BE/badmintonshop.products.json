@@ -1,1448 +1,1483 @@
-[{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591df"
+[
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591df"
+    },
+    "brand": "Yonex",
+    "name": "Astrox 100 ZZ Kurenai",
+    "description": "Advanced attacking racket. The flagship heavy-head racket designed for explosive power and fast recovery.",
+    "price": 229,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-astrox-100zz-kurenai-do-new-2021-5.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-astrox-100zz-kurenai-do-new-2021-1.webp"
+    ],
+    "badge": "Pro Choice",
+    "badgeColor": "#ff6b00",
+    "badgeTextColor": "#561f00",
+    "isFeatured": true,
+    "stock": 50,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.000Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.000Z"
+    },
+    "stiffness": "Extra Stiff",
+    "balance": "Head Heavy",
+    "weight": "3U (Avg. 88g)"
   },
-  "brand": "Yonex",
-  "name": "Astrox 100 ZZ Kurenai",
-  "description": "Advanced attacking racket. The flagship heavy-head racket designed for explosive power and fast recovery.",
-  "price": 229,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-astrox-100zz-kurenai-do-new-2021-5.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-astrox-100zz-kurenai-do-new-2021-1.webp"
-  ],
-  "badge": "Pro Choice",
-  "badgeColor": "#ff6b00",
-  "badgeTextColor": "#561f00",
-  "isFeatured": true,
-  "stock": 50,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.000Z"
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e0"
+    },
+    "brand": "Victor",
+    "name": "Thruster F Claw",
+    "description": "Power and precision",
+    "price": 205,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-5.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-4.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-3.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
   },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.000Z"
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e1"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining AYZW007-3",
+    "description": "Lightweight court shoes",
+    "price": 144,
+    "oldPrice": 180,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-1_1780950649.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-2_1780950654.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-3_1780950659.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-4_1780950664.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-5_1780950669.webp"
+    ],
+    "badge": "Sale -20%",
+    "badgeColor": "#93000a",
+    "badgeTextColor": "#ffdad6",
+    "isFeatured": false,
+    "stock": 50,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e2"
+    },
+    "brand": "Yonex",
+    "name": "AS-50 Feather Shuttles",
+    "description": "Tournament grade shuttles",
+    "price": 39.99,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/ong-cau-long-yonex-as50-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e3"
+    },
+    "brand": "Yonex",
+    "name": "Yonex RM3239 - White",
+    "description": "Breathable activewear",
+    "price": 65,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-white-chinh-hang_1783653908.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-white-chinh-hang-2_1783653921.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e4"
+    },
+    "brand": "Victor",
+    "name": "Victor BR2205",
+    "description": "Spacious racket bag",
+    "price": 115,
+    "images": [
+      "https://down-th.img.susercontent.com/file/th-11134207-7rash-m8hdh98005im43",
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br2205-m-xanh-chinh-hang_1783457212.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br2205-a-trang-chinh-hang_1783457217.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e5"
+    },
+    "brand": "Mizuno",
+    "name": "Wave Claw 4",
+    "description": "Ultimate stability and comfort for multi-directional court movements.",
+    "price": 159,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-chinh-hang-71ga264301_1773716132.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-xanh-chinh-hang-71ga264304_1773718087.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-vang-den-chinh-hang-71ga264305_1773717752.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-den-xanh-chinh-hang-71ga264303_1773716661.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-chinh-hang-71ga264302_1773716444.webp"
+    ],
+    "isFeatured": true,
+    "stock": 50,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e6"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining AYQN024",
+    "description": "Tournament grade goose feathers for precise flight and durability.",
+    "price": 34.99,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/ong-cau-long-lining-ayqn-024-1.webp"
+    ],
+    "isFeatured": true,
+    "stock": 50,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.001Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e7"
+    },
+    "brand": "Yonex",
+    "name": "Nanoflare 800 Pro",
+    "description": "Head-light racket designed for incredibly fast swings.",
+    "price": 210,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang_1698803472.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-7_1698803487.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-6_1698803492.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-1_1699384846.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-4_1698803502.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-3_1698803507.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-2_1698803514.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-1_1698803521.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Extra Stiff",
+    "balance": "Head Light",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e8"
+    },
+    "brand": "Victor",
+    "name": "A970ACE",
+    "description": "High-performance shoes with excellent shock absorption.",
+    "price": 135,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970-ace-den-chinh-hang-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970ace-xanh-nhat-noi-dia-trung-3.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970ace-xanh-noi-dia-trung-3.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591e9"
+    },
+    "brand": "Yonex",
+    "name": "Yonex BG 80 Power",
+    "description": "High-repulsion power and hard feeling.",
+    "price": 12,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg80-power-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 200,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ea"
+    },
+    "brand": "Li-Ning",
+    "name": "Aeronaut 9000",
+    "description": "Combines power with control through an innovative air-stream channel design.",
+    "price": 240,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-lining-aeronaut-9000-chinh-hang-1.webp"
+    ],
+    "badge": "Bestseller",
+    "badgeColor": "#008000",
+    "badgeTextColor": "#ffffff",
+    "isFeatured": true,
+    "stock": 30,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591eb"
+    },
+    "brand": "Yonex",
+    "name": "SHB 65Z3",
+    "description": "Popular all-around badminton shoe used by professionals worldwide.",
+    "price": 145,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-shb-65z3-men-trang-xanh-new-2023-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-yonex-shb-65z3-powe-2_1711940647.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-men-den-new-2022-2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-men-trang-do-new-2022-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-slim-trang-xanh-chuoi-jp-noi-dia-nhat-_1725670568.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-65z3-new-noi-dia-trung-3.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-wide-xanh-duong-jp-noi-dia-nhat-_1725671158.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-wide-be-new-2023-chinh-hang_1693970285.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-momota-trang-bach-ho-new-2022-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-shb-65z3-women-xanh-navy-new-2023-2.webp"
+    ],
+    "isFeatured": false,
+    "stock": 60,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ec"
+    },
+    "brand": "Yonex",
+    "name": "Mavis Field II",
+    "description": "Durable nylon shuttles designed to mimic feather flight performance.",
+    "price": 18,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-nhua-yonex-mavis-field-ii-chinh-hang_1773965832.webp"
+    ],
+    "isFeatured": false,
+    "stock": 150,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ed"
+    },
+    "brand": "Victor",
+    "name": "DriveX 9X",
+    "description": "Even-balance racket providing smooth handling and effortless power.",
+    "price": 195,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-4.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-3.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 45,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ee"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining AXJP012",
+    "description": "Comfortable and absorbent overgrip.",
+    "price": 9.5,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-can-vot-lining-axjp012_1758311052.webp"
+    ],
+    "isFeatured": false,
+    "stock": 300,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ef"
+    },
+    "brand": "Yonex",
+    "name": "Yonex B1408 (GC)",
+    "description": "Compact and convenient backpack for 2 rackets and gear.",
+    "price": 75,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-do-gia-cong_1721682536.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-2024-gia-cong_1724876772.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-den-phoi-hong-1.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-trang-den-gia-cong-1.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-den-xanh-ngoc-gia-cong_1717125268.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-xam-gia-cong-1.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-gia-cong_1694565224.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-xanh-than-gia-cong_1694568100.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-tim-gia-cong_1696038936.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-ngoc-gia-cong_1696042232.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-den-gia-cong_1721678694.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-tim-den-gia-cong_1709864622.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-tim-gia-cong_1715128352.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-xanh-ghi-gia-cong_1720379504.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-hong-gia-cong_1720377335.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-xanh-gia-cong-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 40,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f0"
+    },
+    "brand": "Victor",
+    "name": "Victor 961 - White",
+    "description": "Breathable and lightweight playing shorts.",
+    "price": 35,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-961-trang_1721240608.webp"
+    ],
+    "isFeatured": false,
+    "stock": 80,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f1"
+    },
+    "brand": "Yonex",
+    "name": "ArcSaber 11 Pro",
+    "description": "Precise control and solid feel for all-around play.",
+    "price": 235,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-arcsaber-11-pro-chinh-hang-1.webp"
+    ],
+    "badge": "New",
+    "badgeColor": "#0055ff",
+    "badgeTextColor": "#ffffff",
+    "isFeatured": true,
+    "stock": 35,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Extra Stiff",
+    "balance": "Even Balance",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f2"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining AYAU003-2",
+    "description": "Excellent court grip and lateral support.",
+    "price": 110,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung_1711330461.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-5_1711330556.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-4_1711330562.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-3_1711330567.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-2_1711330573.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-1_1711330579.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-5_1711330761.webp"
+    ],
+    "isFeatured": false,
+    "stock": 55,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f3"
+    },
+    "brand": "Yonex",
+    "name": "TSI3391 - White",
+    "description": "Comfortable fit for unrestricted movement.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi3391-white-chinh-hang_1776652199.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi3391-white-chinh-hang-2_1776652210.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f4"
+    },
+    "brand": "Yonex",
+    "name": "Astrox 99 Pro",
+    "description": "Heavy head racket for explosive power.",
+    "price": 230,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang_1756251974.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-1_1756251979.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-2_1756251984.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-3_1756252089.webp"
+    ],
+    "isFeatured": false,
+    "stock": 40,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Extra Stiff",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f5"
+    },
+    "brand": "Victor",
+    "name": "Thruster-Ryuga Metallic",
+    "description": "Attacking racket used by Lee Zii Jia.",
+    "price": 200,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang_1702259879.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-9_1702259888.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-8_1702259894.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-7_1702259903.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-6_1702259910.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-5_1702259921.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-4_1702259927.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-1_1702259942.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f6"
+    },
+    "brand": "Li-Ning",
+    "name": "Axforce 80",
+    "description": "Powerful smashes and precise control.",
+    "price": 215,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-lining-axforce-80-chinh-hang-2.webp"
+    ],
+    "isFeatured": false,
+    "stock": 35,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f7"
+    },
+    "brand": "Yonex",
+    "name": "Nanoflare 1000Z",
+    "description": "Fastest racket for rapid fire.",
+    "price": 240,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-1000z-chinh-hang_1724879816.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-3.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 30,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Light",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591f8"
+    },
+    "brand": "Victor",
+    "name": "Thruster K CNY 2025",
+    "description": "High-class racket for all-around speed.",
+    "price": 180,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang_1737313813.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-1_1737313818.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-2_1737313824.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-3_1737313833.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-4_1737313842.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-5_1737313856.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-6_1737313870.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-7_1737313879.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-8_1737313886.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-9_1737313892.webp"
+    ],
+    "isFeatured": false,
+    "stock": 60,
+    "category": "RACKET",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "stiffness": "Medium",
+    "balance": "Head Heavy",
+    "weight": "4U (Avg. 83g)"
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591fa"
+    },
+    "brand": "Victor",
+    "name": "P8500Nlite AT",
+    "description": "Stable and durable shoes.",
+    "price": 130,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang_1745873404.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang-1_1745873409.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang-2_1745873416.webp"
+    ],
+    "isFeatured": false,
+    "stock": 45,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591fb"
+    },
+    "brand": "Li-Ning",
+    "name": "AYAU003-1",
+    "description": "Lightweight and breathable.",
+    "price": 125,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-1_1780952289.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-3_1780952301.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-4_1780952308.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-5_1780952314.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-6_1780952321.webp"
+    ],
+    "isFeatured": false,
+    "stock": 65,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591fc"
+    },
+    "brand": "Mizuno",
+    "name": "Wave Fang Pro",
+    "description": "Premium leather shoe for max comfort.",
+    "price": 160,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-mizuno-wave-fang-pro-trang-den-vang-chinh-hang-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-hong-xanh-chinh-hang-2.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-tim-chinh-hang-71ga210021.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-mizuno-wave-fang-pro-trang-vang-chinh-hang-3.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-chinh-hang-71ga210062_1723659643.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-tim-chinh-hang_1713233733.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-white-india-ink-neo-mint-chinh-hang-71ga210071_1740709488.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-kem-chinh-hang-71ga210085_1765501163.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-bac-chinh-hang-71ga210090_1773711962.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-chinh-hang-71ga210091_1773712376.webp"
+    ],
+    "isFeatured": false,
+    "stock": 40,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591fd"
+    },
+    "brand": "Yonex",
+    "name": "Aerus Z Men",
+    "description": "Lightest shoe for agile movement.",
+    "price": 150,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-navy-blue-chinh-hang_1736969021.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-flash-green-chinh-hang_1746231911.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-indigo-chinh-hang_1756253235.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-white-blue-chinh-hang_1767321010.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "SHOES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591fe"
+    },
+    "brand": "Yonex",
+    "name": "AC102-15 EX",
+    "description": "Excellent tackiness and absorbency.",
+    "price": 6,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/quan-can-yonex-xin-ac102-30-ex-cuon--2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/quan-can-yonex-xin-ac102-30-ex-cuon--1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 200,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a4019591ff"
+    },
+    "brand": "Victor",
+    "name": "GR234",
+    "description": "Durable and comfortable grip.",
+    "price": 5,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-can-cau-long-victor-gr234_1715567900.webp"
+    ],
+    "isFeatured": false,
+    "stock": 150,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959200"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining AYQV023",
+    "description": "Tournament standard shuttlecocks.",
+    "price": 30,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-lining-ayqv023_1760737339.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-lining-ayqv023-1_1760737377.webp"
+    ],
+    "isFeatured": false,
+    "stock": 80,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959201"
+    },
+    "brand": "Yonex",
+    "name": "BG66 Ultimax",
+    "description": "High repulsion power string.",
+    "price": 10,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg66-ultimax-1.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg66-ultimax-2.webp"
+    ],
+    "isFeatured": false,
+    "stock": 300,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959202"
+    },
+    "brand": "Victor",
+    "name": "VBS-66 Nano",
+    "description": "Great control and repulsion.",
+    "price": 9,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang-1.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang-2.webp"
+    ],
+    "isFeatured": false,
+    "stock": 250,
+    "category": "ACCESSORIES",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959203"
+    },
+    "brand": "Yonex",
+    "name": "RM3239 - Jet Black",
+    "description": "Very cool dry technology.",
+    "price": 45,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-jet-black-chinh-hang_1783653904.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-jet-black-chinh-hang-2_1783653916.webp"
+    ],
+    "isFeatured": false,
+    "stock": 100,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959204"
+    },
+    "brand": "Victor",
+    "name": "Victor 2117",
+    "description": "Stylish and breathable.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-victor-2117-nam-tim_1749764666.webp"
+    ],
+    "isFeatured": false,
+    "stock": 90,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959205"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining 25005",
+    "description": "Professional grade shirt.",
+    "price": 50,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-lining-25005-nam-den_1749169016.webp"
+    ],
+    "isFeatured": false,
+    "stock": 80,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959206"
+    },
+    "brand": "Yonex",
+    "name": "Yonex VM1072",
+    "description": "Freedom of movement.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-vm1072-nu-do_1726792742.webp"
+    ],
+    "isFeatured": false,
+    "stock": 110,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959207"
+    },
+    "brand": "Victor",
+    "name": "Victor 2115",
+    "description": "Comfortable for daily practice.",
+    "price": 30,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-victor-2115-nu-trang-xanh_1749776996.webp"
+    ],
+    "isFeatured": false,
+    "stock": 120,
+    "category": "SHIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959208"
+    },
+    "brand": "Yonex",
+    "name": "Yonex 3D 2241R (BK/DBL)",
+    "description": "Fits 6 rackets and gear.",
+    "price": 80,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/tui-xach-cau-long-yonex-3d-2241r-bk-dbl-chinh-hang-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 40,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959209"
+    },
+    "brand": "Victor",
+    "name": "Victor BR9615 HB",
+    "description": "Spacious thermal compartment.",
+    "price": 90,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br9615-hb-chinh-hang_1744070853.webp"
+    ],
+    "isFeatured": false,
+    "stock": 35,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920a"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining ABJU013-1",
+    "description": "Stylish and protective.",
+    "price": 75,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-lining-abju013-1-chinh-hang_1710529668.webp"
+    ],
+    "isFeatured": false,
+    "stock": 50,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920b"
+    },
+    "brand": "Yonex",
+    "name": "Yonex 219BT003U (GC)",
+    "description": "Upright bag for easy access.",
+    "price": 110,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/tui-cau-long-yonex-219bt003u-3.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt003u-trang-anh-hong-gia-cong_1717549207.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt003u-den-anh-gia-cong_1704509716.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt005u-trang-gia-cong-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 20,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920c"
+    },
+    "brand": "Victor",
+    "name": "BR5645 UTM CF - Black Blue",
+    "description": "Premium materials and design.",
+    "price": 120,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br5645-utm-cf-xanh-den-chinh-hang_1753233754.webp"
+    ],
+    "isFeatured": false,
+    "stock": 25,
+    "category": "BAGS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920d"
+    },
+    "brand": "Yonex",
+    "name": "Yonex BA92412BEX (GC)",
+    "description": "Compact backpack with shoe pocket.",
+    "price": 60,
+    "images": [
+      "https://tse3.mm.bing.net/th/id/OIP.dzAXgpgrFrfdCUeFv-CCfQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba92412bex-den-gc_1774817405.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba92412bex-trang-gc_1774817807.webp"
+    ],
+    "isFeatured": false,
+    "stock": 60,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920e"
+    },
+    "brand": "Victor",
+    "name": "BR5056 SW AJ",
+    "description": "Versatile for sports and daily use.",
+    "price": 55,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-victor-br5026-sw-aj_1758243686.webp"
+    ],
+    "isFeatured": false,
+    "stock": 70,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195920f"
+    },
+    "brand": "Li-Ning",
+    "name": "P-ABSV133-2",
+    "description": "Lightweight and durable.",
+    "price": 50,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2_1756932407.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2-1_1756932413.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2-2_1756932419.webp"
+    ],
+    "isFeatured": false,
+    "stock": 80,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959210"
+    },
+    "brand": "Mizuno",
+    "name": "BACKPACK II SERIES",
+    "description": "Large capacity with multiple pockets.",
+    "price": 65,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-mizuno-backpack-ii-series-den-2.webp",
+      "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-mizuno-backpack-ii-series-den-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 45,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959211"
+    },
+    "brand": "Yonex",
+    "name": "BA272CR (GC)",
+    "description": "Sporty design with racket holder.",
+    "price": 50,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba272cr-tim-gia-cong-1_1700616837.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba272cr-den-gia-cong_1700617434.webp"
+    ],
+    "isFeatured": false,
+    "stock": 85,
+    "category": "BACKPACKS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.002Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959212"
+    },
+    "brand": "Yonex",
+    "name": "TSM3257 RW3ZZ - Black",
+    "description": "Stretchable and comfortable.",
+    "price": 35,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/1quan-cau-long-yonex-tsm3257-rw3zz-black-chinh-hang_1783711409.webp",
+      "https://cdn.shopvnb.com/uploads/gallery/2quan-cau-long-yonex-tsm3257-rw3zz-black-chinh-hang_1783711417.webp"
+    ],
+    "isFeatured": false,
+    "stock": 120,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959213"
+    },
+    "brand": "Victor",
+    "name": "Victor 225-Pink",
+    "description": "Lightweight playing shorts.",
+    "price": 30,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-225-hong_1751507180.webp"
+    ],
+    "isFeatured": false,
+    "stock": 110,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959214"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining 967",
+    "description": "Excellent moisture management.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-lining-967-trang_1751244115.webp"
+    ],
+    "isFeatured": false,
+    "stock": 90,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959215"
+    },
+    "brand": "Yonex",
+    "name": "Yonex Q3 Woman - White Blue",
+    "description": "Designed for active movement.",
+    "price": 35,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/quan-cau-long-yonex-q3-nu-trang-xanh-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 100,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959216"
+    },
+    "brand": "Victor",
+    "name": "Victor 961",
+    "description": "Affordable and durable.",
+    "price": 25,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-961-den_1721241526.webp"
+    ],
+    "isFeatured": false,
+    "stock": 150,
+    "category": "SHORTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959217"
+    },
+    "brand": "Yonex",
+    "name": "Yonex TSI2846 - Hemlock",
+    "description": "Built-in inner shorts.",
+    "price": 45,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi2846-hemlock-chinh-hang_1754854674.webp"
+    ],
+    "isFeatured": false,
+    "stock": 80,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959218"
+    },
+    "brand": "Victor",
+    "name": "Victor 9036",
+    "description": "Elegant design for the court.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/san_pham/vay-cau-long-victor-9036-trang-1.webp"
+    ],
+    "isFeatured": false,
+    "stock": 75,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a401959219"
+    },
+    "brand": "Li-Ning",
+    "name": "Lining 9861 - White",
+    "description": "Flattering fit and breathable.",
+    "price": 35,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-lining-9861-trang_1693536308.webp"
+    ],
+    "isFeatured": false,
+    "stock": 90,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195921a"
+    },
+    "brand": "Yonex",
+    "name": "Yonex TSI2846 - Jet Black",
+    "description": "Maximum comfort and coverage.",
+    "price": 40,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-2846-jet-black-chinh-hang_1773781200.webp"
+    ],
+    "isFeatured": false,
+    "stock": 85,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5f11f98e7878a40195921b"
+    },
+    "brand": "Victor",
+    "name": "Victor Hello Kitty K-KT207 A",
+    "description": "Premium materials and style.",
+    "price": 50,
+    "images": [
+      "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-victor-hello-kitty-k-kt207a-trang-2.webp"
+    ],
+    "isFeatured": false,
+    "stock": 60,
+    "category": "SKIRTS",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    },
+    "updatedAt": {
+      "$date": "2026-07-21T06:30:18.003Z"
+    }
   }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e0"
-  },
-  "brand": "Victor",
-  "name": "Thruster F Claw",
-  "description": "Power and precision",
-  "price": 205,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-5.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-4.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-3.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-thruster-f-claw-chinh-hang-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e1"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining AYZW007-3",
-  "description": "Lightweight court shoes",
-  "price": 144,
-  "oldPrice": 180,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-1_1780950649.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-2_1780950654.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-3_1780950659.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-4_1780950664.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayzw007-3-chinh-hang-5_1780950669.webp"
-  ],
-  "badge": "Sale -20%",
-  "badgeColor": "#93000a",
-  "badgeTextColor": "#ffdad6",
-  "isFeatured": false,
-  "stock": 50,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e2"
-  },
-  "brand": "Yonex",
-  "name": "AS-50 Feather Shuttles",
-  "description": "Tournament grade shuttles",
-  "price": 39.99,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/ong-cau-long-yonex-as50-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e3"
-  },
-  "brand": "Yonex",
-  "name": "Yonex RM3239 - White",
-  "description": "Breathable activewear",
-  "price": 65,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-white-chinh-hang_1783653908.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-white-chinh-hang-2_1783653921.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e4"
-  },
-  "brand": "Victor",
-  "name": "Victor BR2205",
-  "description": "Spacious racket bag",
-  "price": 115,
-  "images": [
-    "https://down-th.img.susercontent.com/file/th-11134207-7rash-m8hdh98005im43",
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br2205-m-xanh-chinh-hang_1783457212.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br2205-a-trang-chinh-hang_1783457217.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e5"
-  },
-  "brand": "Mizuno",
-  "name": "Wave Claw 4",
-  "description": "Ultimate stability and comfort for multi-directional court movements.",
-  "price": 159,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-chinh-hang-71ga264301_1773716132.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-xanh-chinh-hang-71ga264304_1773718087.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-vang-den-chinh-hang-71ga264305_1773717752.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-den-xanh-chinh-hang-71ga264303_1773716661.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-claw-4-trang-chinh-hang-71ga264302_1773716444.webp"
-  ],
-  "isFeatured": true,
-  "stock": 50,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e6"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining AYQN024",
-  "description": "Tournament grade goose feathers for precise flight and durability.",
-  "price": 34.99,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/ong-cau-long-lining-ayqn-024-1.webp"
-  ],
-  "isFeatured": true,
-  "stock": 50,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.001Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e7"
-  },
-  "brand": "Yonex",
-  "name": "Nanoflare 800 Pro",
-  "description": "Head-light racket designed for incredibly fast swings.",
-  "price": 210,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang_1698803472.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-7_1698803487.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-6_1698803492.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-1_1699384846.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-4_1698803502.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-3_1698803507.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-2_1698803514.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-800-pro-chinh-hang-1_1698803521.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e8"
-  },
-  "brand": "Victor",
-  "name": "A970ACE",
-  "description": "High-performance shoes with excellent shock absorption.",
-  "price": 135,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970-ace-den-chinh-hang-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970ace-xanh-nhat-noi-dia-trung-3.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-a970ace-xanh-noi-dia-trung-3.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591e9"
-  },
-  "brand": "Yonex",
-  "name": "Yonex BG 80 Power",
-  "description": "High-repulsion power and hard feeling.",
-  "price": 12,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg80-power-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 200,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ea"
-  },
-  "brand": "Li-Ning",
-  "name": "Aeronaut 9000",
-  "description": "Combines power with control through an innovative air-stream channel design.",
-  "price": 240,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-lining-aeronaut-9000-chinh-hang-1.webp"
-  ],
-  "badge": "Bestseller",
-  "badgeColor": "#008000",
-  "badgeTextColor": "#ffffff",
-  "isFeatured": true,
-  "stock": 30,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591eb"
-  },
-  "brand": "Yonex",
-  "name": "SHB 65Z3",
-  "description": "Popular all-around badminton shoe used by professionals worldwide.",
-  "price": 145,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-shb-65z3-men-trang-xanh-new-2023-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-yonex-shb-65z3-powe-2_1711940647.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-men-den-new-2022-2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-men-trang-do-new-2022-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-slim-trang-xanh-chuoi-jp-noi-dia-nhat-_1725670568.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-65z3-new-noi-dia-trung-3.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-wide-xanh-duong-jp-noi-dia-nhat-_1725671158.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-65z3-wide-be-new-2023-chinh-hang_1693970285.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-yonex-shb-65z3-momota-trang-bach-ho-new-2022-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-shb-65z3-women-xanh-navy-new-2023-2.webp"
-  ],
-  "isFeatured": false,
-  "stock": 60,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ec"
-  },
-  "brand": "Yonex",
-  "name": "Mavis Field II",
-  "description": "Durable nylon shuttles designed to mimic feather flight performance.",
-  "price": 18,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-nhua-yonex-mavis-field-ii-chinh-hang_1773965832.webp"
-  ],
-  "isFeatured": false,
-  "stock": 150,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ed"
-  },
-  "brand": "Victor",
-  "name": "DriveX 9X",
-  "description": "Even-balance racket providing smooth handling and effortless power.",
-  "price": 195,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-4.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-3.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-victor-drivex-9x-chinh-hang-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 45,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ee"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining AXJP012",
-  "description": "Comfortable and absorbent overgrip.",
-  "price": 9.5,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-can-vot-lining-axjp012_1758311052.webp"
-  ],
-  "isFeatured": false,
-  "stock": 300,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ef"
-  },
-  "brand": "Yonex",
-  "name": "Yonex B1408 (GC)",
-  "description": "Compact and convenient backpack for 2 rackets and gear.",
-  "price": 75,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-do-gia-cong_1721682536.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-2024-gia-cong_1724876772.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-den-phoi-hong-1.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-trang-den-gia-cong-1.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-den-xanh-ngoc-gia-cong_1717125268.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-xam-gia-cong-1.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-gia-cong_1694565224.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-xanh-than-gia-cong_1694568100.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-tim-gia-cong_1696038936.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-ngoc-gia-cong_1696042232.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-den-gia-cong_1721678694.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-tim-den-gia-cong_1709864622.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-xanh-tim-gia-cong_1715128352.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-xanh-ghi-gia-cong_1720379504.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-b1408-trang-hong-gia-cong_1720377335.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-yonex-b1408-xanh-gia-cong-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 40,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f0"
-  },
-  "brand": "Victor",
-  "name": "Victor 961 - White",
-  "description": "Breathable and lightweight playing shorts.",
-  "price": 35,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-961-trang_1721240608.webp"
-  ],
-  "isFeatured": false,
-  "stock": 80,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f1"
-  },
-  "brand": "Yonex",
-  "name": "ArcSaber 11 Pro",
-  "description": "Precise control and solid feel for all-around play.",
-  "price": 235,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-arcsaber-11-pro-chinh-hang-1.webp"
-  ],
-  "badge": "New",
-  "badgeColor": "#0055ff",
-  "badgeTextColor": "#ffffff",
-  "isFeatured": true,
-  "stock": 35,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f2"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining AYAU003-2",
-  "description": "Excellent court grip and lateral support.",
-  "price": 110,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung_1711330461.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-5_1711330556.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-4_1711330562.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-3_1711330567.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-2_1711330573.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-1_1711330579.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-2-noi-dia-trung-5_1711330761.webp"
-  ],
-  "isFeatured": false,
-  "stock": 55,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f3"
-  },
-  "brand": "Yonex",
-  "name": "TSI3391 - White",
-  "description": "Comfortable fit for unrestricted movement.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi3391-white-chinh-hang_1776652199.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi3391-white-chinh-hang-2_1776652210.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f4"
-  },
-  "brand": "Yonex",
-  "name": "Astrox 99 Pro",
-  "description": "Heavy head racket for explosive power.",
-  "price": 230,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang_1756251974.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-1_1756251979.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-2_1756251984.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-astrox-99-pro-black-green-chinh-hang-3_1756252089.webp"
-  ],
-  "isFeatured": false,
-  "stock": 40,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f5"
-  },
-  "brand": "Victor",
-  "name": "Thruster-Ryuga Metallic",
-  "description": "Attacking racket used by Lee Zii Jia.",
-  "price": 200,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang_1702259879.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-9_1702259888.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-8_1702259894.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-7_1702259903.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-6_1702259910.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-5_1702259921.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-4_1702259927.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-victor-tk-ryuga-metallic-chinh-hang-1_1702259942.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f6"
-  },
-  "brand": "Li-Ning",
-  "name": "Axforce 80",
-  "description": "Powerful smashes and precise control.",
-  "price": 215,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-lining-axforce-80-chinh-hang-2.webp"
-  ],
-  "isFeatured": false,
-  "stock": 35,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f7"
-  },
-  "brand": "Yonex",
-  "name": "Nanoflare 1000Z",
-  "description": "Fastest racket for rapid fire.",
-  "price": 240,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-yonex-nanoflare-1000z-chinh-hang_1724879816.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-3.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/vot-cau-long-yonex-nanoflare-1000z-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 30,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591f8"
-  },
-  "brand": "Victor",
-  "name": "Thruster K CNY 2025",
-  "description": "High-class racket for all-around speed.",
-  "price": 180,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang_1737313813.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-1_1737313818.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-2_1737313824.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-3_1737313833.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-4_1737313842.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-5_1737313856.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-6_1737313870.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-7_1737313879.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-8_1737313886.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/set-vot-cau-long-victor-thruster-k-cny-2025-chinh-hang-9_1737313892.webp"
-  ],
-  "isFeatured": false,
-  "stock": 60,
-  "category": "RACKET",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591fa"
-  },
-  "brand": "Victor",
-  "name": "P8500Nlite AT",
-  "description": "Stable and durable shoes.",
-  "price": 130,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang_1745873404.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang-1_1745873409.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-victor-p8500nlite-at-trang-tim-chinh-hang-2_1745873416.webp"
-  ],
-  "isFeatured": false,
-  "stock": 45,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591fb"
-  },
-  "brand": "Li-Ning",
-  "name": "AYAU003-1",
-  "description": "Lightweight and breathable.",
-  "price": 125,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-1_1780952289.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-3_1780952301.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-4_1780952308.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-5_1780952314.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-lining-ayau003-1-chinh-hang-6_1780952321.webp"
-  ],
-  "isFeatured": false,
-  "stock": 65,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591fc"
-  },
-  "brand": "Mizuno",
-  "name": "Wave Fang Pro",
-  "description": "Premium leather shoe for max comfort.",
-  "price": 160,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-mizuno-wave-fang-pro-trang-den-vang-chinh-hang-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-hong-xanh-chinh-hang-2.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-tim-chinh-hang-71ga210021.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/giay-cau-long-mizuno-wave-fang-pro-trang-vang-chinh-hang-3.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-chinh-hang-71ga210062_1723659643.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-tim-chinh-hang_1713233733.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-white-india-ink-neo-mint-chinh-hang-71ga210071_1740709488.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-kem-chinh-hang-71ga210085_1765501163.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-bac-chinh-hang-71ga210090_1773711962.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-mizuno-wave-fang-pro-trang-xanh-chinh-hang-71ga210091_1773712376.webp"
-  ],
-  "isFeatured": false,
-  "stock": 40,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591fd"
-  },
-  "brand": "Yonex",
-  "name": "Aerus Z Men",
-  "description": "Lightest shoe for agile movement.",
-  "price": 150,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-navy-blue-chinh-hang_1736969021.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-flash-green-chinh-hang_1746231911.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-indigo-chinh-hang_1756253235.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/giay-cau-long-yonex-aerus-z-men-white-blue-chinh-hang_1767321010.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "SHOES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591fe"
-  },
-  "brand": "Yonex",
-  "name": "AC102-15 EX",
-  "description": "Excellent tackiness and absorbency.",
-  "price": 6,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/quan-can-yonex-xin-ac102-30-ex-cuon--2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/quan-can-yonex-xin-ac102-30-ex-cuon--1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 200,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a4019591ff"
-  },
-  "brand": "Victor",
-  "name": "GR234",
-  "description": "Durable and comfortable grip.",
-  "price": 5,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-can-cau-long-victor-gr234_1715567900.webp"
-  ],
-  "isFeatured": false,
-  "stock": 150,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959200"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining AYQV023",
-  "description": "Tournament standard shuttlecocks.",
-  "price": 30,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-lining-ayqv023_1760737339.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/ong-cau-long-lining-ayqv023-1_1760737377.webp"
-  ],
-  "isFeatured": false,
-  "stock": 80,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959201"
-  },
-  "brand": "Yonex",
-  "name": "BG66 Ultimax",
-  "description": "High repulsion power string.",
-  "price": 10,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg66-ultimax-1.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/day-cuoc-cang-vot-yonex-bg66-ultimax-2.webp"
-  ],
-  "isFeatured": false,
-  "stock": 300,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959202"
-  },
-  "brand": "Victor",
-  "name": "VBS-66 Nano",
-  "description": "Great control and repulsion.",
-  "price": 9,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang-1.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/day-cuoc-cang-vot-victor-vbs-66n-chinh-hang-2.webp"
-  ],
-  "isFeatured": false,
-  "stock": 250,
-  "category": "ACCESSORIES",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959203"
-  },
-  "brand": "Yonex",
-  "name": "RM3239 - Jet Black",
-  "description": "Very cool dry technology.",
-  "price": 45,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-jet-black-chinh-hang_1783653904.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-rm3239-jet-black-chinh-hang-2_1783653916.webp"
-  ],
-  "isFeatured": false,
-  "stock": 100,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959204"
-  },
-  "brand": "Victor",
-  "name": "Victor 2117",
-  "description": "Stylish and breathable.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-victor-2117-nam-tim_1749764666.webp"
-  ],
-  "isFeatured": false,
-  "stock": 90,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959205"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining 25005",
-  "description": "Professional grade shirt.",
-  "price": 50,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-lining-25005-nam-den_1749169016.webp"
-  ],
-  "isFeatured": false,
-  "stock": 80,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959206"
-  },
-  "brand": "Yonex",
-  "name": "Yonex VM1072",
-  "description": "Freedom of movement.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-yonex-vm1072-nu-do_1726792742.webp"
-  ],
-  "isFeatured": false,
-  "stock": 110,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959207"
-  },
-  "brand": "Victor",
-  "name": "Victor 2115",
-  "description": "Comfortable for daily practice.",
-  "price": 30,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/ao-cau-long-victor-2115-nu-trang-xanh_1749776996.webp"
-  ],
-  "isFeatured": false,
-  "stock": 120,
-  "category": "SHIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959208"
-  },
-  "brand": "Yonex",
-  "name": "Yonex 3D 2241R (BK/DBL)",
-  "description": "Fits 6 rackets and gear.",
-  "price": 80,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/tui-xach-cau-long-yonex-3d-2241r-bk-dbl-chinh-hang-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 40,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959209"
-  },
-  "brand": "Victor",
-  "name": "Victor BR9615 HB",
-  "description": "Spacious thermal compartment.",
-  "price": 90,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br9615-hb-chinh-hang_1744070853.webp"
-  ],
-  "isFeatured": false,
-  "stock": 35,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920a"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining ABJU013-1",
-  "description": "Stylish and protective.",
-  "price": 75,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-lining-abju013-1-chinh-hang_1710529668.webp"
-  ],
-  "isFeatured": false,
-  "stock": 50,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920b"
-  },
-  "brand": "Yonex",
-  "name": "Yonex 219BT003U (GC)",
-  "description": "Upright bag for easy access.",
-  "price": 110,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/tui-cau-long-yonex-219bt003u-3.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt003u-trang-anh-hong-gia-cong_1717549207.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt003u-den-anh-gia-cong_1704509716.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-yonex-219bt005u-trang-gia-cong-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 20,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920c"
-  },
-  "brand": "Victor",
-  "name": "BR5645 UTM CF - Black Blue",
-  "description": "Premium materials and design.",
-  "price": 120,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/tui-cau-long-victor-br5645-utm-cf-xanh-den-chinh-hang_1753233754.webp"
-  ],
-  "isFeatured": false,
-  "stock": 25,
-  "category": "BAGS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920d"
-  },
-  "brand": "Yonex",
-  "name": "Yonex BA92412BEX (GC)",
-  "description": "Compact backpack with shoe pocket.",
-  "price": 60,
-  "images": [
-    "https://tse3.mm.bing.net/th/id/OIP.dzAXgpgrFrfdCUeFv-CCfQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba92412bex-den-gc_1774817405.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba92412bex-trang-gc_1774817807.webp"
-  ],
-  "isFeatured": false,
-  "stock": 60,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920e"
-  },
-  "brand": "Victor",
-  "name": "BR5056 SW AJ",
-  "description": "Versatile for sports and daily use.",
-  "price": 55,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-victor-br5026-sw-aj_1758243686.webp"
-  ],
-  "isFeatured": false,
-  "stock": 70,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195920f"
-  },
-  "brand": "Li-Ning",
-  "name": "P-ABSV133-2",
-  "description": "Lightweight and durable.",
-  "price": 50,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2_1756932407.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2-1_1756932413.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-lining-p-absv133-2-2_1756932419.webp"
-  ],
-  "isFeatured": false,
-  "stock": 80,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959210"
-  },
-  "brand": "Mizuno",
-  "name": "BACKPACK II SERIES",
-  "description": "Large capacity with multiple pockets.",
-  "price": 65,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-mizuno-backpack-ii-series-den-2.webp",
-    "https://cdn.shopvnb.com/uploads/san_pham/balo-cau-long-mizuno-backpack-ii-series-den-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 45,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959211"
-  },
-  "brand": "Yonex",
-  "name": "BA272CR (GC)",
-  "description": "Sporty design with racket holder.",
-  "price": 50,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba272cr-tim-gia-cong-1_1700616837.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/balo-cau-long-yonex-ba272cr-den-gia-cong_1700617434.webp"
-  ],
-  "isFeatured": false,
-  "stock": 85,
-  "category": "BACKPACKS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.002Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959212"
-  },
-  "brand": "Yonex",
-  "name": "TSM3257 RW3ZZ - Black",
-  "description": "Stretchable and comfortable.",
-  "price": 35,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/1quan-cau-long-yonex-tsm3257-rw3zz-black-chinh-hang_1783711409.webp",
-    "https://cdn.shopvnb.com/uploads/gallery/2quan-cau-long-yonex-tsm3257-rw3zz-black-chinh-hang_1783711417.webp"
-  ],
-  "isFeatured": false,
-  "stock": 120,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959213"
-  },
-  "brand": "Victor",
-  "name": "Victor 225-Pink",
-  "description": "Lightweight playing shorts.",
-  "price": 30,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-225-hong_1751507180.webp"
-  ],
-  "isFeatured": false,
-  "stock": 110,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959214"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining 967",
-  "description": "Excellent moisture management.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-lining-967-trang_1751244115.webp"
-  ],
-  "isFeatured": false,
-  "stock": 90,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959215"
-  },
-  "brand": "Yonex",
-  "name": "Yonex Q3 Woman - White Blue",
-  "description": "Designed for active movement.",
-  "price": 35,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/quan-cau-long-yonex-q3-nu-trang-xanh-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 100,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959216"
-  },
-  "brand": "Victor",
-  "name": "Victor 961",
-  "description": "Affordable and durable.",
-  "price": 25,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/quan-cau-long-victor-961-den_1721241526.webp"
-  ],
-  "isFeatured": false,
-  "stock": 150,
-  "category": "SHORTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959217"
-  },
-  "brand": "Yonex",
-  "name": "Yonex TSI2846 - Hemlock",
-  "description": "Built-in inner shorts.",
-  "price": 45,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-tsi2846-hemlock-chinh-hang_1754854674.webp"
-  ],
-  "isFeatured": false,
-  "stock": 80,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959218"
-  },
-  "brand": "Victor",
-  "name": "Victor 9036",
-  "description": "Elegant design for the court.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/san_pham/vay-cau-long-victor-9036-trang-1.webp"
-  ],
-  "isFeatured": false,
-  "stock": 75,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a401959219"
-  },
-  "brand": "Li-Ning",
-  "name": "Lining 9861 - White",
-  "description": "Flattering fit and breathable.",
-  "price": 35,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-lining-9861-trang_1693536308.webp"
-  ],
-  "isFeatured": false,
-  "stock": 90,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195921a"
-  },
-  "brand": "Yonex",
-  "name": "Yonex TSI2846 - Jet Black",
-  "description": "Maximum comfort and coverage.",
-  "price": 40,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-yonex-2846-jet-black-chinh-hang_1773781200.webp"
-  ],
-  "isFeatured": false,
-  "stock": 85,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6a5f11f98e7878a40195921b"
-  },
-  "brand": "Victor",
-  "name": "Victor Hello Kitty K-KT207 A",
-  "description": "Premium materials and style.",
-  "price": 50,
-  "images": [
-    "https://cdn.shopvnb.com/uploads/gallery/vay-cau-long-victor-hello-kitty-k-kt207a-trang-2.webp"
-  ],
-  "isFeatured": false,
-  "stock": 60,
-  "category": "SKIRTS",
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  },
-  "updatedAt": {
-    "$date": "2026-07-21T06:30:18.003Z"
-  }
-}]
+]

@@ -53,6 +53,18 @@ const productSchema = new mongoose.Schema({
   numReviews: {
     type: Number,
     default: 0
+  },
+  weight: {
+    type: String,
+    required: false
+  },
+  stiffness: {
+    type: String,
+    required: false
+  },
+  balance: {
+    type: String,
+    required: false
   }
 }, { timestamps: true });
 
