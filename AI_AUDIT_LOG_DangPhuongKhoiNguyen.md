@@ -7,10 +7,10 @@
 | Môn học               | Front-End web development with React                                          |
 | Mã môn học            | FER202                                                                        |
 | Lớp                   | SE20A03                                                                       |
-| Học kỳ                | Semester 7                                                                    |
+| Học kỳ                | 7                                                                             |
 | Tên bài tập / Project | BadmintonShop (Full-stack Badminton E-Commerce Web & React Native Mobile App) |
-| Tên sinh viên         | Đặng Phương Khôi Nguyên                                                       |
-| MSSV                  | DE190434                                                                      |
+| Nhóm                  | 7                                                                             |
+| Sinh viên             | Đặng Phương Khôi Nguyên (DE190434)                                            |
 | Giảng viên hướng dẫn  | Nguyễn Quang Tuyến                                                            |
 | Ngày bắt đầu          | 13/05/2026                                                                    |
 | Ngày hoàn thành       | 23/07/2026                                                                    |
@@ -157,11 +157,11 @@ AI đã tạo các mảng JSON có định dạng cho dữ liệu người dùng
 #### 4.5. Minh chứng
 
 | Loại minh chứng   | Nội dung                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Link commit       | [ec2b42c](file:///c:/Users/Dang/Documents/FER202/FER202-SE20A03-DE190434-Dang_Phuong_Khoi_Nguyen/Slot%2018/FER_ASS) `feat: seed user data`, [8f1e140](file:///c:/Users/Dang/Documents/FER202/FER202-SE20A03-DE190434-Dang_Phuong_Khoi_Nguyen/Slot%2018/FER_ASS) `feat: add product data and database seeding script`, [a5f0d0f](file:///c:/Users/Dang/Documents/FER202/FER202-SE20A03-DE190434-Dang_Phuong_Khoi_Nguyen/Slot%2018/FER_ASS) `feat: add google login` |
 | File liên quan    | [badmintonshop.users.json](file:///c:/Users/Dang/Documents/FER202/FER202-SE20A03-DE190434-Dang_Phuong_Khoi_Nguyen/Slot%2018/FER_ASS/badmintonshop.users.json), [database.ts](file:///c:/Users/Dang/Documents/FER202/FER202-SE20A03-DE190434-Dang_Phuong_Khoi_Nguyen/Slot%2018/FER_ASS/BadmintonShop-FE/utils/database.ts)                                                                                                                                          |
 | Screenshot        | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Kết quả chạy/test | Cơ sở dữ liệu đã được tạo sẵn thành công với người dùng và danh mục sản phẩm                                                                                                                                                                                                                                                                                                                                                                                       |     |
+| Kết quả chạy/test | Cơ sở dữ liệu đã được tạo sẵn thành công với người dùng và danh mục sản phẩm                                                                                                                                                                                                                                                                                                                                                                                       |
 | Link video demo   | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Ghi chú khác      | Commits by Dang Phuong Khoi Nguyen                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
@@ -442,21 +442,21 @@ Việc tách riêng logic ra một custom hook khiến code gọn gàng hơn h�
 
 Đánh dấu mức độ AI hỗ trợ ở từng hạng mục.
 
-| Hạng mục                    | Không dùng AI | AI hỗ trợ ít | AI hỗ trợ nhiều | AI sinh chính | Ghi chú                                |
-| --------------------------- | :-----------: | :----------: | :-------------: | :-----------: | -------------------------------------- |
-| Phân tích yêu cầu           |               |      X       |                 |               | Phân tích và chia nhỏ yêu cầu          |
-| Viết user story/use case    |               |      X       |                 |               | Xác định phạm vi tính năng             |
-| Thiết kế database           |               |              |        X        |               | Cấu trúc dữ liệu mẫu                   |
-| Thiết kế kiến trúc hệ thống |               |      X       |                 |               | Gợi ý mô hình dự án đa nền tảng        |
-| Thiết kế giao diện          |               |      X       |                 |               | Tham khảo bố cục và màu sắc            |
-| Code frontend               |               |              |        X        |               | Dựng khung component và trang          |
-| Code backend                |               |      X       |                 |               | Gợi ý route API và controller logic    |
-| Debug lỗi                   |               |      X       |                 |               | Sửa lỗi liên quan đến socket           |
-| Viết test case              |               |      X       |                 |               | Kiểm thử API và xác thực form         |
+| Hạng mục                    | Không dùng AI | AI hỗ trợ ít | AI hỗ trợ nhiều | AI sinh chính | Ghi chú                                      |
+| --------------------------- | :-----------: | :----------: | :-------------: | :-----------: | -------------------------------------------- |
+| Phân tích yêu cầu           |               |      X       |                 |               | Phân tích và chia nhỏ yêu cầu                |
+| Viết user story/use case    |               |      X       |                 |               | Xác định phạm vi tính năng                   |
+| Thiết kế database           |               |              |        X        |               | Cấu trúc dữ liệu mẫu                         |
+| Thiết kế kiến trúc hệ thống |               |      X       |                 |               | Gợi ý mô hình dự án đa nền tảng              |
+| Thiết kế giao diện          |               |      X       |                 |               | Tham khảo bố cục và màu sắc                  |
+| Code frontend               |               |              |        X        |               | Dựng khung component và trang                |
+| Code backend                |               |      X       |                 |               | Gợi ý route API và controller logic          |
+| Debug lỗi                   |               |      X       |                 |               | Sửa lỗi liên quan đến socket                 |
+| Viết test case              |               |      X       |                 |               | Kiểm thử API và xác thực form                |
 | Kiểm thử sản phẩm           |       X       |              |                 |               | Kiểm thử thủ công trên máy ảo và trình duyệt |
-| Tối ưu code                 |       X       |              |                 |               | Tự tối ưu lại các hàm bằng useMemo     |
-| Viết báo cáo                |       X       |              |                 |               | Tự tổng hợp tài liệu                   |
-| Làm slide thuyết trình      |               |      X       |                 |               | Tham khảo cấu trúc slide               |
+| Tối ưu code                 |       X       |              |                 |               | Tự tối ưu lại các hàm bằng useMemo           |
+| Viết báo cáo                |       X       |              |                 |               | Tự tổng hợp tài liệu                         |
+| Làm slide thuyết trình      |               |      X       |                 |               | Tham khảo cấu trúc slide                     |
 
 ---
 
@@ -468,7 +468,7 @@ Ghi lại các trường hợp AI trả lời sai, thiếu, chưa phù hợp ho�
 | --: | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 |   1 | Gợi ý code dùng cú pháp SQLite cũ không còn được hỗ trợ tốt trên React Native.               | Bị lỗi build khi chạy Metro bundler ở file `database.ts`.                   | Tự tìm tài liệu và chuyển sang dùng hàm bất đồng bộ của Expo SQLite (`SQLite.openDatabaseAsync`). |
 |   2 | Gợi ý hardcode cứng các đường dẫn gọi API (kiểu `http://localhost:5000`).                    | Ứng dụng mobile không gọi được API khi chạy trên máy ảo hoặc thiết bị thật. | Tự thiết lập một file config chung (`api/config.js`) để đổi endpoint linh hoạt theo môi trường.   |
-|   3 | Gợi ý viết các hàm cập nhật state trong hook mà không dùng memoize, gây render lại liên tục.  | Ứng dụng giảm hiệu năng, React DevTools cảnh báo re-render quá nhiều.         | Tự tối ưu lại bằng cách bọc các hàm tính toán và sự kiện giỏ hàng qua `useMemo` và `useCallback`.  |
+|   3 | Gợi ý viết các hàm cập nhật state trong hook mà không dùng memoize, gây render lại liên tục. | Ứng dụng giảm hiệu năng, React DevTools cảnh báo re-render quá nhiều.       | Tự tối ưu lại bằng cách bọc các hàm tính toán và sự kiện giỏ hàng qua `useMemo` và `useCallback`. |
 
 ---
 
@@ -513,10 +513,9 @@ Mô tả phần sinh viên tự làm, phần AI hỗ trợ và phần đã tự 
 
 ### 8.2. Đối với bài nhóm
 
-| Thành viên              | MSSV          | Nhiệm vụ chính                                                                                                 | Có sử dụng AI không? | Minh chứng đóng góp                                                                            |
-| ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------- |
-| Đặng Phương Khôi Nguyên | DE190434      | Project setup, Shared node_modules, User seed dataset, Google Auth, Env config, Documentation                  | Có                   | Commits `16f7f0d`, `2f7f3b9`, `ec2b42c`, `a5f0d0f`, `4d713e0`, `5dd4fba`, `8f1e140`            |
-| Thanh Anh Huấn          | (Team Member) | Layout architecture, Product detail & cart UI, Admin dashboard & revenue analytics, AppController, Socket chat | Có                   | Commits `e1d1ea0`, `68b9e18`, `44291f9`, `07b8707`, `9859598`, `7276a9c`, `13e32c4`, `d2c10ba` |
+| Thành viên              | MSSV     | Nhiệm vụ chính                                                                                | Có sử dụng AI không? | Minh chứng đóng góp                                                                 |
+| ----------------------- | -------- | --------------------------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------- |
+| Đặng Phương Khôi Nguyên | DE190434 | Project setup, Shared node_modules, User seed dataset, Google Auth, Env config, Documentation | Có                   | Commits `16f7f0d`, `2f7f3b9`, `ec2b42c`, `a5f0d0f`, `4d713e0`, `5dd4fba`, `8f1e140` |
 
 ---
 
