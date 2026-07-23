@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Componentstyles/BannerSlider.css';
+import './styles/BannerSlider.css';
 
 import banner1 from '../assets/banners/banner1.webp';
 import banner2 from '../assets/banners/banner2.webp';

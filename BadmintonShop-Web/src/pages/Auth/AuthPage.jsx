@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { loginUser, googleLogin } from "../../api/authApi";
-import RegisterForm from "./RegisterForm";
-import GoogleLoginButton from "../../components/Auth/GoogleLoginButton";
+import RegisterForm from "./RegisterForm"; // Import RegisterForm from lowercase auth folder
+import GoogleLoginButton from "../../components/auth/GoogleLoginButton";
 import ShopLogo from "../../assets/ShopLogo.png";
 import "../../styles/AuthPage.css";
 
