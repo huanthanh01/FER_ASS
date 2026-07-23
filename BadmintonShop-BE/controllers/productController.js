@@ -1,7 +1,23 @@
 const Product = require('../models/Product');
 const Review = require('../models/Review');
 
+const getBaseUrl = (req) => `${req.protocol}://${req.get('host')}`;
+
 const productController = {
+  uploadProductImages: async (req, res) => {
+    try {
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ success: false, error: 'Please upload at least one image' });
+      }
+
+      const images = req.files.map((file) => `${getBaseUrl(req)}/uploads/products/${file.filename}`);
+      res.status(201).json({ success: true, images });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Failed to upload product images' });
+    }
+  },
+
   // Get all unique categories
   getCategories: async (req, res) => {
     try {

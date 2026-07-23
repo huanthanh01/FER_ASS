@@ -6,6 +6,7 @@ import {
   HiOutlineHome,
   HiOutlineShoppingBag,
   HiOutlineShoppingCart,
+  HiOutlineClipboardList,
   HiOutlineBell,
   HiOutlineUser,
   HiOutlineLogout,
@@ -39,6 +40,7 @@ export default function Sidebar() {
       label: "Cart",
       badge: cartCount,
     },
+    { to: "/orders", icon: HiOutlineClipboardList, label: "Orders" },
     {
       to: "/notifications",
       icon: HiOutlineBell,

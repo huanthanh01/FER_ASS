@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../../api/productApi';
-import { useAppContext } from '../../context/AppContext';
-import { HiOutlinePlus, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
+import { useSearchParams } from 'react-router-dom';
+import { getProducts, createProduct, updateProduct, deleteProduct, getCategories, uploadProductImages } from '../../api/productApi';
+import {
+  HiOutlineChevronDown,
+  HiOutlineChevronUp,
+  HiOutlinePhotograph,
+  HiOutlinePlus,
+  HiOutlinePencilAlt,
+  HiOutlineTrash,
+  HiOutlineSearch,
+  HiOutlineX,
+  HiOutlineUpload
+} from 'react-icons/hi';
 import { toast } from 'react-toastify';
+import ConfirmModal from '../../components/ConfirmModal';
 import '../../styles/AdminProductsPage.css';
 
 export default function AdminProductsPage() {
-  const navigate = useNavigate();
-  const { currentUser } = useAppContext();
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [products, setProducts] = useState([]);
@@ -16,12 +24,16 @@ export default function AdminProductsPage() {
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [draggedImageId, setDraggedImageId] = useState(null);
+  const [imageUrlInput, setImageUrlInput] = useState('');
+  const [isUploadingImages, setIsUploadingImages] = useState(false);
   
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -30,7 +42,7 @@ export default function AdminProductsPage() {
     price: '',
     discount: '0',
     stock: '',
-    images: [''],
+    images: [],
     brand: 'Yonex',
     description: '',
     isFeatured: false,
@@ -84,6 +96,13 @@ export default function AdminProductsPage() {
   };
 
   const openModal = (product = null) => {
+    const buildImageItems = (images = []) => images
+      .filter(Boolean)
+      .map((url) => ({
+        id: `${url}-${Math.random().toString(36).slice(2)}`,
+        url
+      }));
+
     if (product) {
       setIsEditMode(true);
       setCurrentProduct(product);
@@ -93,7 +112,7 @@ export default function AdminProductsPage() {
         price: product.price?.toString() || '',
         discount: product.discount?.toString() || '0',
         stock: product.stock?.toString() || '',
-        images: (product.images && product.images.length > 0) ? [...product.images] : (product.imageUrl ? [product.imageUrl] : ['']),
+        images: buildImageItems(product.images || (product.imageUrl ? [product.imageUrl] : [])),
         brand: product.brand || 'Yonex',
         description: product.description || '',
         isFeatured: product.isFeatured || false,
@@ -110,7 +129,7 @@ export default function AdminProductsPage() {
         price: '',
         discount: '0',
         stock: '',
-        images: [''],
+        images: [],
         brand: 'Yonex',
         description: '',
         isFeatured: false,
@@ -119,6 +138,8 @@ export default function AdminProductsPage() {
         balance: ''
       });
     }
+    setImageUrlInput('');
+    setDraggedImageId(null);
     setIsModalOpen(true);
   };
 
@@ -135,38 +156,88 @@ export default function AdminProductsPage() {
     }));
   };
 
-  const handleImageURLChange = (index, value) => {
-    setFormData(prev => {
-      const updatedImages = [...prev.images];
-      updatedImages[index] = value;
-      return { ...prev, images: updatedImages };
-    });
-  };
+  const addImageUrls = (urls) => {
+    const nextImages = urls
+      .map((url) => url.trim())
+      .filter(Boolean)
+      .map((url) => ({
+        id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        url
+      }));
 
-  const handleAddImageField = () => {
+    if (nextImages.length === 0) return;
+
     setFormData(prev => ({
       ...prev,
-      images: [...(prev.images || []), '']
+      images: [...prev.images, ...nextImages]
     }));
   };
 
-  const handleRemoveImageField = (index) => {
+  const handleImageUpload = async (event) => {
+    const files = Array.from(event.target.files || []);
+    event.target.value = '';
+    if (files.length === 0) return;
+
+    setIsUploadingImages(true);
+    const res = await uploadProductImages(files);
+    setIsUploadingImages(false);
+
+    if (res.success) {
+      addImageUrls(res.images);
+      toast.success(`${res.images.length} image${res.images.length > 1 ? 's' : ''} uploaded`);
+    } else {
+      toast.error(res.error);
+    }
+  };
+
+  const handleAddImageUrl = () => {
+    addImageUrls([imageUrlInput]);
+    setImageUrlInput('');
+  };
+
+  const removeImage = (id) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter(image => image.id !== id)
+    }));
+  };
+
+  const moveImage = (fromIndex, toIndex) => {
+    if (toIndex < 0 || toIndex >= formData.images.length) return;
+
     setFormData(prev => {
-      const updatedImages = [...prev.images];
-      updatedImages.splice(index, 1);
-      return { ...prev, images: updatedImages };
+      const nextImages = [...prev.images];
+      const [movedImage] = nextImages.splice(fromIndex, 1);
+      nextImages.splice(toIndex, 0, movedImage);
+      return { ...prev, images: nextImages };
     });
+  };
+
+  const handleImageDrop = (targetId) => {
+    if (!draggedImageId || draggedImageId === targetId) return;
+
+    const fromIndex = formData.images.findIndex(image => image.id === draggedImageId);
+    const toIndex = formData.images.findIndex(image => image.id === targetId);
+    if (fromIndex !== -1 && toIndex !== -1) {
+      moveImage(fromIndex, toIndex);
+    }
+    setDraggedImageId(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const cleanedImages = formData.images.filter(url => url.trim() !== '');
+    const images = formData.images.map(image => image.url).filter(Boolean);
+    if (images.length === 0) {
+      toast.error('Please upload or add at least one product image');
+      setIsSubmitting(false);
+      return;
+    }
 
     const submitData = {
       ...formData,
-      images: cleanedImages,
+      images,
       price: parseFloat(formData.price),
       discount: parseInt(formData.discount, 10),
       stock: parseInt(formData.stock, 10)
@@ -194,13 +265,14 @@ export default function AdminProductsPage() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
-    
+  const confirmDeleteProduct = async () => {
+    if (!productToDelete) return;
+
     try {
-      const res = await deleteProduct(id);
+      const res = await deleteProduct(productToDelete.id);
       if (res.success) {
         toast.success('Product deleted successfully');
+        setProductToDelete(null);
         fetchProducts(search, currentPage);
       } else {
         toast.error(res.error || 'Failed to delete product');
@@ -301,7 +373,10 @@ export default function AdminProductsPage() {
                           <button 
                             className="action-btn delete" 
                             title="Delete"
-                            onClick={() => handleDelete(product._id || product.id)}
+                            onClick={() => setProductToDelete({
+                              id: product._id || product.id,
+                              name: product.name
+                            })}
                           >
                             <HiOutlineTrash />
                           </button>
@@ -433,40 +508,89 @@ export default function AdminProductsPage() {
                 </div>
                 
                 <div className="form-group col-span-2">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <label className="form-label" style={{ margin: 0 }}>Product Images (URLs) *</label>
-                    <button 
-                      type="button" 
-                      className="btn btn-secondary" 
-                      style={{ padding: '4px 10px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}
-                      onClick={handleAddImageField}
-                    >
-                      <HiOutlinePlus /> Add Image
-                    </button>
-                  </div>
-                  
-                  {formData.images && formData.images.map((url, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-                      <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder={`https://example.com/image${idx + 1}.jpg`}
-                        value={url}
-                        onChange={(e) => handleImageURLChange(idx, e.target.value)}
-                        required={idx === 0}
+                  <label className="form-label">Product Images *</label>
+                  <div className="image-upload-panel">
+                    <label className={`image-upload-dropzone ${isUploadingImages ? 'uploading' : ''}`}>
+                      <HiOutlineUpload size={24} />
+                      <span>{isUploadingImages ? 'Uploading images...' : 'Upload images'}</span>
+                      <small>PNG, JPG, JPEG, WEBP or GIF. Up to 8 files, 5MB each.</small>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        disabled={isUploadingImages}
+                        onChange={handleImageUpload}
                       />
-                      {formData.images.length > 1 && (
-                        <button 
-                          type="button" 
-                          className="btn btn-secondary" 
-                          style={{ padding: '0 12px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px' }}
-                          onClick={() => handleRemoveImageField(idx)}
-                        >
-                          <HiOutlineX size={16} />
-                        </button>
-                      )}
+                    </label>
+
+                    <div className="image-url-row">
+                      <input
+                        type="url"
+                        className="form-control"
+                        placeholder="Or paste an image URL"
+                        value={imageUrlInput}
+                        onChange={(e) => setImageUrlInput(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={handleAddImageUrl}
+                        disabled={!imageUrlInput.trim()}
+                      >
+                        <HiOutlinePlus /> Add URL
+                      </button>
                     </div>
-                  ))}
+
+                    {formData.images.length > 0 ? (
+                      <div className="image-preview-grid">
+                        {formData.images.map((image, index) => (
+                          <div
+                            key={image.id}
+                            className="image-preview-card"
+                            draggable
+                            onDragStart={() => setDraggedImageId(image.id)}
+                            onDragOver={(event) => event.preventDefault()}
+                            onDrop={() => handleImageDrop(image.id)}
+                          >
+                            <img src={image.url} alt={`Product preview ${index + 1}`} />
+                            <div className="image-preview-meta">
+                              <span>{index === 0 ? 'Cover image' : `Image ${index + 1}`}</span>
+                              <div className="image-preview-actions">
+                                <button
+                                  type="button"
+                                  title="Move up"
+                                  disabled={index === 0}
+                                  onClick={() => moveImage(index, index - 1)}
+                                >
+                                  <HiOutlineChevronUp />
+                                </button>
+                                <button
+                                  type="button"
+                                  title="Move down"
+                                  disabled={index === formData.images.length - 1}
+                                  onClick={() => moveImage(index, index + 1)}
+                                >
+                                  <HiOutlineChevronDown />
+                                </button>
+                                <button
+                                  type="button"
+                                  title="Remove image"
+                                  onClick={() => removeImage(image.id)}
+                                >
+                                  <HiOutlineTrash />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="image-empty-state">
+                        <HiOutlinePhotograph size={28} />
+                        <span>No product images selected</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="form-group col-span-2">
@@ -561,6 +685,15 @@ export default function AdminProductsPage() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={Boolean(productToDelete)}
+        title="Delete product?"
+        message={`Delete ${productToDelete?.name || 'this product'}? This action cannot be undone.`}
+        confirmText="Delete"
+        onCancel={() => setProductToDelete(null)}
+        onConfirm={confirmDeleteProduct}
+      />
     </div>
   );
 }
