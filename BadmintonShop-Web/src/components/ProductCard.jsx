@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineShoppingCart, HiStar, HiHeart, HiOutlineHeart } from 'react-icons/hi';
 import { useAppContext } from '../context/AppContext';
-import './Componentstyles/ProductCard.css';
+import './styles/ProductCard.css';
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();

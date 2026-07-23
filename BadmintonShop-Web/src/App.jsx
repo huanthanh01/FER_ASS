@@ -10,9 +10,10 @@ import HomePage from './pages/HomePage';
 const ShopPage = React.lazy(() => import('./pages/ShopPage'));
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
-import AuthPage from './pages/Auth/AuthPage';
+import AuthPage from './pages/auth/AuthPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProfilePage from './pages/ProfilePage';
+import OrdersPage from './pages/OrdersPage';
 import NotificationsPage from './pages/NotificationsPage';
 import NotificationDetailPage from './pages/NotificationDetailPage';
 import ReportPage from './pages/ReportPage';
@@ -47,6 +48,7 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="orders" element={<OrdersPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="notifications/:id" element={<NotificationDetailPage />} />
           <Route path="support" element={<SupportPage />} />

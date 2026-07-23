@@ -15,6 +15,18 @@ export const getOrders = async (searchQuery = '') => {
   }
 };
 
+export const getUserOrders = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/orders/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || 'Failed to fetch your orders'
+    };
+  }
+};
+
 export const updateOrderStatus = async (orderId, status) => {
   try {
     const response = await axios.put(`${API_URL}/orders/${orderId}/status`, { status });

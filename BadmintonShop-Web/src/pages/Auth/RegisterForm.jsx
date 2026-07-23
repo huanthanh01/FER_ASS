@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import { registerUser, googleLogin } from '../../api/authApi';
 
-import GoogleLoginButton from '../../components/Auth/GoogleLoginButton';
+import GoogleLoginButton from '../../components/auth/GoogleLoginButton';
 
 function RegisterForm({ isLoading, setIsLoading, switchToLogin }) {
   const { handleRegisterSuccess, handleLoginSuccess } = useAppContext();

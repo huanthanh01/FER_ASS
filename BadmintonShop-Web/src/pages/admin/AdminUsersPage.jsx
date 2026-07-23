@@ -3,12 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 import { HiOutlineSearch, HiOutlineShieldCheck, HiOutlineUser, HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
 import { getUsers, updateUserRole, toggleUserStatus } from '../../api/userApi';
 import { toast } from 'react-toastify';
+import ConfirmModal from '../../components/ConfirmModal';
 
 export default function AdminUsersPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [userToToggle, setUserToToggle] = useState(null);
   
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,14 +52,17 @@ export default function AdminUsersPage() {
     }
   };
 
-  const handleToggleStatus = async (user) => {
+  const confirmToggleStatus = async () => {
+    if (!userToToggle) return;
+
+    const user = userToToggle;
     const action = user.isActive === false ? 'Enable' : 'Disable';
-    if (!window.confirm(`Are you sure you want to ${action} this user?`)) return;
 
     const res = await toggleUserStatus(user._id);
     if (res.success) {
       toast.success(`User ${action}d successfully`);
       setUsers(users.map(u => u._id === user._id ? { ...u, isActive: res.user.isActive } : u));
+      setUserToToggle(null);
     } else {
       toast.error(res.error);
     }
@@ -174,7 +179,7 @@ export default function AdminUsersPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right">
                       <button
-                        onClick={() => handleToggleStatus(user)}
+                        onClick={() => setUserToToggle(user)}
                         title={user.isActive !== false ? "Disable User" : "Enable User"}
                         className={`p-2 rounded-lg transition-colors ${
                           user.isActive !== false
@@ -221,6 +226,16 @@ export default function AdminUsersPage() {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={Boolean(userToToggle)}
+        title={`${userToToggle?.isActive === false ? 'Enable' : 'Disable'} user?`}
+        message={`${userToToggle?.isActive === false ? 'Enable' : 'Disable'} ${userToToggle?.fullname || 'this user'}'s account access?`}
+        confirmText={userToToggle?.isActive === false ? 'Enable' : 'Disable'}
+        variant={userToToggle?.isActive === false ? 'warning' : 'danger'}
+        onCancel={() => setUserToToggle(null)}
+        onConfirm={confirmToggleStatus}
+      />
     </div>
   );
 }
