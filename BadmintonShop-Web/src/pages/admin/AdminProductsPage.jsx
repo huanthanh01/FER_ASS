@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { getProducts, createProduct, updateProduct, deleteProduct, getCategories, uploadProductImages } from '../../api/productApi';
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import {
+  getProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getCategories,
+  getBrands,
+  uploadProductImages,
+} from "../../api/productApi";
 import {
   HiOutlineChevronDown,
   HiOutlineChevronUp,
@@ -10,24 +18,24 @@ import {
   HiOutlineTrash,
   HiOutlineSearch,
   HiOutlineX,
-  HiOutlineUpload
-} from 'react-icons/hi';
-import { toast } from 'react-toastify';
-import ConfirmModal from '../../components/ConfirmModal';
-import '../../styles/AdminProductsPage.css';
+  HiOutlineUpload,
+} from "react-icons/hi";
+import { toast } from "react-toastify";
+import ConfirmModal from "../../components/ConfirmModal";
+import "../../styles/AdminProductsPage.css";
 
 export default function AdminProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [draggedImageId, setDraggedImageId] = useState(null);
-  const [imageUrlInput, setImageUrlInput] = useState('');
+  const [imageUrlInput, setImageUrlInput] = useState("");
   const [isUploadingImages, setIsUploadingImages] = useState(false);
-  
+
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -37,29 +45,32 @@ export default function AdminProductsPage() {
 
   // Form State
   const [formData, setFormData] = useState({
-    name: '',
-    category: 'Rackets',
-    price: '',
-    discount: '0',
-    stock: '',
+    name: "",
+    category: "RACKET",
+    price: "",
+    discount: "0",
+    stock: "",
     images: [],
-    brand: 'Yonex',
-    description: '',
+    brand: "Yonex",
+    description: "",
     isFeatured: false,
-    weight: '',
-    stiffness: '',
-    balance: ''
+    weight: "",
+    stiffness: "",
+    balance: "",
   });
 
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [newBrandName, setNewBrandName] = useState("");
 
   useEffect(() => {
-    const query = searchParams.get('search') || '';
+    const query = searchParams.get("search") || "";
     setSearch(query);
     fetchProducts(query, 1);
   }, [searchParams]);
 
-  const fetchProducts = async (searchQuery = '', page = 1) => {
+  const fetchProducts = async (searchQuery = "", page = 1) => {
     setIsLoading(true);
     try {
       const res = await getProducts(false, page, 10, undefined, searchQuery);
@@ -86,8 +97,20 @@ export default function AdminProductsPage() {
     }
   };
 
+  const fetchBrandsList = async () => {
+    try {
+      const res = await getBrands();
+      if (res.success && res.brands) {
+        setBrands(res.brands);
+      }
+    } catch (error) {
+      console.error("Failed to fetch brands", error);
+    }
+  };
+
   useEffect(() => {
     fetchCats();
+    fetchBrandsList();
   }, []);
 
   const handleSearch = (e) => {
@@ -96,49 +119,53 @@ export default function AdminProductsPage() {
   };
 
   const openModal = (product = null) => {
-    const buildImageItems = (images = []) => images
-      .filter(Boolean)
-      .map((url) => ({
+    const buildImageItems = (images = []) =>
+      images.filter(Boolean).map((url) => ({
         id: `${url}-${Math.random().toString(36).slice(2)}`,
-        url
+        url,
       }));
+
+    setNewCategoryName("");
+    setNewBrandName("");
 
     if (product) {
       setIsEditMode(true);
       setCurrentProduct(product);
       setFormData({
-        name: product.name || '',
-        category: product.category || 'Rackets',
-        price: product.price?.toString() || '',
-        discount: product.discount?.toString() || '0',
-        stock: product.stock?.toString() || '',
-        images: buildImageItems(product.images || (product.imageUrl ? [product.imageUrl] : [])),
-        brand: product.brand || 'Yonex',
-        description: product.description || '',
+        name: product.name || "",
+        category: product.category || "RACKET",
+        price: product.price?.toString() || "",
+        discount: product.discount?.toString() || "0",
+        stock: product.stock?.toString() || "",
+        images: buildImageItems(
+          product.images || (product.imageUrl ? [product.imageUrl] : []),
+        ),
+        brand: product.brand || "Yonex",
+        description: product.description || "",
         isFeatured: product.isFeatured || false,
-        weight: product.weight || '',
-        stiffness: product.stiffness || '',
-        balance: product.balance || ''
+        weight: product.weight || "",
+        stiffness: product.stiffness || "",
+        balance: product.balance || "",
       });
     } else {
       setIsEditMode(false);
       setCurrentProduct(null);
       setFormData({
-        name: '',
-        category: 'Rackets',
-        price: '',
-        discount: '0',
-        stock: '',
+        name: "",
+        category: "RACKET",
+        price: "",
+        discount: "0",
+        stock: "",
         images: [],
-        brand: 'Yonex',
-        description: '',
+        brand: "Yonex",
+        description: "",
         isFeatured: false,
-        weight: '',
-        stiffness: '',
-        balance: ''
+        weight: "",
+        stiffness: "",
+        balance: "",
       });
     }
-    setImageUrlInput('');
+    setImageUrlInput("");
     setDraggedImageId(null);
     setIsModalOpen(true);
   };
@@ -150,9 +177,9 @@ export default function AdminProductsPage() {
 
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -162,20 +189,20 @@ export default function AdminProductsPage() {
       .filter(Boolean)
       .map((url) => ({
         id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        url
+        url,
       }));
 
     if (nextImages.length === 0) return;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      images: [...prev.images, ...nextImages]
+      images: [...prev.images, ...nextImages],
     }));
   };
 
   const handleImageUpload = async (event) => {
     const files = Array.from(event.target.files || []);
-    event.target.value = '';
+    event.target.value = "";
     if (files.length === 0) return;
 
     setIsUploadingImages(true);
@@ -184,7 +211,9 @@ export default function AdminProductsPage() {
 
     if (res.success) {
       addImageUrls(res.images);
-      toast.success(`${res.images.length} image${res.images.length > 1 ? 's' : ''} uploaded`);
+      toast.success(
+        `${res.images.length} image${res.images.length > 1 ? "s" : ""} uploaded`,
+      );
     } else {
       toast.error(res.error);
     }
@@ -192,20 +221,20 @@ export default function AdminProductsPage() {
 
   const handleAddImageUrl = () => {
     addImageUrls([imageUrlInput]);
-    setImageUrlInput('');
+    setImageUrlInput("");
   };
 
   const removeImage = (id) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter(image => image.id !== id)
+      images: prev.images.filter((image) => image.id !== id),
     }));
   };
 
   const moveImage = (fromIndex, toIndex) => {
     if (toIndex < 0 || toIndex >= formData.images.length) return;
 
-    setFormData(prev => {
+    setFormData((prev) => {
       const nextImages = [...prev.images];
       const [movedImage] = nextImages.splice(fromIndex, 1);
       nextImages.splice(toIndex, 0, movedImage);
@@ -216,8 +245,10 @@ export default function AdminProductsPage() {
   const handleImageDrop = (targetId) => {
     if (!draggedImageId || draggedImageId === targetId) return;
 
-    const fromIndex = formData.images.findIndex(image => image.id === draggedImageId);
-    const toIndex = formData.images.findIndex(image => image.id === targetId);
+    const fromIndex = formData.images.findIndex(
+      (image) => image.id === draggedImageId,
+    );
+    const toIndex = formData.images.findIndex((image) => image.id === targetId);
     if (fromIndex !== -1 && toIndex !== -1) {
       moveImage(fromIndex, toIndex);
     }
@@ -228,38 +259,69 @@ export default function AdminProductsPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const images = formData.images.map(image => image.url).filter(Boolean);
+    const images = formData.images.map((image) => image.url).filter(Boolean);
     if (images.length === 0) {
-      toast.error('Please upload or add at least one product image');
+      toast.error("Please upload or add at least one product image");
       setIsSubmitting(false);
       return;
     }
 
+    let finalCategory = formData.category;
+    if (formData.category === "__NEW__") {
+      if (!newCategoryName.trim()) {
+        toast.error("Please enter a new category name");
+        setIsSubmitting(false);
+        return;
+      }
+      finalCategory = newCategoryName.trim();
+    }
+
+    let finalBrand = formData.brand;
+    if (formData.brand === "__NEW__") {
+      if (!newBrandName.trim()) {
+        toast.error("Please enter a new brand name");
+        setIsSubmitting(false);
+        return;
+      }
+      finalBrand = newBrandName.trim();
+    }
+
     const submitData = {
       ...formData,
+      category: finalCategory,
+      brand: finalBrand,
       images,
       price: parseFloat(formData.price),
       discount: parseInt(formData.discount, 10),
-      stock: parseInt(formData.stock, 10)
+      stock: parseInt(formData.stock, 10),
     };
 
     try {
       let res;
       if (isEditMode) {
-        res = await updateProduct(currentProduct._id || currentProduct.id, submitData);
+        res = await updateProduct(
+          currentProduct._id || currentProduct.id,
+          submitData,
+        );
       } else {
         res = await createProduct(submitData);
       }
 
       if (res.success) {
-        toast.success(`Product ${isEditMode ? 'updated' : 'created'} successfully`);
+        toast.success(
+          `Product ${isEditMode ? "updated" : "created"} successfully`,
+        );
         closeModal();
         fetchProducts(search, currentPage);
+        fetchCats();
+        fetchBrandsList();
       } else {
-        toast.error(res.error || `Failed to ${isEditMode ? 'update' : 'create'} product`);
+        toast.error(
+          res.error || `Failed to ${isEditMode ? "update" : "create"} product`,
+        );
       }
     } catch (error) {
-      toast.error('An error occurred');
+      toast.error("An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -271,14 +333,14 @@ export default function AdminProductsPage() {
     try {
       const res = await deleteProduct(productToDelete.id);
       if (res.success) {
-        toast.success('Product deleted successfully');
+        toast.success("Product deleted successfully");
         setProductToDelete(null);
         fetchProducts(search, currentPage);
       } else {
-        toast.error(res.error || 'Failed to delete product');
+        toast.error(res.error || "Failed to delete product");
       }
     } catch (error) {
-      toast.error('An error occurred');
+      toast.error("An error occurred");
     }
   };
 
@@ -320,106 +382,124 @@ export default function AdminProductsPage() {
           </div>
         ) : (
           <>
-          <div className="table-responsive">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.length === 0 ? (
+            <div className="table-responsive">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <td colSpan="7" className="text-center py-4">No products found</td>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ) : (
-                  products.map(product => (
-                    <tr key={product._id || product.id}>
-                      <td>
-                        <img 
-                          src={(product.images && product.images.length > 0) ? product.images[0] : (product.imageUrl || 'https://via.placeholder.com/50')} 
-                          alt={product.name} 
-                          className="table-img"
-                        />
-                      </td>
-                      <td className="font-medium max-w-xs truncate" title={product.name}>
-                        {product.name}
-                      </td>
-                      <td>{product.category}</td>
-                      <td>${product.price?.toFixed(2)}</td>
-                      <td>
-                        <span className={`stock-badge ${product.stock > 10 ? 'high' : product.stock > 0 ? 'medium' : 'low'}`}>
-                          {product.stock}
-                        </span>
-                      </td>
-                      <td>
-                        {product.isFeatured && <span className="featured-badge">Featured</span>}
-                      </td>
-                      <td>
-                        <div className="table-actions">
-                          <button 
-                            className="action-btn edit" 
-                            title="Edit"
-                            onClick={() => openModal(product)}
-                          >
-                            <HiOutlinePencilAlt />
-                          </button>
-                          <button 
-                            className="action-btn delete" 
-                            title="Delete"
-                            onClick={() => setProductToDelete({
-                              id: product._id || product.id,
-                              name: product.name
-                            })}
-                          >
-                            <HiOutlineTrash />
-                          </button>
-                        </div>
+                </thead>
+                <tbody>
+                  {products.length === 0 ? (
+                    <tr>
+                      <td colSpan="7" className="text-center py-4">
+                        No products found
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {totalPages > 1 && (
-            <div className="pagination">
-              <button 
-                className="page-btn" 
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              
-              <div className="page-numbers">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                  <button
-                    key={page}
-                    className={`page-btn ${currentPage === page ? 'active' : ''}`}
-                    onClick={() => handlePageChange(page)}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-              
-              <button 
-                className="page-btn" 
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
+                  ) : (
+                    products.map((product) => (
+                      <tr key={product._id || product.id}>
+                        <td>
+                          <img
+                            src={
+                              product.images && product.images.length > 0
+                                ? product.images[0]
+                                : product.imageUrl ||
+                                  "https://via.placeholder.com/50"
+                            }
+                            alt={product.name}
+                            className="table-img"
+                          />
+                        </td>
+                        <td
+                          className="font-medium max-w-xs truncate"
+                          title={product.name}
+                        >
+                          {product.name}
+                        </td>
+                        <td>{product.category}</td>
+                        <td>${product.price?.toFixed(2)}</td>
+                        <td>
+                          <span
+                            className={`stock-badge ${product.stock > 10 ? "high" : product.stock > 0 ? "medium" : "low"}`}
+                          >
+                            {product.stock}
+                          </span>
+                        </td>
+                        <td>
+                          {product.isFeatured && (
+                            <span className="featured-badge">Featured</span>
+                          )}
+                        </td>
+                        <td>
+                          <div className="table-actions">
+                            <button
+                              className="action-btn edit"
+                              title="Edit"
+                              onClick={() => openModal(product)}
+                            >
+                              <HiOutlinePencilAlt />
+                            </button>
+                            <button
+                              className="action-btn delete"
+                              title="Delete"
+                              onClick={() =>
+                                setProductToDelete({
+                                  id: product._id || product.id,
+                                  name: product.name,
+                                })
+                              }
+                            >
+                              <HiOutlineTrash />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
             </div>
-          )}
+
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  className="page-btn"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+
+                <div className="page-numbers">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <button
+                        key={page}
+                        className={`page-btn ${currentPage === page ? "active" : ""}`}
+                        onClick={() => handlePageChange(page)}
+                      >
+                        {page}
+                      </button>
+                    ),
+                  )}
+                </div>
+
+                <button
+                  className="page-btn"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -429,52 +509,84 @@ export default function AdminProductsPage() {
         <div className="modal-overlay">
           <div className="modal-content glass">
             <div className="modal-header">
-              <h2>{isEditMode ? 'Edit Product' : 'Add New Product'}</h2>
+              <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
               <button className="modal-close" onClick={closeModal}>
                 <HiOutlineX size={24} />
               </button>
             </div>
-            
+
             <form className="modal-body" onSubmit={handleSubmit}>
               <div className="form-grid">
                 <div className="form-group col-span-2">
                   <label className="form-label">Product Name *</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    name="name" 
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
                     required
                     value={formData.name}
                     onChange={handleFormChange}
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label className="form-label">Category *</label>
-                  <input 
-                    className="form-control" 
+                  <select
+                    className="form-control"
                     name="category"
-                    list="category-list"
                     required
                     value={formData.category}
                     onChange={handleFormChange}
-                    placeholder="Select or type category"
-                  />
-                  <datalist id="category-list">
-                    {categories.map(cat => (
-                      <option key={cat} value={cat} />
-                    ))}
-                  </datalist>
+                  >
+                    {[
+                      ...new Set([
+                        ...(categories.length > 0
+                          ? categories
+                          : [
+                              "RACKET",
+                              "SHOES",
+                              "SHIRTS",
+                              "SHORTS",
+                              "SKIRTS",
+                              "BAGS",
+                              "BACKPACKS",
+                              "ACCESSORIES",
+                            ]),
+                        formData.category,
+                      ]),
+                    ]
+                      .filter((cat) => cat && cat !== "__NEW__")
+                      .map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    <option value="__NEW__">Add new category...</option>
+                  </select>
                 </div>
-                
+
+                {formData.category === "__NEW__" && (
+                  <div className="form-group col-span-2">
+                    <label className="form-label">New Category Name *</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter new category name"
+                      required
+                      value={newCategoryName}
+                      onChange={(e) => setNewCategoryName(e.target.value)}
+                    />
+                  </div>
+                )}
+
                 <div className="form-group">
                   <label className="form-label">Price ($) *</label>
-                  <input 
-                    type="number" 
-                    step="0.01" 
+                  <input
+                    type="number"
+                    step="0.01"
                     min="0"
-                    className="form-control" 
-                    name="price" 
+                    className="form-control"
+                    name="price"
                     required
                     value={formData.price}
                     onChange={handleFormChange}
@@ -483,37 +595,45 @@ export default function AdminProductsPage() {
 
                 <div className="form-group">
                   <label className="form-label">Stock Quantity *</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     min="0"
-                    className="form-control" 
-                    name="stock" 
+                    className="form-control"
+                    name="stock"
                     required
                     value={formData.stock}
                     onChange={handleFormChange}
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label className="form-label">Discount (%)</label>
-                  <input 
-                    type="number" 
-                    min="0" 
+                  <input
+                    type="number"
+                    min="0"
                     max="100"
-                    className="form-control" 
-                    name="discount" 
+                    className="form-control"
+                    name="discount"
                     value={formData.discount}
                     onChange={handleFormChange}
                   />
                 </div>
-                
+
                 <div className="form-group col-span-2">
                   <label className="form-label">Product Images *</label>
                   <div className="image-upload-panel">
-                    <label className={`image-upload-dropzone ${isUploadingImages ? 'uploading' : ''}`}>
+                    <label
+                      className={`image-upload-dropzone ${isUploadingImages ? "uploading" : ""}`}
+                    >
                       <HiOutlineUpload size={24} />
-                      <span>{isUploadingImages ? 'Uploading images...' : 'Upload images'}</span>
-                      <small>PNG, JPG, JPEG, WEBP or GIF. Up to 8 files, 5MB each.</small>
+                      <span>
+                        {isUploadingImages
+                          ? "Uploading images..."
+                          : "Upload images"}
+                      </span>
+                      <small>
+                        PNG, JPG, JPEG, WEBP or GIF. Up to 8 files, 5MB each.
+                      </small>
                       <input
                         type="file"
                         accept="image/*"
@@ -552,9 +672,16 @@ export default function AdminProductsPage() {
                             onDragOver={(event) => event.preventDefault()}
                             onDrop={() => handleImageDrop(image.id)}
                           >
-                            <img src={image.url} alt={`Product preview ${index + 1}`} />
+                            <img
+                              src={image.url}
+                              alt={`Product preview ${index + 1}`}
+                            />
                             <div className="image-preview-meta">
-                              <span>{index === 0 ? 'Cover image' : `Image ${index + 1}`}</span>
+                              <span>
+                                {index === 0
+                                  ? "Cover image"
+                                  : `Image ${index + 1}`}
+                              </span>
                               <div className="image-preview-actions">
                                 <button
                                   type="button"
@@ -567,7 +694,9 @@ export default function AdminProductsPage() {
                                 <button
                                   type="button"
                                   title="Move down"
-                                  disabled={index === formData.images.length - 1}
+                                  disabled={
+                                    index === formData.images.length - 1
+                                  }
                                   onClick={() => moveImage(index, index + 1)}
                                 >
                                   <HiOutlineChevronDown />
@@ -595,90 +724,136 @@ export default function AdminProductsPage() {
 
                 <div className="form-group col-span-2">
                   <label className="form-label">Brand *</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    name="brand" 
+                  <select
+                    className="form-control"
+                    name="brand"
                     required
                     value={formData.brand}
                     onChange={handleFormChange}
-                  />
+                  >
+                    {[
+                      ...new Set([
+                        ...(brands.length > 0
+                          ? brands
+                          : ["Yonex", "Victor", "Li-Ning", "Mizuno"]),
+                        formData.brand,
+                      ]),
+                    ]
+                      .filter((b) => b && b !== "__NEW__")
+                      .map((b) => (
+                        <option key={b} value={b}>
+                          {b}
+                        </option>
+                      ))}
+                    <option value="__NEW__">Add new brand...</option>
+                  </select>
                 </div>
 
-                {formData.category && formData.category.toLowerCase().includes('racket') && (
-                  <>
-                    <div className="form-group">
-                      <label className="form-label">Weight</label>
-                      <input 
-                        type="text" 
-                        className="form-control" 
-                        name="weight" 
-                        placeholder="e.g. 4U (Avg. 83g)"
-                        value={formData.weight}
-                        onChange={handleFormChange}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Stiffness (Flex)</label>
-                      <select 
-                        className="form-control" 
-                        name="stiffness" 
-                        value={formData.stiffness}
-                        onChange={handleFormChange}
-                      >
-                        <option value="">Select Stiffness</option>
-                        <option value="Flexible">Flexible</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Stiff">Stiff</option>
-                        <option value="Extra Stiff">Extra Stiff</option>
-                      </select>
-                    </div>
-                    <div className="form-group col-span-2">
-                      <label className="form-label">Balance Point</label>
-                      <select 
-                        className="form-control" 
-                        name="balance" 
-                        value={formData.balance}
-                        onChange={handleFormChange}
-                      >
-                        <option value="">Select Balance Point</option>
-                        <option value="Head Heavy">Head Heavy (Tấn công)</option>
-                        <option value="Even Balance">Even Balance (Toàn diện)</option>
-                        <option value="Head Light">Head Light (Phòng thủ)</option>
-                      </select>
-                    </div>
-                  </>
+                {formData.brand === "__NEW__" && (
+                  <div className="form-group col-span-2">
+                    <label className="form-label">New Brand Name *</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter new brand name"
+                      required
+                      value={newBrandName}
+                      onChange={(e) => setNewBrandName(e.target.value)}
+                    />
+                  </div>
                 )}
-                
+
+                {formData.category &&
+                  formData.category.toLowerCase().includes("racket") && (
+                    <>
+                      <div className="form-group">
+                        <label className="form-label">Weight</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="weight"
+                          placeholder="e.g. 4U (Avg. 83g)"
+                          value={formData.weight}
+                          onChange={handleFormChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Stiffness (Flex)</label>
+                        <select
+                          className="form-control"
+                          name="stiffness"
+                          value={formData.stiffness}
+                          onChange={handleFormChange}
+                        >
+                          <option value="">Select Stiffness</option>
+                          <option value="Flexible">Flexible</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Stiff">Stiff</option>
+                          <option value="Extra Stiff">Extra Stiff</option>
+                        </select>
+                      </div>
+                      <div className="form-group col-span-2">
+                        <label className="form-label">Balance Point</label>
+                        <select
+                          className="form-control"
+                          name="balance"
+                          value={formData.balance}
+                          onChange={handleFormChange}
+                        >
+                          <option value="">Select Balance Point</option>
+                          <option value="Head Heavy">
+                            Head Heavy (Tấn công)
+                          </option>
+                          <option value="Even Balance">
+                            Even Balance (Toàn diện)
+                          </option>
+                          <option value="Head Light">
+                            Head Light (Phòng thủ)
+                          </option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+
                 <div className="form-group col-span-2">
                   <label className="form-label">Description</label>
-                  <textarea 
-                    className="form-control" 
-                    name="description" 
+                  <textarea
+                    className="form-control"
+                    name="description"
                     rows="3"
                     value={formData.description}
                     onChange={handleFormChange}
                   ></textarea>
                 </div>
-                
+
                 <div className="form-group col-span-2 checkbox-group">
-                  <input 
-                    type="checkbox" 
-                    id="isFeatured" 
+                  <input
+                    type="checkbox"
+                    id="isFeatured"
                     name="isFeatured"
                     checked={formData.isFeatured}
                     onChange={handleFormChange}
                   />
-                  <label htmlFor="isFeatured">Featured Product (Shows on Home Page)</label>
+                  <label htmlFor="isFeatured">
+                    Featured Product (Shows on Home Page)
+                  </label>
                 </div>
               </div>
-              
+
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={closeModal}>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={closeModal}
+                >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                  {isSubmitting ? 'Saving...' : 'Save Product'}
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Saving..." : "Save Product"}
                 </button>
               </div>
             </form>
@@ -689,7 +864,7 @@ export default function AdminProductsPage() {
       <ConfirmModal
         isOpen={Boolean(productToDelete)}
         title="Delete product?"
-        message={`Delete ${productToDelete?.name || 'this product'}? This action cannot be undone.`}
+        message={`Delete ${productToDelete?.name || "this product"}? This action cannot be undone.`}
         confirmText="Delete"
         onCancel={() => setProductToDelete(null)}
         onConfirm={confirmDeleteProduct}

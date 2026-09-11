@@ -123,8 +123,14 @@ export default function RacketFinderScreen() {
 
       if (filtered.length === 0) {
         setIsFallback(true);
+        
+        // Filter by the selected brand first for fallback if specified
+        const baseRackets = selections.brand !== 'All'
+          ? rackets.filter(r => (r.brand || '').toLowerCase() === selections.brand.toLowerCase())
+          : rackets;
+
         // Fallback style matches
-        let styleMatches = rackets.filter(r => {
+        let styleMatches = baseRackets.filter(r => {
           const balance = (r.balance || '').toLowerCase();
           if (selections.style === 'attacking') return balance === 'head heavy';
           if (selections.style === 'defensive') return balance === 'head light';
@@ -144,7 +150,7 @@ export default function RacketFinderScreen() {
         } else if (styleMatches.length > 0) {
           setResults(styleMatches.slice(0, 3));
         } else {
-          setResults(rackets.slice(0, 3));
+          setResults(baseRackets.slice(0, 3));
         }
       } else {
         setIsFallback(false);

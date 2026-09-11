@@ -39,6 +39,18 @@ export async function getCategories() {
   }
 }
 
+export async function getBrands() {
+  try {
+    const response = await axios.get(`${API_URL}/products/brands`);
+    return { success: true, brands: response.data.brands || [] };
+  } catch (error) {
+    if (!error.response) {
+      return { success: false, error: 'Network error. Is the backend running?' };
+    }
+    return { success: false, error: error.response?.data?.error || 'Failed to fetch brands.' };
+  }
+}
+
 export async function getProductById(id) {
   try {
     const response = await axios.get(`${API_URL}/products/${id}`);
