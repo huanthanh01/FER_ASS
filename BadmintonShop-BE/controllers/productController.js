@@ -29,6 +29,17 @@ const productController = {
     }
   },
 
+  // Get all unique brands
+  getBrands: async (req, res) => {
+    try {
+      const brands = await Product.distinct('brand');
+      res.json({ success: true, brands });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: 'Server Error' });
+    }
+  },
+
   // Get products (all or featured, with pagination, filtering, searching, sorting)
   getProducts: async (req, res) => {
     try {

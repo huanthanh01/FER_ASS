@@ -61,6 +61,9 @@ router.get('/', productController.getProducts);
 // Get all unique categories
 router.get('/categories', productController.getCategories);
 
+// Get all unique brands
+router.get('/brands', productController.getBrands);
+
 // Upload product images
 router.post('/upload-images', handleUpload, productController.uploadProductImages);
 
